@@ -6,11 +6,12 @@ import ThreeCards from '../components/three-cards'
 import { Container } from '../components/styled/global'
 
 import vars from '../vars'
+import heroSrc from '../../content/assets/hero.jpg'
 
 const IndexPage = () => {
   return (
     <Layout>
-      <HeroSection />
+      <HeroSection image={heroSrc} />
       <Container>
         <ThreeCards bgColor={vars.colorRed} topOffset />
       </Container>
