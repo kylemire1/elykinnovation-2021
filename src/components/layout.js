@@ -18,6 +18,17 @@ const Header = styled.header`
   top: 0;
   left: 0;
   right: 0;
+  z-index: 50;
+
+  & > div {
+    display: none;
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    & > div {
+      display: block;
+    }
+  }
 `
 
 const NavWrapper = styled.div`
@@ -36,9 +47,10 @@ const PrimaryNav = styled.div`
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    padding-left: 0;
 
     li + li {
-      margin-left: 1.4em;
+      margin-left: 1.5em;
     }
   }
 `
@@ -53,6 +65,7 @@ const SecondaryNav = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-left: 0;
   }
 `
 
@@ -144,11 +157,13 @@ const Layout = ({ isHomePage, children }) => {
       <main>{children}</main>
 
       <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-        {` `}
-        And <a href="https://wordpress.org/">WordPress</a>
+        <Container>
+          © {new Date().getFullYear()}, Built with
+          {` `}
+          <a href="https://www.gatsbyjs.com">Gatsby</a>
+          {` `}
+          And <a href="https://wordpress.org/">WordPress</a>
+        </Container>
       </footer>
     </div>
   )

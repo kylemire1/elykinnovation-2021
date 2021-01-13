@@ -1,4 +1,5 @@
 import React from 'react'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import { Container } from './styled/global'
@@ -13,6 +14,7 @@ const StyledHero = styled.section`
   color: ${vars.colorWhite};
   background-image: url(${props => props.bg});
   background-color: ${vars.colorAlmostBlack};
+  background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
@@ -20,19 +22,35 @@ const StyledHero = styled.section`
   z-index: 0;
 
   h1 {
-    font-size: 3.75rem;
+    font-size: ${vars.fontSizeHeading3};
     text-align: center;
+    line-height: 1.3;
+    font-weight: ${vars.fontWeightLight};
+
+    @media (min-width: ${vars.breakpointLarge}) {
+      font-size: ${vars.fontSizeHeading7};
+    }
   }
 `
 
-const HeroSection = ({ image }) => {
+const HeroSection = ({ heroImage, heroText }) => {
   return (
-    <StyledHero bg={image}>
+    <StyledHero bg={heroImage?.sourceUrl}>
       <Container>
-        <h1>Client-Driven Web Development by a Team of Innovators</h1>
+        <h1>{heroText}</h1>
       </Container>
     </StyledHero>
   )
 }
+
+export const fragment = graphql`
+  fragment HeroSection on WpPage_Layoutsections_Components_HomepageHero {
+    fieldGroupName
+    heroText
+    heroImage {
+      sourceUrl
+    }
+  }
+`
 
 export default HeroSection

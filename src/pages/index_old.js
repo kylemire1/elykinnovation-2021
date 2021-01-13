@@ -13,7 +13,7 @@ const IndexPage = () => {
     <Layout>
       <HeroSection image={heroSrc} />
       <Container>
-        <ThreeCards bgColor={vars.colorRed} topOffset />
+        <ThreeCards bgColor={vars.colorRed} />
       </Container>
     </Layout>
   )

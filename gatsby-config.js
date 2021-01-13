@@ -77,8 +77,7 @@ module.exports = {
      */
     // `gatsby-plugin-offline`,
 
-    {
-      resolve: `gatsby-plugin-styled-components`,
-    },
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-sass`,
   ],
 }
