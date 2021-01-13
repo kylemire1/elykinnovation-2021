@@ -28,7 +28,7 @@ const vars = {
   fontWeightBolder: '700',
   colorAlmostBlack: '#141414',
   colorBlack: '#0A0A0A',
-  colorWhite: '#e8e8e7',
+  colorWhite: '#E8E8E7',
   colorRed: '#610103',
   colorDarkRed: '#450C01',
   colorGreen: '#277476',

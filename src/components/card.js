@@ -18,6 +18,8 @@ const StyledCard = styled.div`
     margin-bottom: 0;
     font-weight: ${vars.fontWeightBolder};
     font-size: ${vars.fontSizeHeading1};
+    color: ${props =>
+      props.bg !== vars.colorWhite ? vars.colorWhite : vars.colorBlack};
 
     span {
       font-weight: ${vars.fontWeightBold};
