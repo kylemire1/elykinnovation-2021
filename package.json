@@ -10,7 +10,7 @@
   "dependencies": {
     "@wordpress/block-library": "^2.27.0",
     "babel-plugin-styled-components": "^1.12.0",
-    "gatsby": "^2.30.1",
+    "gatsby": "^2.30.3",
     "gatsby-image": "^2.9.0",
     "gatsby-plugin-manifest": "^2.10.0",
     "gatsby-plugin-offline": "^3.8.0",
