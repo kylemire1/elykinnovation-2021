@@ -33,7 +33,7 @@ export const SectionHeading = styled.h2`
   span {
     font-size: 1.125rem;
     display: block;
-    color: #277476;
+    color: ${vars.colorGreenSmall};
     text-transform: uppercase;
   }
 `

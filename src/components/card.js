@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'gatsby'
+import parse from 'html-react-parser'
 
 import vars from '../vars'
 
@@ -39,8 +40,8 @@ const StyledCard = styled.div`
 const Card = ({ title, body, link, backgroundColor }) => {
   return (
     <StyledCard bg={backgroundColor}>
-      <h2 dangerouslySetInnerHTML={{ __html: title }} />
-      <div dangerouslySetInnerHTML={{ __html: body }} />
+      <h2>{parse(title)}</h2>
+      <div>{parse(body)}</div>
       {link && <Link to={link}>Read More</Link>}
     </StyledCard>
   )

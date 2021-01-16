@@ -1,7 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
-import Image from 'gatsby-image'
-import parse from 'html-react-parser'
+import { graphql } from 'gatsby'
 
 import HeroSection from '../components/hero-section'
 import ThreeCards from '../components/three-cards'
@@ -9,9 +7,7 @@ import Motto from '../components/motto'
 import SixCards from '../components/six-cards'
 import Spacer from '../components/spacer'
 
-import Bio from '../components/bio'
 import Layout from '../components/layout'
-import SEO from '../components/seo'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components

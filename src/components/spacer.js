@@ -8,7 +8,6 @@ const StyledSpacer = styled.div`
 `
 
 const Spacer = ({ backgroundColor, spacing }) => {
-  console.log('spacer?')
   return <StyledSpacer bg={backgroundColor} height={spacing} aria-hidden />
 }
 

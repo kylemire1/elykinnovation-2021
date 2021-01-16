@@ -59,7 +59,7 @@ const SecondaryNav = styled.div`
   width: 100%;
   max-width: 55%;
   margin-left: auto;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   ul {
     list-style: none;
     display: flex;

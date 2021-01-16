@@ -1,6 +1,7 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
+import parse from 'html-react-parser'
 
 import { Container, Section } from './styled/global'
 
@@ -62,15 +63,15 @@ const ThreeCards = ({
         <CardGrid bg={cardBackgroundColor} $offset={offsetTop}>
           <div>
             <h2 dangerouslySetInnerHTML={{ __html: card1Title }} />
-            <div dangerouslySetInnerHTML={{ __html: card1Body }} />
+            <div>{parse(card1Body)}</div>
           </div>
           <div>
             <h2 dangerouslySetInnerHTML={{ __html: card2Title }} />
-            <div dangerouslySetInnerHTML={{ __html: card2Body }} />
+            <div>{parse(card2Body)}</div>
           </div>
           <div>
             <h2 dangerouslySetInnerHTML={{ __html: card3Title }} />
-            <div dangerouslySetInnerHTML={{ __html: card3Body }} />
+            <div>{parse(card3Body)}</div>
           </div>
         </CardGrid>
       </Container>

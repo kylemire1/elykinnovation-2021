@@ -1,8 +1,9 @@
 import { graphql } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
+import parse from 'html-react-parser'
 
-import { Container, Section } from './styled/global'
+import { Container, Section, SectionHeading } from './styled/global'
 
 import vars from '../vars'
 
@@ -14,13 +15,14 @@ const MottoWrapper = styled.div`
     gap: 1rem;
 
     > div:first-child {
-      border-right: solid 2px ${vars.colorGreen};
+      border-right: solid 2px ${vars.colorGreenSmall};
     }
   }
 `
 
-const MottoHeading = styled.h2`
+const MottoHeading = styled(SectionHeading)`
   font-size: ${vars.fontSizeHeading4};
+  margin-bottom: 1rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
     font-size: ${vars.fontSizeHeading5};
@@ -49,9 +51,7 @@ const Motto = ({
               {mainHeadingText}
             </MottoHeading>
           </div>
-          <MottoContent
-            dangerouslySetInnerHTML={{ __html: paragraphContent }}
-          />
+          <MottoContent>{parse(paragraphContent)}</MottoContent>
         </MottoWrapper>
       </Container>
     </Section>
