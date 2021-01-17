@@ -44,6 +44,7 @@ const vars = {
   /** 1200px */
   breakpointExtraLarge: '75em',
   ease: 'cubic-bezier(0.55, 0, 0.1, 1)',
+  headerHeight: '5.762rem',
 }
 
 export default vars
