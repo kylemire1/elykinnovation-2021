@@ -201,7 +201,10 @@ const Header = () => {
               />
             </Link>
           </LogoWrapper>
-          <MobileNavButton {...buttonProps}>
+          <MobileNavButton
+            aria-label={`${isOpen ? 'Close' : 'Open'} mobile menu`}
+            {...buttonProps}
+          >
             {isOpen ? <BiX /> : <BiMenuAltRight />}
           </MobileNavButton>
           <FlexNav className={isOpen ? 'visible' : ''} role="menu">
