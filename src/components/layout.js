@@ -4,6 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import Header from './header'
 import Footer from './footer'
 import SEO from './seo'
+import { MainContent } from './styled/global'
 
 const Layout = ({ isHomePage, children }) => {
   const {
@@ -26,7 +27,7 @@ const Layout = ({ isHomePage, children }) => {
       <SEO title={title} />
       <Header />
 
-      <main>{children}</main>
+      <MainContent home={isHomePage}>{children}</MainContent>
 
       <Footer />
     </div>

@@ -11,9 +11,10 @@ import Layout from '../components/layout'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
+  const isHomePage = data.page.isFrontPage
 
   return (
-    <Layout>
+    <Layout isHomePage={isHomePage}>
       {layoutSections.map((section, index) => {
         switch (section.fieldGroupName) {
           case 'page_Layoutsections_Components_HomepageHero':
@@ -45,6 +46,7 @@ export const pageQuery = graphql`
   ) {
     page: wpPage(id: { eq: $id }) {
       id
+      isFrontPage
       layoutSections {
         components {
           ...HeroSection

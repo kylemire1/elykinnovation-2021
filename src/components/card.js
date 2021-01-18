@@ -11,7 +11,6 @@ const StyledCard = styled.div`
     props.bg !== vars.colorWhite ? vars.colorWhite : vars.colorBlack};
   padding: 2em;
   border-radius: ${vars.borderRadiusSmall};
-  box-shadow: 0 3px 40px #150000;
   display: flex;
   flex-direction: column;
 

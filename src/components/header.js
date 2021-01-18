@@ -1,10 +1,12 @@
 import React from 'react'
+import { Link } from 'gatsby'
 import styled from 'styled-components'
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook'
 import { BiMenuAltRight } from '@react-icons/all-files/bi/BiMenuAltRight'
 import { BiX } from '@react-icons/all-files/bi/BiX'
 
 import { Container } from './styled/global'
+import MobileNavButton from './styled/mobile-nav-button'
 import NavItem from './nav-item'
 import logoSrc from '../../content/assets/logo-final.png'
 
@@ -13,13 +15,17 @@ import vars from '../vars'
 const StyledHeader = styled.header`
   background-color: ${vars.colorBlack};
   color: ${vars.colorWhite};
-  height: 74px;
+  height: ${vars.headerHeight};
   box-shadow: 0 3px 30px rgba(0, 0, 0, 0.48);
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    height: ${vars.headerHeight};
+  }
 `
 
 const NavWrapper = styled.div`
@@ -121,10 +127,12 @@ const FlexNav = styled.nav`
   overflow-y: hidden;
   padding: 1em 0;
   opacity: 0;
+  transform: translateY(-2rem);
   transition: all 500ms ${vars.ease};
 
   &.visible {
     opacity: 1;
+    transform: translateY(0);
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
@@ -140,6 +148,7 @@ const FlexNav = styled.nav`
     max-height: 100%;
     justify-content: space-between;
     padding: 0.5em 0;
+    transform: translateY(0);
   }
 `
 
@@ -150,7 +159,7 @@ const LogoWrapper = styled.div`
   width: 32%;
   position: relative;
 
-  img {
+  a {
     z-index: 1;
   }
 
@@ -170,47 +179,27 @@ const LogoWrapper = styled.div`
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 5.762em 5.762em 0;
+    border-width: 0 ${vars.headerHeight} ${vars.headerHeight} 0;
     right: 0;
     border-color: transparent ${vars.colorBlack} transparent transparent;
   }
 `
 
-const MobileNavButton = styled.button`
-  display: block;
-  margin-left: auto;
-  background: none;
-  border: none;
-  color: ${vars.colorWhite};
-  font-size: 1rem;
-  min-width: 3rem;
-  cursor: pointer;
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (min-width: ${vars.breakpointLarge}) {
-    display: none;
-  }
-`
-
 const Header = () => {
   const MENU_ITEMS_COUNT = 11 // Temporary hard-coded data
-  const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(
-    MENU_ITEMS_COUNT
-  )
+  const { buttonProps, itemProps, isOpen } = useDropdownMenu(MENU_ITEMS_COUNT)
 
   return (
     <StyledHeader>
       <Container>
         <NavWrapper>
           <LogoWrapper>
-            <img
-              src={logoSrc}
-              alt="Elyk Innovation Inc.: Internet Strategy by Design"
-            />
+            <Link to="/">
+              <img
+                src={logoSrc}
+                alt="Elyk Innovation Inc.: Internet Strategy by Design"
+              />
+            </Link>
           </LogoWrapper>
           <MobileNavButton {...buttonProps}>
             {isOpen ? <BiX /> : <BiMenuAltRight />}
@@ -218,25 +207,43 @@ const Header = () => {
           <FlexNav className={isOpen ? 'visible' : ''} role="menu">
             <PrimaryNav>
               <ul>
-                <NavItem itemProps={itemProps[0]}>Website Design</NavItem>
-                <NavItem itemProps={itemProps[1]}>
+                <NavItem href="/test-page" itemProps={itemProps[0]}>
+                  Website Design
+                </NavItem>
+                <NavItem href="/404" itemProps={itemProps[1]}>
                   Web & App Development
                 </NavItem>
-                <NavItem itemProps={itemProps[2]}>Website Maintenance</NavItem>
-                <NavItem itemProps={itemProps[3]}>
+                <NavItem href="/404" itemProps={itemProps[2]}>
+                  Website Maintenance
+                </NavItem>
+                <NavItem href="/404" itemProps={itemProps[3]}>
                   Website Accessibility
                 </NavItem>
-                <NavItem itemProps={itemProps[4]}>Online Marketing</NavItem>
+                <NavItem href="/404" itemProps={itemProps[4]}>
+                  Online Marketing
+                </NavItem>
               </ul>
             </PrimaryNav>
             <SecondaryNav>
               <ul>
-                <NavItem itemProps={itemProps[5]}>About</NavItem>
-                <NavItem itemProps={itemProps[6]}>Services</NavItem>
-                <NavItem itemProps={itemProps[7]}>Portfolio</NavItem>
-                <NavItem itemProps={itemProps[8]}>FAQ</NavItem>
-                <NavItem itemProps={itemProps[9]}>Blog</NavItem>
-                <NavItem itemProps={itemProps[10]}>Contact</NavItem>
+                <NavItem href="/404" itemProps={itemProps[5]}>
+                  About
+                </NavItem>
+                <NavItem href="/404" itemProps={itemProps[6]}>
+                  Services
+                </NavItem>
+                <NavItem href="/404" itemProps={itemProps[7]}>
+                  Portfolio
+                </NavItem>
+                <NavItem href="/404" itemProps={itemProps[8]}>
+                  FAQ
+                </NavItem>
+                <NavItem href="/404" itemProps={itemProps[9]}>
+                  Blog
+                </NavItem>
+                <NavItem href="/404" itemProps={itemProps[10]}>
+                  Contact
+                </NavItem>
               </ul>
             </SecondaryNav>
           </FlexNav>

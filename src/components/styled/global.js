@@ -2,6 +2,10 @@ import styled from 'styled-components'
 
 import vars from '../../vars'
 
+export const MainContent = styled.main`
+  margin-top: ${props => (props.home ? 0 : '5rem')};
+`
+
 export const Container = styled.div`
   width: 100%;
   max-width: 75rem;

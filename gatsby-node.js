@@ -89,7 +89,7 @@ const createWordpressPages = async ({ pages, gatsbyUtilities }) =>
  * This function creates all the individual blog pages in this site
  */
 async function createBlogPostArchive({ posts, gatsbyUtilities }) {
-  const graphqlResult = await gatsbyUtilities.graphql(/* GraphQL */ `
+  const graphqlResult = await gatsbyUtilities.graphql(`
     {
       wp {
         readingSettings {
@@ -110,10 +110,6 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
 
       const getPagePath = page => {
         if (page > 0 && page <= totalPages) {
-          // Since our homepage is our blog page
-          // we want the first page to be "/" and any additional pages
-          // to be numbered.
-          // "/blog/2" for example
           return `/blog/${page}`
         }
 
@@ -128,7 +124,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
         // use the blog post archive template as the page component
         component: path.resolve(`./src/templates/blog-post-archive.js`),
 
-        // `context` is available in the template as a prop and
+        // context is available in the template as a prop and
         // as a variable in GraphQL.
         context: {
           // the index of our loop is the offset of which posts we want to display
@@ -156,7 +152,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
  * So see https://www.gatsbyjs.com/docs/node-apis/#createPages for more info!
  */
 async function getPosts({ graphql, reporter }) {
-  const graphqlResult = await graphql(/* GraphQL */ `
+  const graphqlResult = await graphql(`
     query WpPosts {
       # Query all WordPress blog posts sorted by date
       allWpPost(sort: { fields: [date], order: DESC }) {

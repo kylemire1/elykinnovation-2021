@@ -10,7 +10,7 @@ import vars from '../vars'
 const CardGrid = styled.div`
   display: grid;
   gap: 1.5em;
-  margin-top: ${props => (props.$offset ? '-8em' : 0)};
+  margin-top: ${props => (props.$offset ? '-7em' : 0)};
 
   ul {
     margin: 0;
@@ -21,7 +21,6 @@ const CardGrid = styled.div`
     color: ${vars.colorWhite};
     padding: 2em;
     border-radius: ${vars.borderRadiusSmall};
-    box-shadow: 0 3px 40px #150000;
 
     > h2 {
       margin-top: 0;
@@ -36,7 +35,7 @@ const CardGrid = styled.div`
 
   @media (min-width: ${vars.breakpointLarge}) {
     grid-template-columns: repeat(3, 1fr);
-
+    margin-top: ${props => (props.$offset ? '-8em' : 0)};
     > div {
       > h2 {
         text-align: center;
