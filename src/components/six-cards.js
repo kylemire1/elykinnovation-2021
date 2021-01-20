@@ -27,24 +27,7 @@ const SixCards = ({
   angledBackgroundTransition,
   buttonLink,
   buttonText,
-  card1Title,
-  card1Link,
-  card1Body,
-  card2Body,
-  card2Link,
-  card2Title,
-  card3Body,
-  card3Link,
-  card3Title,
-  card4Body,
-  card4Link,
-  card4Title,
-  card5Body,
-  card5Title,
-  card5Link,
-  card6Body,
-  card6Title,
-  card6Link,
+  cards,
   cardBackgroundColor,
   mainHeadingText,
   sectionBackgroundColor,
@@ -58,42 +41,15 @@ const SixCards = ({
           {mainHeadingText}
         </SectionHeading>
         <CardGrid $button={buttonLink && buttonText}>
-          <Card
-            title={card1Title}
-            body={card1Body}
-            link={card1Link}
-            backgroundColor={cardBackgroundColor}
-          />
-          <Card
-            title={card2Title}
-            body={card2Body}
-            link={card2Link}
-            backgroundColor={cardBackgroundColor}
-          />
-          <Card
-            title={card3Title}
-            body={card3Body}
-            link={card3Link}
-            backgroundColor={cardBackgroundColor}
-          />
-          <Card
-            title={card4Title}
-            body={card4Body}
-            link={card4Link}
-            backgroundColor={cardBackgroundColor}
-          />
-          <Card
-            title={card5Title}
-            body={card5Body}
-            link={card5Link}
-            backgroundColor={cardBackgroundColor}
-          />
-          <Card
-            title={card6Title}
-            body={card6Body}
-            link={card6Link}
-            backgroundColor={cardBackgroundColor}
-          />
+          {cards.map((card, cardIndex) => (
+            <Card
+              key={`${card.cardTitle}_card_${cardIndex}`}
+              title={card.cardTitle}
+              body={card.cardBody}
+              link={card.cardLink}
+              backgroundColor={cardBackgroundColor}
+            />
+          ))}
         </CardGrid>
         {buttonLink && buttonText && (
           <Button buttonStyle="red" elementType="link" href={buttonLink}>
@@ -110,29 +66,16 @@ export const fragment = graphql`
     angledBackgroundTransition
     buttonLink
     buttonText
-    card1Title
-    card1Link
-    card1Body
-    card2Body
-    card2Link
-    card2Title
-    card3Body
-    card3Link
-    card3Title
-    card4Body
-    card4Link
-    card4Title
-    card5Body
-    card5Title
-    card5Link
-    card6Body
-    card6Title
-    card6Link
     cardBackgroundColor
-    fieldGroupName
     mainHeadingText
     sectionBackgroundColor
     smallGreenHeadingText
+    fieldGroupName
+    cards {
+      cardBody
+      cardLink
+      cardTitle
+    }
   }
 `
 
