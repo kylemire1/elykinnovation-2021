@@ -1,9 +1,10 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import styled from 'styled-components'
 import parse from 'html-react-parser'
 
 import { Container, Section } from './styled/global'
+import Card from './card'
 
 import vars from '../vars'
 
@@ -21,37 +22,18 @@ const CardGrid = styled.div`
     color: ${vars.colorWhite};
     padding: 2em;
     border-radius: ${vars.borderRadiusSmall};
-
-    > h2 {
-      margin-top: 0;
-      font-weight: ${vars.fontWeightLight};
-      font-size: ${vars.fontSizeHeading2};
-
-      span {
-        font-weight: ${vars.fontWeightBold};
-      }
-    }
+    display: flex;
+    flex-direction: column;
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
     grid-template-columns: repeat(3, 1fr);
     margin-top: ${props => (props.$offset ? '-8em' : 0)};
-    > div {
-      > h2 {
-        text-align: center;
-        font-size: ${vars.fontSizeHeading3};
-      }
-    }
   }
 `
 
 const ThreeCards = ({
-  card1Body,
-  card1Title,
-  card2Body,
-  card2Title,
-  card3Body,
-  card3Title,
+  cards,
   cardBackgroundColor,
   offsetTop,
   sectionBackgroundColor,
@@ -60,18 +42,16 @@ const ThreeCards = ({
     <Section bg={sectionBackgroundColor}>
       <Container>
         <CardGrid bg={cardBackgroundColor} $offset={offsetTop}>
-          <div>
-            <h2 dangerouslySetInnerHTML={{ __html: card1Title }} />
-            <div>{parse(card1Body)}</div>
-          </div>
-          <div>
-            <h2 dangerouslySetInnerHTML={{ __html: card2Title }} />
-            <div>{parse(card2Body)}</div>
-          </div>
-          <div>
-            <h2 dangerouslySetInnerHTML={{ __html: card3Title }} />
-            <div>{parse(card3Body)}</div>
-          </div>
+          {cards.map((card, cardIndex) => (
+            <Card
+              key={`${card.cardTitle}_card_${cardIndex}`}
+              largeHeading={true}
+              title={card.cardTitle}
+              body={card.cardBody}
+              link={card.cardLink}
+              backgroundColor={cardBackgroundColor}
+            />
+          ))}
         </CardGrid>
       </Container>
     </Section>
@@ -82,12 +62,11 @@ export const fragment = graphql`
   fragment ThreeCardRow on WpPage_Layoutsections_Components_ThreeCardRow {
     fieldGroupName
     cardBackgroundColor
-    card1Body
-    card1Title
-    card2Body
-    card2Title
-    card3Body
-    card3Title
+    cards {
+      cardTitle
+      cardBody
+      cardLink
+    }
     offsetTop
     sectionBackgroundColor
   }

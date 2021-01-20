@@ -26,6 +26,28 @@ const StyledCard = styled.div`
     }
   }
 
+  &.large-heading {
+    > h2 {
+      margin-bottom: 1rem;
+      margin-top: 0;
+      font-weight: ${vars.fontWeightLight};
+      font-size: ${vars.fontSizeHeading2};
+      color: ${props =>
+        props.bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
+
+      span {
+        font-weight: ${vars.fontWeightBold};
+      }
+    }
+
+    @media (min-width: ${vars.breakpointLarge}) {
+      > h2 {
+        text-align: center;
+        font-size: ${vars.fontSizeHeading3};
+      }
+    }
+  }
+
   a {
     display: block;
     margin-top: auto;
@@ -36,9 +58,12 @@ const StyledCard = styled.div`
   }
 `
 
-const Card = ({ title, body, link, backgroundColor }) => {
+const Card = ({ largeHeading, title, body, link, backgroundColor }) => {
   return (
-    <StyledCard bg={backgroundColor}>
+    <StyledCard
+      bg={backgroundColor}
+      className={largeHeading ? 'large-heading' : ''}
+    >
       <h2>{parse(title)}</h2>
       <div>{parse(body)}</div>
       {link && <Link to={link}>Read More</Link>}
