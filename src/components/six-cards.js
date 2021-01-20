@@ -11,7 +11,7 @@ import vars from '../vars'
 const CardGrid = styled.div`
   display: grid;
   gap: 1.5em;
-  margin-bottom: ${props => (props.$button ? '1.5rem' : 0)};
+  margin-bottom: ${props => (props.$button ? '2rem' : 0)};
 
   @media (min-width: ${vars.breakpointMedium}) {
     grid-template-columns: repeat(2, 1fr);

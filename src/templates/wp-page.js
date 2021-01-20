@@ -6,6 +6,7 @@ import ThreeCards from '../components/three-cards'
 import Motto from '../components/motto'
 import SixCards from '../components/six-cards'
 import Spacer from '../components/spacer'
+import PortfolioPreview from '../components/portfolio-preview'
 
 import Layout from '../components/layout'
 
@@ -31,6 +32,14 @@ const WpPageTemplate = ({ data }) => {
 
           case 'page_Layoutsections_Components_Spacer':
             return <Spacer key={`Spacer_${index}`} {...section} />
+
+          case 'page_Layoutsections_Components_PortfolioPreview':
+            return (
+              <PortfolioPreview
+                key={`PortfolioPreview_${index}`}
+                {...section}
+              />
+            )
         }
       })}
     </Layout>
@@ -54,6 +63,7 @@ export const pageQuery = graphql`
           ...MottoSection
           ...SixCardGrid
           ...Spacer
+          ...PortfolioPreview
         }
       }
     }

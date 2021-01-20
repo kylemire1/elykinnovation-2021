@@ -17,7 +17,7 @@ const CardGrid = styled.div`
   }
 
   > div {
-    background-color: ${props => props.bg};
+    background-color: ${props => vars[props.bg]};
     color: ${vars.colorWhite};
     padding: 2em;
     border-radius: ${vars.borderRadiusSmall};

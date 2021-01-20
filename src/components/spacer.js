@@ -2,8 +2,10 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
+import vars from '../vars'
+
 const StyledSpacer = styled.div`
-  background-color: ${props => props.bg};
+  background-color: ${props => vars[props.bg]};
   height: ${props => props.height};
 `
 

@@ -6,9 +6,9 @@ import parse from 'html-react-parser'
 import vars from '../vars'
 
 const StyledCard = styled.div`
-  background-color: ${props => props.bg};
+  background-color: ${props => vars[props.bg]};
   color: ${props =>
-    props.bg !== vars.colorWhite ? vars.colorWhite : vars.colorBlack};
+    props.bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
   padding: 2em;
   border-radius: ${vars.borderRadiusSmall};
   display: flex;
@@ -19,7 +19,7 @@ const StyledCard = styled.div`
     font-weight: ${vars.fontWeightBolder};
     font-size: ${vars.fontSizeHeading1};
     color: ${props =>
-      props.bg !== vars.colorWhite ? vars.colorWhite : vars.colorBlack};
+      props.bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
 
     span {
       font-weight: ${vars.fontWeightBold};

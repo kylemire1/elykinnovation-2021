@@ -1,6 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import vars from '../../vars'
+import portfolioBgSrc from '../../../content/assets/portfolio-preview-bg.gif'
 
 export const MainContent = styled.main`
   margin-top: ${props => (props.home ? 0 : '5rem')};
@@ -14,14 +15,18 @@ export const Container = styled.div`
 `
 
 export const Section = styled.section`
-  background-color: ${props => props.bg};
+  background-color: ${props => vars[props.bg]};
   padding: ${props => (props.angled ? '7em 0 2em' : '2rem 0')};
   clip-path: ${props =>
     props.angled
       ? 'polygon(0% 0%, 50% 3%, 100% 0%, 100% 100%, 0% 100%)'
       : 'none'};
 
-  @media (min-width: 992px) {
+  @media (min-width: ${vars.breakpointLarge}) {
+    background-image: ${props =>
+      props.graphic ? `url(${portfolioBgSrc})` : 'none'};
+    background-repeat: no-repeat;
+    background-position: top center;
     clip-path: ${props =>
       props.angled
         ? 'polygon(0% 0%, 50% 10%, 100% 0%, 100% 100%, 0% 100%)'
@@ -33,11 +38,14 @@ export const Section = styled.section`
 export const SectionHeading = styled.h2`
   font-size: ${vars.fontSizeHeading3};
   margin-bottom: 0.75em;
+  color: ${props =>
+    props.bg === 'colorWhite' ? vars.colorBlack : vars.colorWhite};
 
   span {
     font-size: 1.125rem;
     display: block;
-    color: ${vars.colorGreenSmall};
+    color: ${props =>
+      props.bg === 'colorWhite' ? vars.colorGreen : vars.colorGreenSmall};
     text-transform: uppercase;
   }
 `
