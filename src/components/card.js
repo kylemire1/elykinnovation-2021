@@ -4,6 +4,7 @@ import { Link } from 'gatsby'
 import parse from 'html-react-parser'
 
 import vars from '../vars'
+import arrowSrc from '../../content/assets/arrow.svg'
 
 const StyledCard = styled.div`
   background-color: ${props => vars[props.bg]};
@@ -58,6 +59,40 @@ const StyledCard = styled.div`
   }
 `
 
+const ReadMore = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid 1px;
+  border-color: rgba(234, 234, 234, 0);
+  border-radius: 5px;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  transition: border-color 250ms ${vars.ease};
+
+  img {
+    will-change: transform;
+    transform: translateX(0px);
+    transition: transform 250ms ${vars.ease};
+  }
+
+  &:hover,
+  &:focus {
+    border-color: rgba(234, 234, 234, 1);
+    transition: border-color 250ms ${vars.ease};
+
+    img {
+      transform: translateX(2px);
+      transition: transform 250ms ${vars.ease};
+    }
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    padding: 1rem;
+    margin: -1rem;
+  }
+`
+
 const Card = ({ largeHeading, title, body, link, backgroundColor }) => {
   return (
     <StyledCard
@@ -66,7 +101,14 @@ const Card = ({ largeHeading, title, body, link, backgroundColor }) => {
     >
       <h2>{parse(title)}</h2>
       <div>{parse(body)}</div>
-      {link && <Link to={link}>Read More</Link>}
+      {link && (
+        <Link to={link}>
+          <ReadMore>
+            Read More
+            <img src={arrowSrc} alt="" />
+          </ReadMore>
+        </Link>
+      )}
     </StyledCard>
   )
 }
