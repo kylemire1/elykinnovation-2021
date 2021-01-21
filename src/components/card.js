@@ -88,8 +88,8 @@ const ReadMore = styled.div`
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
-    padding: 1rem;
-    margin: -1rem;
+    padding: 0.75rem;
+    margin: -0.75rem;
   }
 `
 
