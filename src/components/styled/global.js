@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import vars from '../../vars'
-import portfolioBgSrc from '../../../content/assets/portfolio-preview-bg.gif'
+import portfolioBgSrc from '../../../content/assets/portfolio-bg-pattern.svg'
 
 export const MainContent = styled.main`
   margin-top: ${props => (props.home ? 0 : '5rem')};
@@ -26,7 +26,7 @@ export const Section = styled.section`
     background-image: ${props =>
       props.graphic ? `url(${portfolioBgSrc})` : 'none'};
     background-repeat: no-repeat;
-    background-position: top center;
+    background-position: top -1px center;
     clip-path: ${props =>
       props.angled
         ? 'polygon(0% 0%, 50% 10%, 100% 0%, 100% 100%, 0% 100%)'

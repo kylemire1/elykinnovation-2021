@@ -18,7 +18,6 @@ const StyledCard = styled.div`
 `
 
 const CardTag = styled.div`
-  background-color: ${vars.colorBlack};
   position: absolute;
   z-index: 20;
   bottom: 0;
@@ -26,6 +25,8 @@ const CardTag = styled.div`
 `
 
 const ClientName = styled(CardTag)`
+  background-color: ${vars.colorBlack};
+
   &::before {
     content: '';
     position: absolute;
@@ -70,7 +71,7 @@ const PortfolioCard = ({ clientImage, clientLink, clientName }) => {
       <Link to={clientLink}>
         <ClientName>{clientName}</ClientName>
         <ClientNameBacking aria-hidden>{clientName}</ClientNameBacking>
-        <Image fluid={cardImage} alt="" />
+        <Image backgroundColor={vars.colorDarkRed} fluid={cardImage} alt="" />
       </Link>
     </StyledCard>
   )
