@@ -2,6 +2,8 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Image from 'gatsby-image'
 import styled from 'styled-components'
+import parse from 'html-react-parser'
+import useDimensions from 'react-use-dimensions'
 
 import LargeServiceCard from './large-service-card'
 import { Container, Section } from '../components/styled/global'
@@ -14,6 +16,14 @@ const ServiceGrid = styled.div`
 
   @media (min-width: ${vars.breakpointLarge}) {
     grid-template-columns: repeat(2, 1fr);
+
+    > div:first-child {
+      order: ${props => (props.position === 'left' ? 1 : 2)};
+    }
+
+    > div:last-child {
+      order: ${props => (props.position === 'left' ? 2 : 1)};
+    }
   }
 `
 
@@ -24,20 +34,26 @@ const ServiceCardWrapper = styled.div`
 const StyledServiceCardBG = styled.div`
   display: none;
   position: absolute;
-  right: 5.5rem;
+  ${props => (props.position === 'left' ? 'right: 5.5rem' : 'left: 5.5rem')};
   top: 0;
   z-index: -1;
   height: 46.5rem;
-  flex-direction: row;
+  flex-direction: ${props =>
+    props.position === 'left' ? 'row-reverse' : 'row'};
 
   > div {
+    background-color: ${vars.colorAlmostBlack};
     border-radius: ${vars.borderRadiusLarge};
     width: 35.75rem;
-    box-shadow: -5px -5px 30px ${vars.colorBlack};
+    box-shadow: ${props => (props.position === 'left' ? '-10px' : '10px')} 0
+      15px #0a0a0aa6;
   }
 
   div + div {
-    margin-left: -30rem;
+    ${props =>
+      props.position === 'left'
+        ? 'margin-right: -30rem;'
+        : 'margin-left: -30rem;'};
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
@@ -60,6 +76,94 @@ const SideImage = styled.div`
   }
 `
 
+const SideTextWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`
+
+const SideText = styled.div`
+  width: 100%;
+
+  h2,
+  h3,
+  h4,
+  h5 {
+    font-size: ${vars.fontSizeHeading3};
+    text-align: center;
+  }
+
+  ul {
+    padding: 0;
+    li {
+      background-image: none;
+      padding: 0.5em 0.75em;
+      margin: 0.5em 0;
+      border: solid 1px;
+      border-color: ${vars.colorGreen};
+      border-radius: 180px;
+      text-align: center;
+    }
+  }
+
+  @media (min-width: ${vars.breakpointExtraLarge}) {
+    width: 90%;
+    background-color: ${({ position }) =>
+      position === 'left' ? vars.colorBlack : 'transparent'};
+    border: solid 1px;
+    border-color: ${({ position }) =>
+      position === 'left' ? vars.colorGreen : 'transparent'};
+    border-radius: ${vars.borderRadiusLarge};
+    padding: ${({ position }) => (position === 'left' ? '2em' : 0)};
+
+    ul {
+      display: inline-flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding-left: 1em;
+      li {
+        background-image: none;
+        padding: 0.5em 0.75em;
+        margin: 0.25em;
+        border-color: ${props =>
+          props.position === 'left' ? vars.colorGreen : vars.colorWhite};
+        border-radius: ${vars.borderRadiusLarge};
+        font-size: ${vars.fontSizeTextSmall};
+        font-weight: ${vars.fontWeightBold};
+        text-align: center;
+      }
+    }
+  }
+`
+
+const SideTextBg = styled.div`
+  display: none;
+  position: absolute;
+
+  &.circle {
+    height: 570px;
+    width: 570px;
+    background-color: ${vars.colorGreen};
+    z-index: -1;
+    border-radius: 999px;
+  }
+
+  &.square {
+    width: ${({ $width }) => $width}px;
+    height: ${({ $height }) => $height}px;
+    border: solid 1px ${vars.colorGreen};
+    border-radius: ${vars.borderRadiusLarge};
+    left: 50%;
+    top: 50%;
+    transform: translate(-55%, -55%);
+  }
+
+  @media (min-width: ${vars.breakpointExtraLarge}) {
+    display: block;
+  }
+`
+
 const LargeServiceCardSection = ({
   buttonLink,
   buttonText,
@@ -71,12 +175,15 @@ const LargeServiceCardSection = ({
   sideImage,
   smallGreenHeadingText,
 }) => {
-  const imageFluid = sideImage?.localFile?.childImageSharp.fluid
+  const sideImageData = {
+    imageFluid: sideImage?.localFile?.childImageSharp?.fluid,
+    altText: sideImage?.altText,
+  }
 
   return (
     <Section>
       <Container>
-        <ServiceGrid>
+        <ServiceGrid position={cardPosition}>
           <ServiceCardWrapper>
             <LargeServiceCard
               cardContent={cardContent}
@@ -87,9 +194,12 @@ const LargeServiceCardSection = ({
             />
             <ServiceCardBG cardPosition={cardPosition} />
           </ServiceCardWrapper>
-          <SideImage>
-            <Image backgroundColor={'transparent'} fluid={imageFluid} alt="" />
-          </SideImage>
+          <SideContent
+            sideImage={sideImageData}
+            sideText={sideText}
+            sideContentType={sideContentType}
+            cardPosition={cardPosition}
+          />
         </ServiceGrid>
       </Container>
     </Section>
@@ -99,11 +209,57 @@ const LargeServiceCardSection = ({
 const ServiceCardBG = ({ cardPosition }) => {
   return (
     <StyledServiceCardBG position={cardPosition} aria-hidden>
-      <div style={{ opacity: 0.25 }} />
-      <div style={{ opacity: 0.5 }} />
-      <div style={{ opacity: 0.75 }} />
-      <div style={{ opacity: 0.9 }} />
+      <div
+        style={{
+          opacity: 0.9,
+          zIndex: -1,
+        }}
+      />
+      <div
+        style={{
+          opacity: 0.75,
+          zIndex: -2,
+        }}
+      />
+      <div
+        style={{
+          opacity: 0.5,
+          zIndex: -3,
+        }}
+      />
+      <div
+        style={{
+          opacity: 0.35,
+          zIndex: -4,
+        }}
+      />
     </StyledServiceCardBG>
+  )
+}
+
+const SideContent = ({
+  sideContentType,
+  sideText,
+  sideImage: { imageFluid, altText },
+  cardPosition,
+}) => {
+  const [ref, { width, height }] = useDimensions()
+
+  return sideContentType === 'image' ? (
+    <SideImage>
+      <Image backgroundColor="transparent" fluid={imageFluid} alt={altText} />
+    </SideImage>
+  ) : (
+    <SideTextWrapper position={cardPosition}>
+      <SideText ref={ref} position={cardPosition}>
+        {parse(sideText)}
+      </SideText>
+      <SideTextBg
+        $width={width}
+        $height={height}
+        className={cardPosition === 'left' ? 'square' : 'circle'}
+      />
+    </SideTextWrapper>
   )
 }
 
@@ -119,6 +275,7 @@ export const fragment = graphql`
     sideText
     smallGreenHeadingText
     sideImage {
+      altText
       localFile {
         childImageSharp {
           fluid(maxWidth: 1000, quality: 100) {

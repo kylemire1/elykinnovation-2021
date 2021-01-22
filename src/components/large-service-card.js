@@ -13,10 +13,14 @@ const ServiceCard = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem 3rem;
+  padding: 1.5rem;
   background-color: ${vars.colorBlack};
   border-radius: ${vars.borderRadiusLarge};
   min-height: 46.5rem;
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    padding: 2rem 3rem;
+  }
 `
 
 const CardHeading = styled(SectionHeading)`
