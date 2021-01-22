@@ -36,7 +36,7 @@ const SixCards = ({
   return (
     <Section bg={sectionBackgroundColor} angled={angledBackgroundTransition}>
       <Container>
-        <SectionHeading>
+        <SectionHeading bg={sectionBackgroundColor}>
           <span>{smallGreenHeadingText}</span>
           {mainHeadingText}
         </SectionHeading>

@@ -7,8 +7,8 @@ import Motto from '../components/motto'
 import SixCards from '../components/six-cards'
 import Spacer from '../components/spacer'
 import PortfolioPreview from '../components/portfolio-preview'
-
 import Layout from '../components/layout'
+import LargeServiceCardSection from '../components/large-service-card-section'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -44,6 +44,9 @@ const WpPageTemplate = ({ data }) => {
                 {...section}
               />
             )
+
+          case 'page_Layoutsections_Components_LargeServiceCardSection':
+            return <LargeServiceCardSection {...section} />
         }
       })}
     </Layout>
@@ -68,6 +71,7 @@ export const pageQuery = graphql`
           ...SixCardGrid
           ...Spacer
           ...PortfolioPreview
+          ...LargeServiceCardSection
         }
       }
     }

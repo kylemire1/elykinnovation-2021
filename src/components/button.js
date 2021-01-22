@@ -10,6 +10,7 @@ const StyledLink = styled(Link)`
   color: currentColor;
   text-decoration: none;
   border-radius: 5px;
+  cursor: pointer;
 
   &.red {
     display: inline-grid;
@@ -41,6 +42,7 @@ const StyledButton = styled.button`
   color: currentColor;
   text-decoration: none;
   border-radius: 5px;
+  cursor: pointer;
 
   &.red {
     display: inline-grid;

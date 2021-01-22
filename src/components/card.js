@@ -16,7 +16,6 @@ const StyledCard = styled.div`
   flex-direction: column;
 
   > h2 {
-    margin-bottom: 0;
     font-weight: ${vars.fontWeightBolder};
     font-size: ${vars.fontSizeHeading1};
     color: ${props =>
