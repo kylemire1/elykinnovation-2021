@@ -41,18 +41,20 @@ const ThreeCards = ({
   return (
     <Section bg={sectionBackgroundColor}>
       <Container>
-        <CardGrid bg={cardBackgroundColor} $offset={offsetTop}>
-          {cards.map((card, cardIndex) => (
-            <Card
-              key={`${card.cardTitle}_card_${cardIndex}`}
-              largeHeading={true}
-              title={card.cardTitle}
-              body={card.cardBody}
-              link={card.cardLink}
-              backgroundColor={cardBackgroundColor}
-            />
-          ))}
-        </CardGrid>
+        {cards && (
+          <CardGrid bg={cardBackgroundColor} $offset={offsetTop}>
+            {cards.map((card, cardIndex) => (
+              <Card
+                key={`${card.cardTitle}_card_${cardIndex}`}
+                largeHeading={true}
+                title={card.cardTitle}
+                body={card.cardBody}
+                link={card.cardLink}
+                backgroundColor={cardBackgroundColor}
+              />
+            ))}
+          </CardGrid>
+        )}
       </Container>
     </Section>
   )
