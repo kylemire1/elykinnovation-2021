@@ -30,6 +30,9 @@ const MottoHeading = styled(SectionHeading)`
 `
 
 const MottoContent = styled.div`
+  p {
+    margin-bottom: 0;
+  }
   @media (min-width: ${vars.breakpointLarge}) {
     margin-left: 0.5em;
   }

@@ -2,13 +2,11 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import Image from 'gatsby-image'
 import styled from 'styled-components'
-import parse from 'html-react-parser'
 
-import Button from '../components/button'
-import { Container, Section, SectionHeading } from '../components/styled/global'
+import LargeServiceCard from './large-service-card'
+import { Container, Section } from '../components/styled/global'
 
 import vars from '../vars'
-import checkSrc from '../../content/assets/check-bullet.svg'
 
 const ServiceGrid = styled.div`
   display: grid;
@@ -21,41 +19,6 @@ const ServiceGrid = styled.div`
 
 const ServiceCardWrapper = styled.div`
   position: relative;
-`
-
-const ServiceCard = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem 3rem;
-  background-color: ${vars.colorBlack};
-  border-radius: ${vars.borderRadiusLarge};
-  min-height: 46.5rem;
-`
-
-const CardHeading = styled(SectionHeading)`
-  margin-bottom: 1rem;
-`
-
-const CardContent = styled.div`
-  margin-bottom: 2rem;
-
-  h3,
-  h4,
-  h5 {
-    font-size: ${vars.fontSizeHeading1};
-    font-weight: ${vars.fontWeightBolder};
-  }
-
-  li {
-    background-image: url(${checkSrc});
-    background-position: top 0.25em left;
-  }
-`
-
-const ServiceCardButton = styled.div`
-  width: 100%;
 `
 
 const StyledServiceCardBG = styled.div`
@@ -115,20 +78,13 @@ const LargeServiceCardSection = ({
       <Container>
         <ServiceGrid>
           <ServiceCardWrapper>
-            <ServiceCard bg="colorAlmostBlack">
-              <CardContent>
-                <CardHeading bg="colorBlack">
-                  <span>{smallGreenHeadingText} </span>
-                  {mainHeadingText}
-                </CardHeading>
-                {parse(cardContent)}
-              </CardContent>
-              <ServiceCardButton>
-                <Button elementType="link" buttonStyle="red" href={buttonLink}>
-                  {buttonText}
-                </Button>
-              </ServiceCardButton>
-            </ServiceCard>
+            <LargeServiceCard
+              cardContent={cardContent}
+              mainHeadingText={mainHeadingText}
+              smallGreenHeadingText={smallGreenHeadingText}
+              buttonLink={buttonLink}
+              buttonText={buttonText}
+            />
             <ServiceCardBG cardPosition={cardPosition} />
           </ServiceCardWrapper>
           <SideImage>
