@@ -9,6 +9,7 @@ import Spacer from '../components/spacer'
 import PortfolioPreview from '../components/portfolio-preview'
 import Layout from '../components/layout'
 import LargeServiceCardSection from '../components/large-service-card-section'
+import OnlineMarketingServiceSection from '../components/online-marketing-service-section'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -47,6 +48,9 @@ const WpPageTemplate = ({ data }) => {
 
           case 'page_Layoutsections_Components_LargeServiceCardSection':
             return <LargeServiceCardSection {...section} />
+
+          case 'page_Layoutsections_Components_OnlineMarketing':
+            return <OnlineMarketingServiceSection {...section} />
         }
       })}
     </Layout>
@@ -72,6 +76,7 @@ export const pageQuery = graphql`
           ...Spacer
           ...PortfolioPreview
           ...LargeServiceCardSection
+          ...OnlineMarketingServiceSection
         }
       }
     }

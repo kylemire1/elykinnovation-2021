@@ -10,7 +10,7 @@ import vars from '../vars'
 
 const CardGrid = styled.div`
   display: grid;
-  gap: 1.5em;
+  gap: 1.5rem;
   margin-top: ${props => (props.$offset ? '-7em' : 0)};
 
   ul {

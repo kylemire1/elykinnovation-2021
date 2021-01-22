@@ -12,7 +12,7 @@ import vars from '../vars'
 
 const ServiceGrid = styled.div`
   display: grid;
-  gap: 1.5em;
+  gap: 1.5rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
     grid-template-columns: repeat(2, 1fr);
@@ -91,7 +91,6 @@ const SideText = styled.div`
   h4,
   h5 {
     font-size: ${vars.fontSizeHeading3};
-    text-align: center;
   }
 
   ul {
@@ -115,7 +114,15 @@ const SideText = styled.div`
     border-color: ${({ position }) =>
       position === 'left' ? vars.colorGreen : 'transparent'};
     border-radius: ${vars.borderRadiusLarge};
-    padding: ${({ position }) => (position === 'left' ? '2em' : 0)};
+    padding: ${({ position, padding }) =>
+      position === 'left' ? '2em' : padding};
+
+    h2,
+    h3,
+    h4,
+    h5 {
+      text-align: center;
+    }
 
     ul {
       display: inline-flex;
@@ -174,9 +181,10 @@ const LargeServiceCardSection = ({
   sideText,
   sideImage,
   smallGreenHeadingText,
+  extraPadding,
 }) => {
   const sideImageData = {
-    imageFluid: sideImage?.localFile?.childImageSharp?.fluid,
+    imageFixed: sideImage?.localFile?.childImageSharp?.fixed,
     altText: sideImage?.altText,
   }
 
@@ -199,6 +207,7 @@ const LargeServiceCardSection = ({
             sideText={sideText}
             sideContentType={sideContentType}
             cardPosition={cardPosition}
+            extraPadding={extraPadding}
           />
         </ServiceGrid>
       </Container>
@@ -240,24 +249,26 @@ const ServiceCardBG = ({ cardPosition }) => {
 const SideContent = ({
   sideContentType,
   sideText,
-  sideImage: { imageFluid, altText },
+  sideImage: { imageFixed, altText },
   cardPosition,
+  extraPadding,
 }) => {
   const [ref, { width, height }] = useDimensions()
 
   return sideContentType === 'image' ? (
     <SideImage>
-      <Image backgroundColor="transparent" fluid={imageFluid} alt={altText} />
+      <Image backgroundColor="transparent" fixed={imageFixed} alt={altText} />
     </SideImage>
   ) : (
     <SideTextWrapper position={cardPosition}>
-      <SideText ref={ref} position={cardPosition}>
+      <SideText ref={ref} position={cardPosition} padding={extraPadding}>
         {parse(sideText)}
       </SideText>
       <SideTextBg
         $width={width}
         $height={height}
         className={cardPosition === 'left' ? 'square' : 'circle'}
+        aria-hidden
       />
     </SideTextWrapper>
   )
@@ -274,12 +285,13 @@ export const fragment = graphql`
     sideContentType
     sideText
     smallGreenHeadingText
+    extraPadding
     sideImage {
       altText
       localFile {
         childImageSharp {
-          fluid(maxWidth: 1000, quality: 100) {
-            ...GatsbyImageSharpFluid_noBase64
+          fixed(width: 572) {
+            ...GatsbyImageSharpFixed_noBase64
           }
         }
       }

@@ -12,14 +12,14 @@ const ServiceCard = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 1.5rem;
+  padding: 2rem;
   background-color: ${vars.colorBlack};
   border-radius: ${vars.borderRadiusLarge};
-  min-height: 46.5rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
     padding: 2rem 3rem;
+    min-height: 46.5rem;
+    align-items: center;
   }
 `
 
@@ -28,8 +28,6 @@ const CardHeading = styled(SectionHeading)`
 `
 
 const CardContent = styled.div`
-  margin-bottom: 2rem;
-
   h3,
   h4,
   h5 {
@@ -44,6 +42,7 @@ const CardContent = styled.div`
 `
 
 const ServiceCardButton = styled.div`
+  margin-top: 2rem;
   width: 100%;
 `
 
@@ -62,12 +61,12 @@ const LargeServiceCard = ({
           {mainHeadingText}
         </CardHeading>
         {parse(cardContent)}
+        <ServiceCardButton>
+          <Button elementType="link" buttonStyle="red" href={buttonLink}>
+            {buttonText}
+          </Button>
+        </ServiceCardButton>
       </CardContent>
-      <ServiceCardButton>
-        <Button elementType="link" buttonStyle="red" href={buttonLink}>
-          {buttonText}
-        </Button>
-      </ServiceCardButton>
     </ServiceCard>
   )
 }

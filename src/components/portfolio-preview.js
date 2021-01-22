@@ -10,7 +10,7 @@ import vars from '../vars'
 
 const PortfolioGrid = styled.div`
   display: grid;
-  gap: 1.5em;
+  gap: 1.5rem;
   margin-bottom: 2rem;
   margin-bottom: ${props => (props.$button ? '2rem' : 0)};
 
