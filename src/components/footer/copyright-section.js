@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import SocialIcon from '../icons/social-icon'
@@ -94,35 +94,51 @@ const Socials = styled.div`
 `
 
 const CopyrightSection = () => {
+  const data = useStaticQuery(graphql`
+    query CopyrightFooterData {
+      wpSiteFooter(id: { eq: "cG9zdDozMTA=" }) {
+        id
+        footerFields {
+          copyrightLinks {
+            linkHref
+            linkText
+          }
+          socialLinks
+        }
+      }
+    }
+  `)
+
+  const { copyrightLinks, socialLinks } = data?.wpSiteFooter?.footerFields
+
   return (
     <FooterSection className="sm" color={vars.colorBlack}>
       <Container>
         <FooterRow>
           <Copyright>
             <p>
-              Copyright © 2020 Elyk Innovation, Inc. – Jacksonville, Florida
+              Copyright © {new Date().getFullYear()} Elyk Innovation, Inc. –
+              Jacksonville, Florida
             </p>
           </Copyright>
           <Links>
             <ul>
-              <li>
-                <Link to="/client-resources">Client Resources</Link>
-              </li>
-              <li>
-                <Link to="/site-map">Site Map</Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy">Privacy Policy</Link>
-              </li>
-              <li>
-                <Link to="/terms-of-use">Terms of Use</Link>
-              </li>
+              {copyrightLinks &&
+                copyrightLinks.map(({ linkText, linkHref }, linkIndex) => (
+                  <li key={`${linkText}_link_${linkIndex}`}>
+                    <Link to={linkHref}>{linkText}</Link>
+                  </li>
+                ))}
             </ul>
           </Links>
           <Socials>
-            <SocialIcon icon="facebook" />
-            <SocialIcon icon="linkedin" />
-            <SocialIcon icon="twitter" />
+            {socialLinks &&
+              socialLinks.map((socialLink, socialLinkIndex) => (
+                <SocialIcon
+                  key={`${socialLink}_link_${socialLinkIndex}`}
+                  icon={socialLink}
+                />
+              ))}
           </Socials>
         </FooterRow>
       </Container>

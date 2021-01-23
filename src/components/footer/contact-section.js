@@ -1,4 +1,5 @@
 import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import Button from '../button'
@@ -73,6 +74,7 @@ const FooterHeading = styled(SectionHeading)`
   font-size: ${vars.fontSizeHeading4};
   font-weight: ${vars.fontWeightBolder};
   margin-bottom: 0;
+  text-transform: capitalize;
 
   span {
     font-weight: ${vars.fontWeightBold};
@@ -134,31 +136,63 @@ const StyledOr = styled.div`
   }
 `
 
-const ContactSection = () => (
-  <FooterSection color={vars.colorWhite}>
-    <Container>
-      <ContactGrid>
-        <div>
-          <FooterHeading>
-            <span>Ready to get started? </span>We're Looking Forward to Working
-            With You
-          </FooterHeading>
-        </div>
-        <ContactInfo>
-          <PhoneNumber href="tel:+19049981935">
-            <PhoneIcon className="icon-left" />
-            <span>904.998.1935</span>
-            <PhoneIcon className="icon-right" />
-          </PhoneNumber>
-          <Or />
-          <Button elementType="link" buttonStyle="green" href="/contact-us">
-            Contact Us Online
-          </Button>
-        </ContactInfo>
-      </ContactGrid>
-    </Container>
-  </FooterSection>
-)
+const ContactSection = () => {
+  const data = useStaticQuery(graphql`
+    query ContactFooterData {
+      wpSiteFooter(id: { eq: "cG9zdDozMTA=" }) {
+        id
+        footerFields {
+          contactButtonLink
+          contactButtonText
+          mainHeadingText
+          phoneNumber
+          smallGreenHeadingText
+        }
+      }
+    }
+  `)
+
+  const {
+    contactButtonLink,
+    contactButtonText,
+    mainHeadingText,
+    phoneNumber,
+    smallGreenHeadingText,
+  } = data?.wpSiteFooter?.footerFields
+
+  /** Phone number with non-digit characters removed for the href */
+  const formattedPhoneNumber = phoneNumber.replace(/\D/g, '')
+
+  return (
+    <FooterSection color={vars.colorWhite}>
+      <Container>
+        <ContactGrid>
+          <div>
+            <FooterHeading bg={'colorWhite'}>
+              <span>{smallGreenHeadingText} </span>
+              {mainHeadingText}
+            </FooterHeading>
+          </div>
+          <ContactInfo>
+            <PhoneNumber href={`tel:+1${formattedPhoneNumber}`}>
+              <PhoneIcon className="icon-left" />
+              <span>{phoneNumber}</span>
+              <PhoneIcon className="icon-right" />
+            </PhoneNumber>
+            <Or />
+            <Button
+              elementType="link"
+              buttonStyle="green"
+              href={contactButtonLink}
+            >
+              {contactButtonText}
+            </Button>
+          </ContactInfo>
+        </ContactGrid>
+      </Container>
+    </FooterSection>
+  )
+}
 
 const Or = () => (
   <StyledOr>

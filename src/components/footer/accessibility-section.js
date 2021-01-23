@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useStaticQuery, graphql } from 'gatsby'
 import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import parse from 'html-react-parser'
 
 import { FooterSection } from './index'
 import { Container } from '../styled/global'
@@ -52,10 +54,35 @@ const AccessibilityStatement = styled.div`
   p {
     margin-bottom: 0;
   }
+
+  a {
+    color: currentColor;
+    opacity: 1;
+    transition: opacity 250ms ${vars.ease};
+
+    :hover,
+    :focus-within,
+    :focus {
+      opacity: 0.85;
+      transition: opacity 250ms ${vars.ease};
+    }
+  }
 `
 
 const AccessibilitySection = () => {
   const breakpoints = useBreakpoint()
+  const data = useStaticQuery(graphql`
+    query AccessibilityFooterData {
+      wpSiteFooter(id: { eq: "cG9zdDozMTA=" }) {
+        id
+        footerFields {
+          accessibilityPolicy
+        }
+      }
+    }
+  `)
+
+  const { accessibilityPolicy } = data?.wpSiteFooter?.footerFields
 
   return (
     <FooterSection className="md" color={vars.colorRed}>
@@ -76,12 +103,7 @@ const AccessibilitySection = () => {
           </AccessibilityHeading>
 
           <AccessibilityStatement>
-            <p>
-              Elyk Innovation Inc. is committed to keeping our site accessible
-              to everyone. We welcome feedback on ways to improve the site’s
-              accessibility. Learn more about our website accessibility
-              services.
-            </p>
+            {parse(accessibilityPolicy)}
           </AccessibilityStatement>
         </AccessibilityRow>
       </Container>

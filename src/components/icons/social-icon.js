@@ -5,7 +5,7 @@ const SocialIcon = ({ icon }) => {
     case 'facebook':
       return FB_ICON
 
-    case 'linkedin':
+    case 'linkedIn':
       return LINKEDIN_ICON
 
     case 'twitter':
