@@ -18,11 +18,11 @@ const ServiceGrid = styled.div`
     grid-template-columns: repeat(2, 1fr);
 
     > div:first-child {
-      order: ${props => (props.position === 'left' ? 1 : 2)};
+      order: ${({ position }) => (position === 'left' ? 1 : 2)};
     }
 
     > div:last-child {
-      order: ${props => (props.position === 'left' ? 2 : 1)};
+      order: ${({ props }) => (position === 'left' ? 2 : 1)};
     }
   }
 `
@@ -34,26 +34,24 @@ const ServiceCardWrapper = styled.div`
 const StyledServiceCardBG = styled.div`
   display: none;
   position: absolute;
-  ${props => (props.position === 'left' ? 'right: 5.5rem' : 'left: 5.5rem')};
+  ${({ position }) => (position === 'left' ? 'right: 5.5rem' : 'left: 5.5rem')};
   top: 0;
   z-index: -1;
   height: 42rem;
-  flex-direction: ${props =>
-    props.position === 'left' ? 'row-reverse' : 'row'};
+  flex-direction: ${({ position }) =>
+    position === 'left' ? 'row-reverse' : 'row'};
 
   > div {
     background-color: ${vars.colorAlmostBlack};
     border-radius: ${vars.borderRadiusLarge};
     width: 35.75rem;
-    box-shadow: ${props => (props.position === 'left' ? '-10px' : '10px')} 0
+    box-shadow: ${({ position }) => (position === 'left' ? '-10px' : '10px')} 0
       15px #0a0a0aa6;
   }
 
   div + div {
-    ${props =>
-      props.position === 'left'
-        ? 'margin-right: -30rem;'
-        : 'margin-left: -30rem;'};
+    ${({ position }) =>
+      position === 'left' ? 'margin-right: -30rem;' : 'margin-left: -30rem;'};
   }
 
   @media (min-width: ${vars.breakpointExtraLarge}) {
@@ -133,8 +131,8 @@ const SideText = styled.div`
         background-image: none;
         padding: 0.5em 0.75em;
         margin: 0.25em;
-        border-color: ${props =>
-          props.position === 'left' ? vars.colorGreen : vars.colorWhite};
+        border-color: ${({ position }) =>
+          position === 'left' ? vars.colorGreen : vars.colorWhite};
         border-radius: ${vars.borderRadiusLarge};
         font-size: ${vars.fontSizeTextSmall};
         font-weight: ${vars.fontWeightBold};

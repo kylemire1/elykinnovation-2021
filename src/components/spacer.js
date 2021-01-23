@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import vars from '../vars'
 
 const StyledSpacer = styled.div`
-  background-color: ${props => vars[props.bg]};
-  height: ${props => props.height};
+  background-color: ${({ bg }) => vars[bg]};
+  height: ${({ height }) => height};
 `
 
 const Spacer = ({ backgroundColor, spacing }) => {

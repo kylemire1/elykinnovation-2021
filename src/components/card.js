@@ -7,9 +7,9 @@ import vars from '../vars'
 import arrowSrc from '../../content/assets/arrow.svg'
 
 const StyledCard = styled.div`
-  background-color: ${props => vars[props.bg]};
-  color: ${props =>
-    props.bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
+  background-color: ${({ bg }) => vars[bg]};
+  color: ${({ bg }) =>
+    bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
   padding: 2em;
   border-radius: ${vars.borderRadiusSmall};
   display: flex;
@@ -18,8 +18,8 @@ const StyledCard = styled.div`
   > h2 {
     font-weight: ${vars.fontWeightBolder};
     font-size: ${vars.fontSizeHeading1};
-    color: ${props =>
-      props.bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
+    color: ${({ bg }) =>
+      bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
 
     span {
       font-weight: ${vars.fontWeightBold};
@@ -32,8 +32,8 @@ const StyledCard = styled.div`
       margin-top: 0;
       font-weight: ${vars.fontWeightNormal};
       font-size: ${vars.fontSizeHeading2};
-      color: ${props =>
-        props.bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
+      color: ${({ bg }) =>
+        bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
 
       span {
         font-weight: ${vars.fontWeightBold};
