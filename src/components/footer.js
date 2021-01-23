@@ -235,7 +235,6 @@ const ContactSection = () => (
 
 const AccessibilitySection = () => {
   const breakpoints = useBreakpoint()
-  console.log(breakpoints)
 
   return (
     <FooterSection className="md" color={vars.colorRed}>

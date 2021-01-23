@@ -47,10 +47,20 @@ const WpPageTemplate = ({ data }) => {
             )
 
           case 'page_Layoutsections_Components_LargeServiceCardSection':
-            return <LargeServiceCardSection {...section} />
+            return (
+              <LargeServiceCardSection
+                key={`LargeServiceCardSection_${sectionIndex}`}
+                {...section}
+              />
+            )
 
           case 'page_Layoutsections_Components_OnlineMarketing':
-            return <OnlineMarketingServiceSection {...section} />
+            return (
+              <OnlineMarketingServiceSection
+                key={`OnlineMarketing_${sectionIndex}`}
+                {...section}
+              />
+            )
 
           default:
             return null

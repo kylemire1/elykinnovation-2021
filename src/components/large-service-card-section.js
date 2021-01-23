@@ -190,7 +190,6 @@ const LargeServiceCardSection = ({
     altText: sideImage?.altText,
   }
 
-  console.log(sideImage)
   return (
     <Section>
       <Container>
@@ -252,7 +251,7 @@ const ServiceCardBG = ({ cardPosition }) => {
 const SideContent = ({
   sideContentType,
   sideText,
-  sideImage: { desktop, mobile, tablet, altText },
+  sideImage: { desktop, mobile, altText },
   cardPosition,
   extraPadding,
 }) => {
@@ -301,9 +300,6 @@ export const fragment = graphql`
       localFile {
         childImageSharp {
           desktop: fixed(width: 572) {
-            ...GatsbyImageSharpFixed_noBase64
-          }
-          tablet: fixed(width: 450) {
             ...GatsbyImageSharpFixed_noBase64
           }
           mobile: fixed(width: 350) {

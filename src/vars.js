@@ -23,7 +23,7 @@ const vars = {
   /** 14px */
   fontSizeTextSmall: '0.85rem',
   fontWeightLight: '300',
-  fontWeightNormal: '400',
+  fontWeightNormal: '300',
   fontWeightBold: '600',
   fontWeightBolder: '700',
   colorAlmostBlack: '#141414',
