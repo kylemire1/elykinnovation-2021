@@ -21,7 +21,7 @@ const ServiceCard = styled.div`
     align-items: center;
   }
   @media (min-width: ${vars.breakpointExtraLarge}) {
-    min-height: 46.5rem;
+    min-height: 42rem;
   }
 `
 

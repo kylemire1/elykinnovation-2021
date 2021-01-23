@@ -37,7 +37,7 @@ const StyledServiceCardBG = styled.div`
   ${props => (props.position === 'left' ? 'right: 5.5rem' : 'left: 5.5rem')};
   top: 0;
   z-index: -1;
-  height: 46.5rem;
+  height: 42rem;
   flex-direction: ${props =>
     props.position === 'left' ? 'row-reverse' : 'row'};
 

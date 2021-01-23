@@ -1,0 +1,169 @@
+import React from 'react'
+import styled from 'styled-components'
+
+import Button from '../button'
+import PhoneIcon from '../icons/phone-icon'
+import { FooterSection } from './index'
+import { Container, SectionHeading } from '../styled/global'
+
+import vars from '../../vars'
+
+const PhoneNumber = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${vars.fontSizeHeading4};
+  font-weight: ${vars.fontWeightBolder};
+  color: ${vars.colorBlack};
+  text-decoration: none;
+  transition: color 250ms ${vars.ease};
+  svg {
+    fill: ${vars.colorBlack};
+    transition: fill 250ms ${vars.ease};
+  }
+
+  :hover,
+  :focus,
+  :focus-within {
+    color: ${vars.colorGreen};
+    transition: color 250ms ${vars.ease};
+
+    svg {
+      fill: ${vars.colorGreen};
+      transition: fill 250ms ${vars.ease};
+    }
+  }
+
+  .icon-left {
+    display: none;
+  }
+  .icon-right {
+    margin-left: 1rem;
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    .icon-right {
+      display: none;
+    }
+    .icon-left {
+      display: block;
+      margin-right: 1rem;
+    }
+  }
+`
+
+const ContactInfo = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+
+  .btn {
+    margin: 0;
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    align-items: center;
+    justify-content: center;
+  }
+`
+
+const FooterHeading = styled(SectionHeading)`
+  color: ${vars.colorBlack};
+  font-size: ${vars.fontSizeHeading4};
+  font-weight: ${vars.fontWeightBolder};
+  margin-bottom: 0;
+
+  span {
+    font-weight: ${vars.fontWeightBold};
+  }
+`
+
+const ContactGrid = styled.div`
+  display: grid;
+  gap: 1.5rem;
+  align-items: center;
+
+  > div:last-child {
+    justify-self: start;
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    grid-template-columns: 1.5fr 1fr;
+
+    > div:last-child {
+      justify-self: end;
+    }
+  }
+`
+
+const StyledOr = styled.div`
+  position: relative;
+  width: 100%;
+  z-index: 99;
+  margin: 0rem 0.25rem 0.3rem;
+
+  span {
+    text-transform: uppercase;
+    color: ${vars.colorBlack};
+    font-weight: ${vars.fontWeightBold};
+    background-color: ${vars.colorWhite};
+    display: inline-block;
+    z-index: 1;
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    text-align: center;
+
+    span {
+      padding: 0 0.25rem;
+      font-size: ${vars.fontSizeTextSmall};
+      ::after {
+        content: '';
+        width: 70px;
+        height: 1px;
+        background-color: ${vars.colorBlack};
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        display: block;
+      }
+    }
+  }
+`
+
+const ContactSection = () => (
+  <FooterSection color={vars.colorWhite}>
+    <Container>
+      <ContactGrid>
+        <div>
+          <FooterHeading>
+            <span>Ready to get started? </span>We're Looking Forward to Working
+            With You
+          </FooterHeading>
+        </div>
+        <ContactInfo>
+          <PhoneNumber href="tel:+19049981935">
+            <PhoneIcon className="icon-left" />
+            <span>904.998.1935</span>
+            <PhoneIcon className="icon-right" />
+          </PhoneNumber>
+          <Or />
+          <Button elementType="link" buttonStyle="green" href="/contact-us">
+            Contact Us Online
+          </Button>
+        </ContactInfo>
+      </ContactGrid>
+    </Container>
+  </FooterSection>
+)
+
+const Or = () => (
+  <StyledOr>
+    <span>Or</span>
+  </StyledOr>
+)
+
+export default ContactSection
