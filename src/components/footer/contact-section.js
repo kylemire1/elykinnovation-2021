@@ -103,7 +103,7 @@ const StyledOr = styled.div`
   position: relative;
   width: 100%;
   z-index: 99;
-  margin: 0.3rem 0.25rem 0.6rem;
+  margin: 0.3rem 0.25rem 0.75rem;
 
   span {
     text-transform: uppercase;
