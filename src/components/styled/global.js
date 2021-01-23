@@ -5,6 +5,7 @@ import portfolioBgSrc from '../../../content/assets/portfolio-bg-pattern.svg'
 
 export const MainContent = styled.main`
   margin-top: ${props => (props.home ? 0 : '5rem')};
+  padding-bottom: 3rem;
 `
 
 export const Container = styled.div`
