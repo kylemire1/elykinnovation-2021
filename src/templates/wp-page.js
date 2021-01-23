@@ -51,6 +51,9 @@ const WpPageTemplate = ({ data }) => {
 
           case 'page_Layoutsections_Components_OnlineMarketing':
             return <OnlineMarketingServiceSection {...section} />
+
+          default:
+            return null
         }
       })}
     </Layout>

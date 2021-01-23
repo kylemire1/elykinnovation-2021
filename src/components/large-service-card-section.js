@@ -56,7 +56,7 @@ const StyledServiceCardBG = styled.div`
         : 'margin-left: -30rem;'};
   }
 
-  @media (min-width: ${vars.breakpointLarge}) {
+  @media (min-width: ${vars.breakpointExtraLarge}) {
     display: flex;
   }
 `
@@ -115,7 +115,7 @@ const SideText = styled.div`
       position === 'left' ? vars.colorGreen : 'transparent'};
     border-radius: ${vars.borderRadiusLarge};
     padding: ${({ position, padding }) =>
-      position === 'left' ? '2em' : padding};
+      position === 'left' ? '4em 2em' : padding};
 
     h2,
     h3,
@@ -184,10 +184,13 @@ const LargeServiceCardSection = ({
   extraPadding,
 }) => {
   const sideImageData = {
-    imageFixed: sideImage?.localFile?.childImageSharp?.fixed,
+    desktop: sideImage?.localFile?.childImageSharp?.desktop,
+    tablet: sideImage?.localFile?.childImageSharp?.tablet,
+    mobile: sideImage?.localFile?.childImageSharp?.mobile,
     altText: sideImage?.altText,
   }
 
+  console.log(sideImage)
   return (
     <Section>
       <Container>
@@ -249,7 +252,7 @@ const ServiceCardBG = ({ cardPosition }) => {
 const SideContent = ({
   sideContentType,
   sideText,
-  sideImage: { imageFixed, altText },
+  sideImage: { desktop, mobile, tablet, altText },
   cardPosition,
   extraPadding,
 }) => {
@@ -257,7 +260,15 @@ const SideContent = ({
 
   return sideContentType === 'image' ? (
     <SideImage>
-      <Image backgroundColor="transparent" fixed={imageFixed} alt={altText} />
+      <Image
+        backgroundColor="transparent"
+        fixed={[
+          mobile,
+          { ...tablet, media: `(min-width: ${vars.breakpointSmall})` },
+          { ...desktop, media: `(min-width: ${vars.breakpointLarge})` },
+        ]}
+        alt={altText}
+      />
     </SideImage>
   ) : (
     <SideTextWrapper position={cardPosition}>
@@ -290,7 +301,13 @@ export const fragment = graphql`
       altText
       localFile {
         childImageSharp {
-          fixed(width: 572) {
+          desktop: fixed(width: 572) {
+            ...GatsbyImageSharpFixed_noBase64
+          }
+          tablet: fixed(width: 450) {
+            ...GatsbyImageSharpFixed_noBase64
+          }
+          mobile: fixed(width: 350) {
             ...GatsbyImageSharpFixed_noBase64
           }
         }

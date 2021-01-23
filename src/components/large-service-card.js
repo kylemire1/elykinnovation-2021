@@ -18,8 +18,10 @@ const ServiceCard = styled.div`
 
   @media (min-width: ${vars.breakpointLarge}) {
     padding: 2rem 3rem;
-    min-height: 46.5rem;
     align-items: center;
+  }
+  @media (min-width: ${vars.breakpointExtraLarge}) {
+    min-height: 46.5rem;
   }
 `
 

@@ -1,7 +1,6 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
-import parse from 'html-react-parser'
 
 import { Container, Section } from './styled/global'
 import Card from './card'
