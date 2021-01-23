@@ -79,5 +79,16 @@ module.exports = {
 
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-breakpoints`,
+      options: {
+        queries: {
+          sm: `(min-width: 36em)`,
+          md: `(min-width: 48em)`,
+          lg: `(min-width: 62em)`,
+          xl: `(min-width: 75em)`,
+        },
+      },
+    },
   ],
 }

@@ -264,7 +264,6 @@ const SideContent = ({
         backgroundColor="transparent"
         fixed={[
           mobile,
-          { ...tablet, media: `(min-width: ${vars.breakpointSmall})` },
           { ...desktop, media: `(min-width: ${vars.breakpointLarge})` },
         ]}
         alt={altText}

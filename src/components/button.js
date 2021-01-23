@@ -12,6 +12,21 @@ const StyledLink = styled(Link)`
   border-radius: 5px;
   cursor: pointer;
 
+  &.green {
+    background-color: ${vars.colorGreen};
+    padding: 1.25em 2em;
+    display: inline-block;
+    margin: 0 auto;
+    transition: background-color 250ms ${vars.ease};
+
+    &:hover,
+    &:focus,
+    &:focus-within {
+      background-color: ${vars.colorBlack};
+      transition: background-color 250ms ${vars.ease};
+    }
+  }
+
   &.red {
     display: inline-grid;
     grid-template-columns: 1fr 2.813em;
@@ -71,11 +86,17 @@ const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {
   switch (elementType) {
     case 'link':
       return (
-        <StyledLink className={buttonStyle} to={href}>
-          <TextWrapper>{children}</TextWrapper>
-          <IconWrapper>
-            <img src={arrowSrc} alt="" />
-          </IconWrapper>
+        <StyledLink className={`btn ${buttonStyle}`} to={href}>
+          {buttonStyle === 'red' ? (
+            <>
+              <TextWrapper>{children}</TextWrapper>
+              <IconWrapper>
+                <img src={arrowSrc} alt="" />
+              </IconWrapper>
+            </>
+          ) : (
+            <>{children}</>
+          )}
         </StyledLink>
       )
     default:
