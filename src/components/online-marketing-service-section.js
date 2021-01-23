@@ -29,7 +29,7 @@ const BoxGridItem = styled.div`
 
   p {
     font-size: ${vars.fontSizeHeading2};
-    font-weight: ${vars.fontWeightLight};
+    font-weight: ${vars.fontWeightNormal};
     line-height: 1.3;
     margin-bottom: 0;
     text-align: center;

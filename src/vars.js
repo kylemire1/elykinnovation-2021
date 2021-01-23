@@ -22,7 +22,6 @@ const vars = {
   fontSizeText: '1.125rem',
   /** 14px */
   fontSizeTextSmall: '0.85rem',
-  fontWeightLight: '300',
   fontWeightNormal: '300',
   fontWeightBold: '600',
   fontWeightBolder: '700',

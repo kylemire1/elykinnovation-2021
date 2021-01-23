@@ -20,6 +20,14 @@ const MottoWrapper = styled.div`
   }
 `
 
+const MottoHeadingWrapper = styled.div`
+  @media (min-width: ${vars.breakpointLarge}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
+
 const MottoHeading = styled(SectionHeading)`
   font-size: ${vars.fontSizeHeading4};
   margin-bottom: 1rem;
@@ -31,9 +39,13 @@ const MottoHeading = styled(SectionHeading)`
 
 const MottoContent = styled.div`
   @media (min-width: ${vars.breakpointLarge}) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin-left: 0.5em;
     p {
       margin-bottom: 0;
+      font-size: ${vars.fontSizeTextLarge};
     }
   }
 `
@@ -48,12 +60,12 @@ const Motto = ({
     <Section bg={sectionBackgroundColor}>
       <Container>
         <MottoWrapper>
-          <div>
+          <MottoHeadingWrapper>
             <MottoHeading>
               <span className="green-subtext">{smallGreenHeadingText}</span>
               {mainHeadingText}
             </MottoHeading>
-          </div>
+          </MottoHeadingWrapper>
           <MottoContent>{parse(paragraphContent)}</MottoContent>
         </MottoWrapper>
       </Container>

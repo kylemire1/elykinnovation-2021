@@ -25,7 +25,7 @@ const StyledHero = styled.section`
     font-size: ${vars.fontSizeHeading3};
     text-align: center;
     line-height: 1.3;
-    font-weight: ${vars.fontWeightLight};
+    font-weight: ${vars.fontWeightNormal};
 
     @media (min-width: ${vars.breakpointLarge}) {
       font-size: ${vars.fontSizeHeading7};

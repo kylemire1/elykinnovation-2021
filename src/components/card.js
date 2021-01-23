@@ -30,7 +30,7 @@ const StyledCard = styled.div`
     > h2 {
       margin-bottom: 1rem;
       margin-top: 0;
-      font-weight: ${vars.fontWeightLight};
+      font-weight: ${vars.fontWeightNormal};
       font-size: ${vars.fontSizeHeading2};
       color: ${props =>
         props.bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
