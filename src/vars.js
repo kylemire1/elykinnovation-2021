@@ -36,6 +36,7 @@ const vars = {
   colorTransparent: 'transparent',
   borderRadiusSmall: '0.313em',
   borderRadiusLarge: '1.875em',
+  pixel: '0.063rem',
   /** 576px */
   breakpointSmall: '36em',
   /** 768px */

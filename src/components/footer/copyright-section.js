@@ -36,6 +36,8 @@ const Copyright = styled.div`
 `
 const Links = styled.div`
   width: 100%;
+  max-width: 25rem;
+
   ul {
     margin: 0;
     padding: 0;

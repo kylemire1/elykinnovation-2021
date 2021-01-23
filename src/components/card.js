@@ -62,16 +62,16 @@ const ReadMore = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: solid 1px;
+  border: solid ${vars.pixel};
   border-color: rgba(234, 234, 234, 0);
-  border-radius: 5px;
+  border-radius: ${vars.borderRadiusSmall};
   padding: 0.5rem;
   margin: -0.5rem;
   transition: border-color 250ms ${vars.ease};
 
   img {
     will-change: transform;
-    transform: translateX(0px);
+    transform: translateX(0);
     transition: transform 250ms ${vars.ease};
   }
 
@@ -81,7 +81,7 @@ const ReadMore = styled.div`
     transition: border-color 250ms ${vars.ease};
 
     img {
-      transform: translateX(2px);
+      transform: translateX(0.125rem);
       transition: transform 250ms ${vars.ease};
     }
   }

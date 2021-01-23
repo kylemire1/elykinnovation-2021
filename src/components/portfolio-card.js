@@ -48,7 +48,7 @@ const ClientName = styled(CardTag)`
     border-style: solid;
     border-width: 0 2.65rem 2.65rem 0;
     right: -3rem;
-    top: 0.5px;
+    top: 0.031rem;
     bottom: 0;
     border-color: transparent transparent ${vars.colorRed};
     z-index: 5;

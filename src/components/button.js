@@ -9,7 +9,7 @@ const StyledLink = styled(Link)`
   text-align: center;
   color: currentColor;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: ${vars.borderRadiusSmall};
   cursor: pointer;
 
   &.green {
@@ -45,7 +45,7 @@ const StyledLink = styled(Link)`
       background: ${vars.colorDarkRed};
 
       img {
-        transform: translateX(2px);
+        transform: translateX(0.125rem);
         transition: transform 250ms ${vars.ease};
       }
     }
@@ -56,7 +56,7 @@ const StyledButton = styled.button`
   text-align: center;
   color: currentColor;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: ${vars.borderRadiusSmall};
   cursor: pointer;
 
   &.red {
@@ -78,8 +78,8 @@ const IconWrapper = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${vars.colorDarkRed};
-  border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-right-radius: ${vars.borderRadiusSmall};
+  border-bottom-right-radius: ${vars.borderRadiusSmall};
 `
 
 const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {

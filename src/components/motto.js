@@ -15,7 +15,7 @@ const MottoWrapper = styled.div`
     gap: 1rem;
 
     > div:first-child {
-      border-right: solid 2px ${vars.colorGreenSmall};
+      border-right: solid 0.125rem ${vars.colorGreenSmall};
     }
   }
 `

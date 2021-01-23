@@ -24,7 +24,7 @@ export const Section = styled.section`
     background-image: ${({ graphic }) =>
       graphic ? `url(${portfolioBgSrc})` : 'none'};
     background-repeat: no-repeat;
-    background-position: top -1px center;
+    background-position: top -${vars.pixel} center;
     clip-path: ${({ angled }) =>
       angled ? 'polygon(0% 0%, 50% 10%, 100% 0%, 100% 100%, 0% 100%)' : 'none'};
     padding: ${({ angled }) => (angled ? '9rem 0 3rem' : '3rem 0')};

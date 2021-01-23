@@ -22,7 +22,7 @@ const ServiceGrid = styled.div`
     }
 
     > div:last-child {
-      order: ${({ props }) => (position === 'left' ? 2 : 1)};
+      order: ${({ position }) => (position === 'left' ? 2 : 1)};
     }
   }
 `
@@ -45,8 +45,9 @@ const StyledServiceCardBG = styled.div`
     background-color: ${vars.colorAlmostBlack};
     border-radius: ${vars.borderRadiusLarge};
     width: 35.75rem;
-    box-shadow: ${({ position }) => (position === 'left' ? '-10px' : '10px')} 0
-      15px #0a0a0aa6;
+    box-shadow: ${({ position }) =>
+        position === 'left' ? '-0.625rem' : '0.625rem'}
+      0 0.938rem #0a0a0aa6;
   }
 
   div + div {
@@ -97,9 +98,9 @@ const SideText = styled.div`
       background-image: none;
       padding: 0.5em 0.75em;
       margin: 0.5em 0;
-      border: solid 1px;
+      border: solid ${vars.pixel};
       border-color: ${vars.colorGreen};
-      border-radius: 180px;
+      border-radius: 999rem;
       text-align: center;
     }
   }
@@ -108,7 +109,7 @@ const SideText = styled.div`
     width: 90%;
     background-color: ${({ position }) =>
       position === 'left' ? vars.colorBlack : 'transparent'};
-    border: solid 1px;
+    border: solid ${vars.pixel};
     border-color: ${({ position }) =>
       position === 'left' ? vars.colorGreen : 'transparent'};
     border-radius: ${vars.borderRadiusLarge};
@@ -147,17 +148,17 @@ const SideTextBg = styled.div`
   position: absolute;
 
   &.circle {
-    height: 570px;
-    width: 570px;
+    height: 35.625rem;
+    width: 35.625rem;
     background-color: ${vars.colorGreen};
     z-index: -1;
-    border-radius: 999px;
+    border-radius: 999rem;
   }
 
   &.square {
     width: ${({ $width }) => $width}px;
     height: ${({ $height }) => $height}px;
-    border: solid 1px ${vars.colorGreen};
+    border: solid ${vars.pixel} ${vars.colorGreen};
     border-radius: ${vars.borderRadiusLarge};
     left: 50%;
     top: 50%;

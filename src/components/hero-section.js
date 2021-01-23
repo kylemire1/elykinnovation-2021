@@ -12,7 +12,7 @@ const StyledHero = styled.section`
   align-items: center;
   justify-content: center;
   color: ${vars.colorWhite};
-  background-image: url(${({ props }) => bg});
+  background-image: url(${({ bg }) => bg});
   background-color: ${vars.colorAlmostBlack};
   background-position: center center;
   background-repeat: no-repeat;

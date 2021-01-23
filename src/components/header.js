@@ -16,7 +16,7 @@ const StyledHeader = styled.header`
   background-color: ${vars.colorBlack};
   color: ${vars.colorWhite};
   height: ${vars.headerHeight};
-  box-shadow: 0 3px 30px rgba(0, 0, 0, 0.48);
+  box-shadow: 0 0.188rem 1.875rem rgba(0, 0, 0, 0.48);
   position: fixed;
   top: 0;
   left: 0;
@@ -53,7 +53,7 @@ const PrimaryNav = styled.div`
     margin: 0.25em 0;
     padding: 0.75em;
     background-color: ${vars.colorAlmostBlack};
-    border: solid 1px ${vars.colorGreen};
+    border: solid ${vars.pixel} ${vars.colorGreen};
     border-radius: ${vars.borderRadiusLarge};
   }
 
@@ -90,7 +90,7 @@ const SecondaryNav = styled(PrimaryNav)`
     padding: 0.75em;
     background-color: ${vars.colorAlmostBlack};
     border-radius: ${vars.borderRadiusLarge};
-    border: solid 1px ${vars.colorAlmostBlack};
+    border: solid ${vars.pixel} ${vars.colorAlmostBlack};
     margin: 0.25em 0;
   }
 
@@ -118,7 +118,7 @@ const FlexNav = styled.nav`
   flex-grow: 1;
   position: absolute;
   z-index: 99;
-  top: 74px;
+  top: 4.625rem;
   margin-top: 0.75rem;
   width: 100%;
   background: ${vars.colorBlack};

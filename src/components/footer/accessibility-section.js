@@ -25,12 +25,12 @@ const AccessibilityRow = styled.div`
 
 const IconWrapper = styled.div`
   display: inline-block;
-  width: 30px;
+  width: 1.875rem;
   margin-left: 1rem;
   margin-bottom: -0.75rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
-    width: 57px;
+    width: 3.563rem;
     margin-left: 0;
     margin-bottom: 0;
   }

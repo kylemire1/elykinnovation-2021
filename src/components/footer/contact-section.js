@@ -103,7 +103,7 @@ const StyledOr = styled.div`
   position: relative;
   width: 100%;
   z-index: 99;
-  margin: 0rem 0.25rem 0.3rem;
+  margin: 0.3rem 0.25rem 0.6rem;
 
   span {
     text-transform: uppercase;
@@ -116,14 +116,14 @@ const StyledOr = styled.div`
 
   @media (min-width: ${vars.breakpointLarge}) {
     text-align: center;
-
+    margin: 0 0.25rem 0.3rem;
     span {
       padding: 0 0.25rem;
       font-size: ${vars.fontSizeTextSmall};
       ::after {
         content: '';
-        width: 70px;
-        height: 1px;
+        width: 4.375rem;
+        height: ${vars.pixel};
         background-color: ${vars.colorBlack};
         position: absolute;
         top: 50%;
