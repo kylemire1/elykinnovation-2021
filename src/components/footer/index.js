@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import ContactSection from './contact-section'
 import AccessibilitySection from './accessibility-section'
+import CopyrightSection from './copyright-section'
 
 import { Section } from '../styled/global'
 
@@ -22,6 +23,7 @@ const Footer = () => {
     <footer>
       <ContactSection />
       <AccessibilitySection />
+      <CopyrightSection />
     </footer>
   )
 }
