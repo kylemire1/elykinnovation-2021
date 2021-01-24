@@ -7,7 +7,7 @@ import { BiX } from '@react-icons/all-files/bi/BiX'
 
 import { Container } from '../styled/global'
 import MobileNavButton from '../styled/mobile-nav-button'
-import NavItem from './nav-item'
+import NavItem from '../nav-item'
 import logoSrc from '../../content/assets/logo-final.png'
 
 import vars from '../../vars'
