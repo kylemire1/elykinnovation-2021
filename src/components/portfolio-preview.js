@@ -44,7 +44,7 @@ const PortfolioPreview = ({
         <PortfolioGrid $button={buttonLink && buttonText}>
           {clients.map((client, clientIndex) => (
             <PortfolioCard
-              key={`${client.clienbtName}_card_${clientIndex}`}
+              key={`${client.clientName}_card_${clientIndex}`}
               {...client}
             />
           ))}

@@ -41,12 +41,12 @@ const SixCards = ({
           {mainHeadingText}
         </SectionHeading>
         <CardGrid $button={buttonLink && buttonText}>
-          {cards.map((card, cardIndex) => (
+          {cards.map(({ cardTitle, cardBody, cardLink }, cardIndex) => (
             <Card
-              key={`${card.cardTitle}_card_${cardIndex}`}
-              title={card.cardTitle}
-              body={card.cardBody}
-              link={card.cardLink}
+              key={`${cardTitle}_card_${cardIndex}`}
+              title={cardTitle}
+              body={cardBody}
+              link={cardLink}
               backgroundColor={cardBackgroundColor}
             />
           ))}

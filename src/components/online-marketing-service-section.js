@@ -58,12 +58,12 @@ const OnlineMarketingServiceSection = ({
         </SectionHeading>
         <BoxGrid>
           {boxes &&
-            boxes.map((box, boxIndex) => (
+            boxes.map(({ boxText }, boxIndex) => (
               <BoxGridItem
-                key={`${box.boxText}_component_${boxIndex}`}
+                key={`${boxText}_component_${boxIndex}`}
                 border={contentBoxBorderColor}
               >
-                <p>{box.boxText}</p>
+                <p>{boxText}</p>
               </BoxGridItem>
             ))}
         </BoxGrid>

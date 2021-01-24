@@ -42,13 +42,13 @@ const ThreeCards = ({
       <Container>
         {cards && (
           <CardGrid bg={cardBackgroundColor} $offset={offsetTop}>
-            {cards.map((card, cardIndex) => (
+            {cards.map(({ cardTitle, cardBody, cardLink }, cardIndex) => (
               <Card
-                key={`${card.cardTitle}_card_${cardIndex}`}
+                key={`${cardTitle}_card_${cardIndex}`}
                 largeHeading={true}
-                title={card.cardTitle}
-                body={card.cardBody}
-                link={card.cardLink}
+                title={cardTitle}
+                body={cardBody}
+                link={cardLink}
                 backgroundColor={cardBackgroundColor}
               />
             ))}
