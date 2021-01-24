@@ -168,7 +168,7 @@ const ContactSection = () => {
       <Container>
         <ContactGrid>
           <div>
-            <FooterHeading bg={'colorWhite'}>
+            <FooterHeading bg="colorWhite">
               <span>{smallGreenHeadingText} </span>
               {mainHeadingText}
             </FooterHeading>

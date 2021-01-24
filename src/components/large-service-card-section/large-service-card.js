@@ -2,11 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import parse from 'html-react-parser'
 
-import Button from '../components/button'
-import { SectionHeading } from '../components/styled/global'
+import Button from '../button'
+import { SectionHeading } from '../styled/global'
 
-import vars from '../vars'
-import checkSrc from '../../content/assets/check-bullet.svg'
+import vars from '../../vars'
+import checkSrc from '../../../content/assets/check-bullet.svg'
 
 const ServiceCard = styled.div`
   display: flex;

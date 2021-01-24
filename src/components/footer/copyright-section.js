@@ -119,8 +119,8 @@ const CopyrightSection = () => {
         <FooterRow>
           <Copyright>
             <p>
-              Copyright © {new Date().getFullYear()} Elyk Innovation, Inc. –
-              Jacksonville, Florida
+              Copyright &copy; {new Date().getFullYear()} Elyk Innovation, Inc.
+              &ndash; Jacksonville, Florida
             </p>
           </Copyright>
           <Links>
