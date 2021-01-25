@@ -1,16 +1,18 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook'
 import { BiMenuAltRight } from '@react-icons/all-files/bi/BiMenuAltRight'
 import { BiX } from '@react-icons/all-files/bi/BiX'
 
+import PrimaryNav from './primary-nav'
+import SecondaryNav from './secondary-nav'
+import Logo from './logo'
 import { Container } from '../styled/global'
 import MobileNavButton from '../styled/mobile-nav-button'
-import NavItem from './nav-item'
-import logoSrc from '../../../content/assets/logo-final.png'
 
 import vars from '../../vars'
+import getArraySlice from '../../utils/getArraySlice'
 
 const StyledHeader = styled.header`
   background-color: ${vars.colorBlack};
@@ -31,85 +33,6 @@ const StyledHeader = styled.header`
 const NavWrapper = styled.div`
   display: flex;
   position: relative;
-`
-
-const PrimaryNav = styled.div`
-  order: 1;
-  border-radius: ${vars.borderRadiusLarge};
-  margin: 0 1em;
-
-  ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-left: 0;
-    margin: 0;
-  }
-
-  li {
-    width: 100%;
-    text-align: center;
-    margin: 0.25em 0;
-    padding: 0.75em;
-    background-color: ${vars.colorAlmostBlack};
-    border: solid ${vars.pixel} ${vars.colorGreen};
-    border-radius: ${vars.borderRadiusLarge};
-  }
-
-  @media (min-width: ${vars.breakpointLarge}) {
-    order: 2;
-    margin: 0;
-    ul {
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-
-      li {
-        width: auto;
-        text-align: auto;
-        padding: 0.25em;
-        background-color: transparent;
-        border: none;
-        border-radius: 0;
-      }
-
-      li + li {
-        margin-left: 1.5em;
-      }
-    }
-  }
-`
-
-const SecondaryNav = styled(PrimaryNav)`
-  order: 2;
-  margin: 0 1em;
-  li {
-    width: 100%;
-    text-align: center;
-    padding: 0.75em;
-    background-color: ${vars.colorAlmostBlack};
-    border-radius: ${vars.borderRadiusLarge};
-    border: solid ${vars.pixel} ${vars.colorAlmostBlack};
-    margin: 0.25em 0;
-  }
-
-  @media (min-width: ${vars.breakpointLarge}) {
-    order: 1;
-    max-width: 55%;
-    margin-left: auto;
-    margin-right: 0;
-
-    ul {
-      justify-content: space-between;
-      align-items: center;
-      flex-direction: row;
-    }
-
-    li {
-      font-size: 0.85rem;
-    }
-  }
 `
 
 const FlexNav = styled.nav`
@@ -152,55 +75,47 @@ const FlexNav = styled.nav`
   }
 `
 
-const LogoWrapper = styled.div`
-  background-color: ${vars.colorRed};
-  display: flex;
-  align-items: center;
-  width: 32%;
-  position: relative;
-
-  a {
-    z-index: 1;
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    width: 999%;
-    z-index: 0;
-    height: 100%;
-    background-color: ${vars.colorRed};
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 ${vars.headerHeight} ${vars.headerHeight} 0;
-    right: 0;
-    border-color: transparent ${vars.colorBlack} transparent transparent;
-  }
-`
-
 const Header = () => {
-  const MENU_ITEMS_COUNT = 11 // Temporary hard-coded data
+  const menuData = useStaticQuery(graphql`
+    query MenuData {
+      allWpMenu {
+        nodes {
+          menuItems {
+            nodes {
+              label
+              url
+            }
+          }
+          slug
+        }
+      }
+    }
+  `)
+
+  const primaryMenuData = menuData?.allWpMenu?.nodes.filter(
+    menu => menu.slug === 'primary-menu'
+  )[0]?.menuItems?.nodes
+  const secondaryMenuData = menuData?.allWpMenu?.nodes.filter(
+    menu => menu.slug === 'secondary-menu'
+  )[0]?.menuItems?.nodes
+
+  const MENU_ITEMS_COUNT =
+    (primaryMenuData.length || 0) + (secondaryMenuData.length || 0)
+
   const { buttonProps, itemProps, isOpen } = useDropdownMenu(MENU_ITEMS_COUNT)
+
+  const primaryItemProps = getArraySlice(itemProps, 0, primaryMenuData.length)
+  const secondaryItemProps = getArraySlice(
+    itemProps,
+    primaryMenuData.length,
+    itemProps.length
+  )
 
   return (
     <StyledHeader>
       <Container>
         <NavWrapper>
-          <LogoWrapper>
-            <Link to="/">
-              <img
-                src={logoSrc}
-                alt="Elyk Innovation Inc.: Internet Strategy by Design"
-              />
-            </Link>
-          </LogoWrapper>
+          <Logo />
           <MobileNavButton
             aria-label={`${isOpen ? 'Close' : 'Open'} mobile menu`}
             {...buttonProps}
@@ -208,47 +123,14 @@ const Header = () => {
             {isOpen ? <BiX /> : <BiMenuAltRight />}
           </MobileNavButton>
           <FlexNav className={isOpen ? 'visible' : ''} role="menu">
-            <PrimaryNav>
-              <ul>
-                <NavItem href="/test-page" itemProps={itemProps[0]}>
-                  Website Design
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[1]}>
-                  Web & App Development
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[2]}>
-                  Website Maintenance
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[3]}>
-                  Website Accessibility
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[4]}>
-                  Online Marketing
-                </NavItem>
-              </ul>
-            </PrimaryNav>
-            <SecondaryNav>
-              <ul>
-                <NavItem href="/404" itemProps={itemProps[5]}>
-                  About
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[6]}>
-                  Services
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[7]}>
-                  Portfolio
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[8]}>
-                  FAQ
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[9]}>
-                  Blog
-                </NavItem>
-                <NavItem href="/404" itemProps={itemProps[10]}>
-                  Contact
-                </NavItem>
-              </ul>
-            </SecondaryNav>
+            <PrimaryNav
+              itemProps={primaryItemProps}
+              menuItems={primaryMenuData}
+            />
+            <SecondaryNav
+              itemProps={secondaryItemProps}
+              menuItems={secondaryMenuData}
+            />
           </FlexNav>
         </NavWrapper>
       </Container>

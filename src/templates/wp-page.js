@@ -17,55 +17,61 @@ const WpPageTemplate = ({ data }) => {
 
   return (
     <Layout isHomePage={isHomePage}>
-      {layoutSections.map((section, sectionIndex) => {
-        switch (section.fieldGroupName) {
-          case 'page_Layoutsections_Components_HomepageHero':
-            return (
-              <HeroSection key={`HomepageHero_${sectionIndex}`} {...section} />
-            )
+      {layoutSections &&
+        layoutSections.map((section, sectionIndex) => {
+          switch (section.fieldGroupName) {
+            case 'page_Layoutsections_Components_HomepageHero':
+              return (
+                <HeroSection
+                  key={`HomepageHero_${sectionIndex}`}
+                  {...section}
+                />
+              )
 
-          case 'page_Layoutsections_Components_ThreeCardRow':
-            return (
-              <ThreeCards key={`ThreeCardRow_${sectionIndex}`} {...section} />
-            )
+            case 'page_Layoutsections_Components_ThreeCardRow':
+              return (
+                <ThreeCards key={`ThreeCardRow_${sectionIndex}`} {...section} />
+              )
 
-          case 'page_Layoutsections_Components_MottoSection':
-            return <Motto key={`MottoSection_${sectionIndex}`} {...section} />
+            case 'page_Layoutsections_Components_MottoSection':
+              return <Motto key={`MottoSection_${sectionIndex}`} {...section} />
 
-          case 'page_Layoutsections_Components_SixCardGrid':
-            return <SixCards key={`SixCardGrid_${sectionIndex}`} {...section} />
+            case 'page_Layoutsections_Components_SixCardGrid':
+              return (
+                <SixCards key={`SixCardGrid_${sectionIndex}`} {...section} />
+              )
 
-          case 'page_Layoutsections_Components_Spacer':
-            return <Spacer key={`Spacer_${sectionIndex}`} {...section} />
+            case 'page_Layoutsections_Components_Spacer':
+              return <Spacer key={`Spacer_${sectionIndex}`} {...section} />
 
-          case 'page_Layoutsections_Components_PortfolioPreview':
-            return (
-              <PortfolioPreview
-                key={`PortfolioPreview_${sectionIndex}`}
-                {...section}
-              />
-            )
+            case 'page_Layoutsections_Components_PortfolioPreview':
+              return (
+                <PortfolioPreview
+                  key={`PortfolioPreview_${sectionIndex}`}
+                  {...section}
+                />
+              )
 
-          case 'page_Layoutsections_Components_LargeServiceCardSection':
-            return (
-              <LargeServiceCardSection
-                key={`LargeServiceCardSection_${sectionIndex}`}
-                {...section}
-              />
-            )
+            case 'page_Layoutsections_Components_LargeServiceCardSection':
+              return (
+                <LargeServiceCardSection
+                  key={`LargeServiceCardSection_${sectionIndex}`}
+                  {...section}
+                />
+              )
 
-          case 'page_Layoutsections_Components_OnlineMarketing':
-            return (
-              <OnlineMarketingServiceSection
-                key={`OnlineMarketing_${sectionIndex}`}
-                {...section}
-              />
-            )
+            case 'page_Layoutsections_Components_OnlineMarketing':
+              return (
+                <OnlineMarketingServiceSection
+                  key={`OnlineMarketing_${sectionIndex}`}
+                  {...section}
+                />
+              )
 
-          default:
-            return null
-        }
-      })}
+            default:
+              return null
+          }
+        })}
     </Layout>
   )
 }
