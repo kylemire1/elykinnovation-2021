@@ -29,18 +29,6 @@ export const StyledPrimaryNav = styled.div`
     border-radius: ${vars.borderRadiusLarge};
   }
 
-  a {
-    color: currentColor;
-    transition: color 250ms ${vars.ease};
-  }
-
-  a:hover,
-  :focus,
-  :focus-within {
-    color: ${vars.colorGreenSmall};
-    transition: color 250ms ${vars.ease};
-  }
-
   @media (min-width: ${vars.breakpointLarge}) {
     order: 2;
     margin: 0;

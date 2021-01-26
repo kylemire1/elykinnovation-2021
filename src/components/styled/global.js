@@ -44,6 +44,7 @@ export const SectionHeading = styled.h2`
     color: ${({ bg }) =>
       bg === 'colorWhite' ? vars.colorGreen : vars.colorGreenSmall};
     text-transform: uppercase;
+    margin-bottom: 0.3rem;
   }
 `
 export const HeroHeading = styled.h1`
@@ -61,5 +62,12 @@ export const HeroHeading = styled.h1`
       bg === 'colorWhite' ? vars.colorGreen : vars.colorGreenSmall};
     text-transform: uppercase;
     font-weight: ${vars.fontWeightBold};
+    margin-bottom: 0.3rem;
   }
+`
+
+export const SoloHeading = styled.h2`
+  font-size: ${vars.fontSizeHeading4};
+  color: ${({ color }) => color};
+  margin-bottom: 1rem;
 `

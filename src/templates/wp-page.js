@@ -11,6 +11,7 @@ import Layout from '../components/layout'
 import LargeServiceCardSection from '../components/large-service-card-section'
 import OnlineMarketingServiceSection from '../components/online-marketing-service-section'
 import SubpageHeroLarge from '../components/subpage-hero-large'
+import TextWithImageSection from '../components/text-with-image-section'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -77,8 +78,16 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_TextContentWithImage':
+              return (
+                <TextWithImageSection
+                  key={`TextContentWithImage_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
-              return
+              return null
           }
         })}
     </Layout>
@@ -97,6 +106,8 @@ export const pageQuery = graphql`
       isFrontPage
       layoutSections {
         components {
+          # these are GraphQL fragments. They are essentially placeholders for the 'fragment' queries exported from their respective components
+          # they let us keep the concerns of our code separated, and keep a large query like this looking clean
           ...HeroSection
           ...ThreeCardRow
           ...MottoSection
@@ -106,6 +117,7 @@ export const pageQuery = graphql`
           ...LargeServiceCardSection
           ...OnlineMarketingServiceSection
           ...SubpageHeroLarge
+          ...TextWithImageSection
         }
       }
     }

@@ -31,6 +31,10 @@ const HeroContent = styled.div`
   }
 `
 
+const ImageWrapper = styled.div`
+  justify-self: end;
+`
+
 const SubpageHeroLarge = ({
   mainHeadingText,
   image,
@@ -54,7 +58,7 @@ const SubpageHeroLarge = ({
             </HeroHeading>
             {parse(paragraphText)}
           </div>
-          <div>
+          <ImageWrapper>
             <Image
               backgroundColor="transparent"
               fixed={[
@@ -66,7 +70,7 @@ const SubpageHeroLarge = ({
               ]}
               alt={imageData.altText}
             />
-          </div>
+          </ImageWrapper>
         </HeroContent>
       </Container>
     </StyledHero>
