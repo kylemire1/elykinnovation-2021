@@ -10,6 +10,7 @@ import PortfolioPreview from '../components/portfolio-preview'
 import Layout from '../components/layout'
 import LargeServiceCardSection from '../components/large-service-card-section'
 import OnlineMarketingServiceSection from '../components/online-marketing-service-section'
+import SubpageHeroLarge from '../components/subpage-hero-large'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -68,8 +69,16 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_SubpageHeroLarge':
+              return (
+                <SubpageHeroLarge
+                  key={`SubpageHeroLarge_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
-              return null
+              return
           }
         })}
     </Layout>
@@ -96,6 +105,7 @@ export const pageQuery = graphql`
           ...PortfolioPreview
           ...LargeServiceCardSection
           ...OnlineMarketingServiceSection
+          ...SubpageHeroLarge
         }
       }
     }

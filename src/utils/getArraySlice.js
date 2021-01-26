@@ -3,7 +3,7 @@
  * @param {array} array
  * @param {number} startIndex
  * @param {number} endIndex
- * @returns {array} The sliced array
+ * @returns {array} The sliced segment of the array
  */
 export default function getArraySlice(array, startIndex, endIndex) {
   const tempArray = array

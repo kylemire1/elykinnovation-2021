@@ -36,6 +36,7 @@ export const SectionHeading = styled.h2`
   margin-bottom: 0.75em;
   color: ${({ bg }) =>
     bg === 'colorWhite' ? vars.colorBlack : vars.colorWhite};
+  text-transform: capitalize;
 
   span {
     font-size: 1.125rem;
@@ -43,5 +44,22 @@ export const SectionHeading = styled.h2`
     color: ${({ bg }) =>
       bg === 'colorWhite' ? vars.colorGreen : vars.colorGreenSmall};
     text-transform: uppercase;
+  }
+`
+export const HeroHeading = styled.h1`
+  font-size: ${vars.fontSizeHeading7};
+  font-weight: ${vars.fontWeightBolder};
+  margin-bottom: 1.25rem;
+  color: ${({ bg }) =>
+    bg === 'colorWhite' ? vars.colorBlack : vars.colorWhite};
+  text-transform: capitalize;
+
+  span {
+    font-size: 1.125rem;
+    display: block;
+    color: ${({ bg }) =>
+      bg === 'colorWhite' ? vars.colorGreen : vars.colorGreenSmall};
+    text-transform: uppercase;
+    font-weight: ${vars.fontWeightBold};
   }
 `
