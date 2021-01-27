@@ -13,6 +13,7 @@ import OnlineMarketingServiceSection from '../components/online-marketing-servic
 import SubpageHeroLarge from '../components/subpage-hero-large'
 import TextWithImageSection from '../components/text-with-image-section'
 import IndustrySection from '../components/industry-section'
+import WysiwygContent from '../components/wysiwyg-content'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -95,6 +96,14 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_WysiwygContentPanel':
+              return (
+                <WysiwygContent
+                  key={`WysiwygContent_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -128,6 +137,7 @@ export const pageQuery = graphql`
           ...SubpageHeroLarge
           ...TextWithImageSection
           ...IndustriesSection
+          ...WysiwygContent
         }
       }
     }

@@ -36,17 +36,28 @@ const ImageWithStroke = ({
   altText,
   backgroundColor,
   rounded,
+  imageBorderEffect,
 }) => {
   const [ref, { width, height }] = useDimensions()
 
   return (
     <ImageWrapper $rounded={rounded} ref={ref}>
       {fixed ? (
-        <Image backgroundColor={backgroundColor} fixed={fixed} alt={altText} />
+        <Image
+          backgroundColor={imageBorderEffect ? backgroundColor : 'transparent'}
+          fixed={fixed}
+          alt={altText}
+        />
       ) : (
-        <Image backgroundColor={backgroundColor} fluid={fluid} alt={altText} />
+        <Image
+          backgroundColor={imageBorderEffect ? backgroundColor : 'transparent'}
+          fluid={fluid}
+          alt={altText}
+        />
       )}
-      <ImageBg $width={width} $height={height} aria-hidden />
+      {imageBorderEffect && (
+        <ImageBg $width={width} $height={height} aria-hidden />
+      )}
     </ImageWrapper>
   )
 }

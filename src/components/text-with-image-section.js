@@ -23,12 +23,17 @@ const Content = styled.div`
   }
 `
 
+const TextContentWrapper = styled.div`
+  width: 100%;
+`
+
 const TextWithImageSection = ({
   angledBackgroundTransition,
   headingText,
   sectionBackgroundColor,
   textContent,
   image,
+  imageBorderEffect,
 }) => {
   const imageData = {
     desktop: image?.localFile?.childImageSharp?.desktop,
@@ -39,22 +44,25 @@ const TextWithImageSection = ({
     <Section bg={sectionBackgroundColor} angled={angledBackgroundTransition}>
       <Container>
         <Content>
-          <div>
+          <TextContentWrapper>
             <SoloHeading color={vars.colorGreen}>{headingText}</SoloHeading>
             {parse(textContent)}
-          </div>
-          <ImageWithStroke
-            fixed={[
-              imageData.mobile,
-              {
-                ...imageData.desktop,
-                media: `(min-width: ${vars.breakpointLarge})`,
-              },
-            ]}
-            altText={imageData.altText}
-            backgroundColor={vars.colorGreen}
-            rounded
-          />
+          </TextContentWrapper>
+          {image && (
+            <ImageWithStroke
+              fixed={[
+                imageData.mobile,
+                {
+                  ...imageData.desktop,
+                  media: `(min-width: ${vars.breakpointLarge})`,
+                },
+              ]}
+              altText={imageData.altText}
+              backgroundColor={vars.colorGreen}
+              imageBorderEffect={imageBorderEffect}
+              rounded={imageBorderEffect}
+            />
+          )}
         </Content>
       </Container>
     </Section>
@@ -68,6 +76,7 @@ export const fragment = graphql`
     headingText
     sectionBackgroundColor
     textContent
+    imageBorderEffect
     image {
       altText
       localFile {

@@ -38,9 +38,10 @@ const ThreeCards = ({
   sectionBackgroundColor,
   largeHeadings,
   sectionHeading,
+  angledBackgroundTransition,
 }) => {
   return (
-    <Section bg={sectionBackgroundColor}>
+    <Section bg={sectionBackgroundColor} angled={angledBackgroundTransition}>
       <Container>
         {sectionHeading && <SoloHeading>{sectionHeading}</SoloHeading>}
         {cards && (
@@ -75,6 +76,7 @@ export const fragment = graphql`
     sectionBackgroundColor
     largeHeadings
     sectionHeading
+    angledBackgroundTransition
   }
 `
 

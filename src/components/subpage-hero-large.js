@@ -32,7 +32,9 @@ const HeroContent = styled.div`
 `
 
 const ImageWrapper = styled.div`
-  justify-self: end;
+  @media (min-width: ${vars.breakpointLarge}) {
+    justify-self: end;
+  }
 `
 
 const SubpageHeroLarge = ({

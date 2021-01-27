@@ -14,6 +14,14 @@ const StyledCard = styled.div`
   a {
     color: currentColor;
     font-weight: ${vars.fontWeightBold};
+    opacity: 1;
+    transition: opacity 250ms ${vars.ease};
+
+    :focus,
+    :hover {
+      opacity: 0.75;
+      transition: opacity 250ms ${vars.ease};
+    }
   }
 `
 
@@ -69,9 +77,9 @@ const PortfolioCard = ({ clientImage, clientLink, clientName }) => {
   return (
     <StyledCard>
       <Link to={clientLink}>
-        <ClientName>{clientName}</ClientName>
-        <ClientNameBacking aria-hidden>{clientName}</ClientNameBacking>
         <Image backgroundColor={vars.colorDarkRed} fluid={cardImage} alt="" />
+        <ClientNameBacking aria-hidden>{clientName}</ClientNameBacking>
+        <ClientName>{clientName}</ClientName>
       </Link>
     </StyledCard>
   )

@@ -13,6 +13,7 @@ const ImageWrapper = styled.div`
   max-height: 16.25rem;
   overflow: hidden;
   margin-bottom: 1rem;
+  border-radius: ${vars.borderRadiusSmall};
 `
 
 const FeaturedClientHeading = styled(SectionHeading)`
@@ -41,7 +42,7 @@ const CardText = styled.div`
     text-align: center;
     color: ${vars.colorWhite};
     margin-bottom: 0;
-    text-shadow: 0px 3px 10px rgba(0, 0, 0, 0.6);
+    text-shadow: 2px 2px 7px rgba(0, 0, 0, 1);
   }
 `
 
