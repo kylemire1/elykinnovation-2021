@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import { Container, Section } from './styled/global'
+import { Container, Section, SoloHeading } from './styled/global'
 import Card from './card'
 
 import vars from '../vars'
@@ -36,16 +36,19 @@ const ThreeCards = ({
   cardBackgroundColor,
   offsetTop,
   sectionBackgroundColor,
+  largeHeadings,
+  sectionHeading,
 }) => {
   return (
     <Section bg={sectionBackgroundColor}>
       <Container>
+        {sectionHeading && <SoloHeading>{sectionHeading}</SoloHeading>}
         {cards && (
           <CardGrid bg={cardBackgroundColor} $offset={offsetTop}>
             {cards.map(({ cardTitle, cardBody, cardLink }, cardIndex) => (
               <Card
                 key={`${cardTitle}_card_${cardIndex}`}
-                largeHeading={true}
+                largeHeading={largeHeadings}
                 title={cardTitle}
                 body={cardBody}
                 link={cardLink}
@@ -70,6 +73,8 @@ export const fragment = graphql`
     }
     offsetTop
     sectionBackgroundColor
+    largeHeadings
+    sectionHeading
   }
 `
 

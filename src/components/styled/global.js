@@ -37,6 +37,7 @@ export const SectionHeading = styled.h2`
   color: ${({ bg }) =>
     bg === 'colorWhite' ? vars.colorBlack : vars.colorWhite};
   text-transform: capitalize;
+  max-width: 54rem;
 
   span {
     font-size: 1.125rem;

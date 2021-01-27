@@ -46,7 +46,7 @@ const ImageWithStroke = ({
       ) : (
         <Image backgroundColor={backgroundColor} fluid={fluid} alt={altText} />
       )}
-      <ImageBg $width={width} $height={height} />
+      <ImageBg $width={width} $height={height} aria-hidden />
     </ImageWrapper>
   )
 }

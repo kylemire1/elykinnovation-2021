@@ -12,6 +12,7 @@ import LargeServiceCardSection from '../components/large-service-card-section'
 import OnlineMarketingServiceSection from '../components/online-marketing-service-section'
 import SubpageHeroLarge from '../components/subpage-hero-large'
 import TextWithImageSection from '../components/text-with-image-section'
+import IndustrySection from '../components/industry-section'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -86,6 +87,14 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_IndustrySection':
+              return (
+                <IndustrySection
+                  key={`IndustrySection_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -118,6 +127,7 @@ export const pageQuery = graphql`
           ...OnlineMarketingServiceSection
           ...SubpageHeroLarge
           ...TextWithImageSection
+          ...IndustriesSection
         }
       }
     }

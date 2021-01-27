@@ -11,6 +11,9 @@ const StyledCard = styled.div`
   color: ${({ bg }) =>
     bg !== 'colorWhite' ? vars.colorWhite : vars.colorBlack};
   padding: 2em;
+  border: solid ${vars.pixel};
+  border-color: ${({ bg }) =>
+    bg === 'colorTransparent' ? vars.colorWhite : vars[bg]};
   border-radius: ${vars.borderRadiusSmall};
   display: flex;
   flex-direction: column;
@@ -24,6 +27,10 @@ const StyledCard = styled.div`
     span {
       font-weight: ${vars.fontWeightBold};
     }
+  }
+
+  .no-link p {
+    margin-bottom: 0;
   }
 
   &.large-heading {
@@ -99,7 +106,7 @@ const Card = ({ largeHeading, title, body, link, backgroundColor }) => {
       className={largeHeading ? 'large-heading' : ''}
     >
       <h2>{parse(title)}</h2>
-      <div>{parse(body)}</div>
+      <div className={`margin ${!link ? 'no-link' : null}`}>{parse(body)}</div>
       {link && (
         <Link to={link}>
           <ReadMore>
