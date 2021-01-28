@@ -7,7 +7,7 @@ import arrowSrc from '../../content/assets/arrow.svg'
 
 const StyledLink = styled(Link)`
   text-align: center;
-  color: currentColor;
+  color: ${vars.colorWhite};
   text-decoration: none;
   border-radius: ${vars.borderRadiusSmall};
   cursor: pointer;
@@ -54,7 +54,7 @@ const StyledLink = styled(Link)`
 
 const StyledButton = styled.button`
   text-align: center;
-  color: currentColor;
+  color: ${vars.colorWhite};
   text-decoration: none;
   border-radius: ${vars.borderRadiusSmall};
   cursor: pointer;

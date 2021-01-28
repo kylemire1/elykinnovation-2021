@@ -11,6 +11,7 @@ const StyledHero = styled.section`
   min-height: 14.5rem;
   display: flex;
   align-items: center;
+  background-color: ${vars.colorAlmostBlack};
 
   @media (min-width: ${vars.breakpointLarge}) {
     background-image: url(${heroBgSrc});

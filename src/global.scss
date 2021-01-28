@@ -17,15 +17,36 @@ html {
 
 body {
   font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  color: #e8e8e7;
   overflow-x: hidden;
 }
 
 .body-wrapper {
   background-color: #141414;
-  .secondary {
+  color: #eaeaea;
+
+  main ul {
+    li {
+      background-image: url('../content/assets/bullet.png');
+    }
+    &.check li {
+      background-image: url('../content/assets/check-bullet.svg');
+      background-position: top 0.25em left;
+    }
+  }
+
+  &.secondary {
     background-color: #eaeaea;
+    color: #0a0a0a;
+
+    main ul {
+      li {
+        background-image: url('../content/assets/bullet-black.png');
+      }
+      &.check li {
+        background-image: url('../content/assets/check-bullet.svg');
+        background-position: top 0.25em left;
+      }
+    }
   }
 }
 
@@ -66,7 +87,6 @@ main {
       padding-left: 2em;
       margin-left: -1em;
       line-height: 1.5;
-      background-image: url('../content/assets/bullet.png');
       background-repeat: no-repeat;
       background-position: top 0.5em left;
       max-width: 75ch;
@@ -74,10 +94,6 @@ main {
 
     li + li {
       margin-top: 1em;
-    }
-
-    &.check li {
-      background-image: url('../content/assets/check-bullet.svg');
     }
   }
 
@@ -95,4 +111,8 @@ span.green-subtext {
   display: block;
   color: #148588;
   text-transform: uppercase;
+}
+
+strong {
+  font-weight: 700;
 }

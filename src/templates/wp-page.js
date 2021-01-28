@@ -15,6 +15,7 @@ import TextWithImageSection from '../components/text-with-image-section'
 import IndustrySection from '../components/industry-section'
 import WysiwygContent from '../components/wysiwyg-content'
 import SubpageHeroSmall from '../components/subpage-hero-small'
+import WysiwygContentWithSideCard from '../components/wysiwyg-content-with-side-card'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -114,6 +115,14 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_WysiwygTextSideCard':
+              return (
+                <WysiwygContentWithSideCard
+                  key={`WysiwygTextSideCard_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -150,6 +159,7 @@ export const pageQuery = graphql`
           ...IndustriesSection
           ...WysiwygContent
           ...SubpageHeroSmall
+          ...WysiwygContentWithSideCard
         }
       }
     }
