@@ -10,6 +10,7 @@ const StyledCard = styled.div`
   overflow: hidden;
   border-radius: ${vars.borderRadiusSmall};
   position: relative;
+  cursor: pointer;
 
   a {
     color: currentColor;

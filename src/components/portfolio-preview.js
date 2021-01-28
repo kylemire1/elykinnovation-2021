@@ -42,12 +42,13 @@ const PortfolioPreview = ({
           {mainHeadingText}
         </SectionHeading>
         <PortfolioGrid $button={buttonLink && buttonText}>
-          {clients.map((client, clientIndex) => (
-            <PortfolioCard
-              key={`${client.clientName}_card_${clientIndex}`}
-              {...client}
-            />
-          ))}
+          {clients.length > 0 &&
+            clients.map((client, clientIndex) => (
+              <PortfolioCard
+                key={`${client.clientName}_card_${clientIndex}`}
+                {...client}
+              />
+            ))}
         </PortfolioGrid>
         <Button buttonStyle="red" elementType="link" href={buttonLink}>
           {buttonText}

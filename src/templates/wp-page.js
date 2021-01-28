@@ -18,9 +18,10 @@ import WysiwygContent from '../components/wysiwyg-content'
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
   const isHomePage = data.page.isFrontPage
+  const currentPageSlug = data.page.slug
 
   return (
-    <Layout isHomePage={isHomePage}>
+    <Layout isHomePage={isHomePage} currentPageSlug={currentPageSlug}>
       {layoutSections &&
         layoutSections.map((section, sectionIndex) => {
           switch (section.fieldGroupName) {
@@ -120,6 +121,7 @@ export const pageQuery = graphql`
     $id: String!
   ) {
     page: wpPage(id: { eq: $id }) {
+      slug
       id
       isFrontPage
       layoutSections {

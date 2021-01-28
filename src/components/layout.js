@@ -6,7 +6,14 @@ import Footer from './footer'
 import SEO from './seo'
 import { MainContent } from './styled/global'
 
-const Layout = ({ isHomePage, children }) => {
+import useMenuData from '../utils/hooks/useMenuData'
+import getMenuItemSlugs from '../utils/getMenuItemSlugs'
+
+const Layout = ({ isHomePage, children, currentPageSlug }) => {
+  // This is a custom hook to query for menu data.
+  // Hooks are a built-in tool of React that let us separate a lot of the business logic out of our components and let them just worry about displaying the template.
+  // See https://reactjs.org/docs/hooks-custom.html for more info
+  const [{ primaryMenuData, secondaryMenuData }, menuItemsCount] = useMenuData()
   const {
     wp: {
       generalSettings: { title },
@@ -22,10 +29,23 @@ const Layout = ({ isHomePage, children }) => {
     }
   `)
 
+  const isPrimaryPage =
+    getMenuItemSlugs(primaryMenuData).includes(currentPageSlug) ||
+    currentPageSlug === 'home'
+
   return (
-    <div>
+    <div
+      className={`body-wrapper ${currentPageSlug} ${
+        isPrimaryPage ? 'primary' : 'secondary'
+      }`}
+    >
       <SEO title={title} />
-      <Header />
+      <Header
+        primaryMenuData={primaryMenuData}
+        secondaryMenuData={secondaryMenuData}
+        menuItemsCount={menuItemsCount}
+        currentPageSlug={currentPageSlug}
+      />
 
       <MainContent home={isHomePage}>{children}</MainContent>
 

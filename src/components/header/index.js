@@ -1,5 +1,4 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook'
 import { BiMenuAltRight } from '@react-icons/all-files/bi/BiMenuAltRight'
@@ -75,34 +74,13 @@ const FlexNav = styled.nav`
   }
 `
 
-const Header = () => {
-  const menuData = useStaticQuery(graphql`
-    query MenuData {
-      allWpMenu {
-        nodes {
-          menuItems {
-            nodes {
-              label
-              url
-            }
-          }
-          slug
-        }
-      }
-    }
-  `)
-
-  const primaryMenuData = menuData?.allWpMenu?.nodes.filter(
-    menu => menu.slug === 'primary-menu'
-  )[0]?.menuItems?.nodes
-  const secondaryMenuData = menuData?.allWpMenu?.nodes.filter(
-    menu => menu.slug === 'secondary-menu'
-  )[0]?.menuItems?.nodes
-
-  const MENU_ITEMS_COUNT =
-    (primaryMenuData.length || 0) + (secondaryMenuData.length || 0)
-
-  const { buttonProps, itemProps, isOpen } = useDropdownMenu(MENU_ITEMS_COUNT)
+const Header = ({
+  primaryMenuData,
+  secondaryMenuData,
+  menuItemsCount,
+  currentPageSlug,
+}) => {
+  const { buttonProps, itemProps, isOpen } = useDropdownMenu(menuItemsCount)
 
   const primaryItemProps = getArraySlice(itemProps, 0, primaryMenuData.length)
   const secondaryItemProps = getArraySlice(
@@ -126,10 +104,12 @@ const Header = () => {
             <PrimaryNav
               itemProps={primaryItemProps}
               menuItems={primaryMenuData}
+              currentPageSlug={currentPageSlug}
             />
             <SecondaryNav
               itemProps={secondaryItemProps}
               menuItems={secondaryMenuData}
+              currentPageSlug={currentPageSlug}
             />
           </FlexNav>
         </NavWrapper>

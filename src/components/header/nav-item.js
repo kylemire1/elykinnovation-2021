@@ -4,6 +4,22 @@ import styled from 'styled-components'
 
 import vars from '../../vars'
 
+const StyledNavItem = styled.li`
+  background-color: transparent;
+  &.current {
+    background-color: ${vars.colorGreen};
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    &.current {
+      background-color: transparent;
+      a {
+        color: ${vars.colorGreenSmall};
+      }
+    }
+  }
+`
+
 const StyledLink = styled(Link)`
   color: currentColor;
   text-decoration: none;
@@ -16,11 +32,13 @@ const StyledLink = styled(Link)`
   }
 `
 
-const NavItem = ({ children, itemProps, href }) => {
+const NavItem = ({ children, itemProps, href, currentItem }) => {
   return (
-    <li {...itemProps}>
-      <StyledLink to={href}>{children}</StyledLink>
-    </li>
+    <StyledNavItem className={currentItem ? 'current' : null}>
+      <StyledLink {...itemProps} to={href}>
+        {children}
+      </StyledLink>
+    </StyledNavItem>
   )
 }
 

@@ -27,6 +27,7 @@ export const StyledPrimaryNav = styled.div`
     background-color: ${vars.colorAlmostBlack};
     border: solid ${vars.pixel} ${vars.colorGreen};
     border-radius: ${vars.borderRadiusLarge};
+    .
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
@@ -53,7 +54,7 @@ export const StyledPrimaryNav = styled.div`
   }
 `
 
-const PrimaryNav = ({ itemProps, menuItems }) => {
+const PrimaryNav = ({ itemProps, menuItems, currentPageSlug }) => {
   return (
     <StyledPrimaryNav>
       <ul>
@@ -63,6 +64,7 @@ const PrimaryNav = ({ itemProps, menuItems }) => {
               key={`primary_nav_item_${itemIndex}`}
               href={url}
               itemProps={itemProps[itemIndex]}
+              currentItem={url.replaceAll('/', '').includes(currentPageSlug)}
             >
               {label}
             </NavItem>

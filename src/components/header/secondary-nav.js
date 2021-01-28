@@ -37,7 +37,7 @@ const StyledSecondaryNav = styled(StyledPrimaryNav)`
   }
 `
 
-const SecondaryNav = ({ itemProps, menuItems }) => {
+const SecondaryNav = ({ itemProps, menuItems, currentPageSlug }) => {
   return (
     <StyledSecondaryNav>
       <ul>
@@ -47,6 +47,7 @@ const SecondaryNav = ({ itemProps, menuItems }) => {
               key={`secondary_nav_item_${itemIndex}`}
               href={url}
               itemProps={itemProps[itemIndex]}
+              currentItem={url.replaceAll('/', '').includes(currentPageSlug)}
             >
               {label}
             </NavItem>
