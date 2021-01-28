@@ -31,7 +31,7 @@ const Layout = ({ isHomePage, children, currentPageSlug }) => {
   `)
 
   let isPrimaryPage = true
-  if (canUseDom) {
+  if (canUseDom && primaryMenuData.length > 0) {
     isPrimaryPage =
       getMenuItemSlugs(primaryMenuData).includes(currentPageSlug) ||
       currentPageSlug === 'home'
