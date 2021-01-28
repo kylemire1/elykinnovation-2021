@@ -8,6 +8,7 @@ import { MainContent } from './styled/global'
 
 import useMenuData from '../utils/hooks/useMenuData'
 import getMenuItemSlugs from '../utils/getMenuItemSlugs'
+import canUseDom from '../utils/canUseDom'
 
 const Layout = ({ isHomePage, children, currentPageSlug }) => {
   // This is a custom hook to query for menu data.
@@ -29,9 +30,12 @@ const Layout = ({ isHomePage, children, currentPageSlug }) => {
     }
   `)
 
-  const isPrimaryPage =
-    getMenuItemSlugs(primaryMenuData).includes(currentPageSlug) ||
-    currentPageSlug === 'home'
+  let isPrimaryPage = true
+  if (canUseDom) {
+    isPrimaryPage =
+      getMenuItemSlugs(primaryMenuData).includes(currentPageSlug) ||
+      currentPageSlug === 'home'
+  }
 
   return (
     <div
