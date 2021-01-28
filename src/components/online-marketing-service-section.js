@@ -18,6 +18,8 @@ const BoxGrid = styled.div`
 `
 
 const BoxGridItem = styled.div`
+  color: ${({ bg }) =>
+    bg === 'colorWhite' ? vars.colorAlmostBlack : vars.colorWhite};
   border: solid ${vars.pixel};
   border-color: ${({ border }) => vars[border]};
   border-radius: ${vars.borderRadiusSmall};
@@ -53,7 +55,7 @@ const OnlineMarketingServiceSection = ({
     <Section bg={sectionBackgroundColor}>
       <Container>
         <SectionHeading>
-          <span>{smallGreenHeadingText} </span>
+          {smallGreenHeadingText && <span>{smallGreenHeadingText} </span>}
           {mainHeadingText}
         </SectionHeading>
         <BoxGrid>
@@ -62,12 +64,19 @@ const OnlineMarketingServiceSection = ({
               <BoxGridItem
                 key={`${boxText}_component_${boxIndex}`}
                 border={contentBoxBorderColor}
+                bg={sectionBackgroundColor}
               >
                 <p>{boxText}</p>
               </BoxGridItem>
             ))}
         </BoxGrid>
-        <Button elementType="link" buttonStyle="red" href={buttonLink}>
+        <Button
+          elementType="link"
+          buttonStyle={
+            sectionBackgroundColor === 'colorGreen' ? 'outline' : 'red'
+          }
+          href={buttonLink}
+        >
           {buttonText}
         </Button>
       </Container>

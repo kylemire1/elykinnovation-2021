@@ -16,6 +16,7 @@ import IndustrySection from '../components/industry-section'
 import WysiwygContent from '../components/wysiwyg-content'
 import SubpageHeroSmall from '../components/subpage-hero-small'
 import WysiwygContentWithSideCard from '../components/wysiwyg-content-with-side-card'
+import FaqSection from '../components/faq-section'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -123,6 +124,11 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_FaqSection':
+              return (
+                <FaqSection key={`FaqSection_${sectionIndex}`} {...section} />
+              )
+
             default:
               return null
           }
@@ -160,6 +166,7 @@ export const pageQuery = graphql`
           ...WysiwygContent
           ...SubpageHeroSmall
           ...WysiwygContentWithSideCard
+          ...FaqSection
         }
       }
     }

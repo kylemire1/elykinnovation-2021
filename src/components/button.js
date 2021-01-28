@@ -27,10 +27,11 @@ const StyledLink = styled(Link)`
     }
   }
 
-  &.red {
+  &.red,
+  &.outline {
     display: inline-grid;
     grid-template-columns: 1fr 2.813em;
-    background: ${vars.colorRed};
+
     transition: background 250ms ${vars.ease};
 
     img {
@@ -48,6 +49,25 @@ const StyledLink = styled(Link)`
         transform: translateX(0.125rem);
         transition: transform 250ms ${vars.ease};
       }
+    }
+  }
+
+  &.red {
+    background: ${vars.colorRed};
+
+    &:hover,
+    &:focus {
+      background: ${vars.colorDarkRed};
+    }
+  }
+
+  &.outline {
+    background: ${vars.colorTransparent};
+    border: solid ${vars.pixel} ${vars.colorWhite};
+
+    &:hover,
+    &:focus {
+      background: ${vars.colorTransparent};
     }
   }
 `
@@ -77,9 +97,12 @@ const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${vars.colorDarkRed};
+  background-color: ${({ btn }) =>
+    btn === 'red' ? vars.colorDarkRed : vars.colorGreenSmall};
   border-top-right-radius: ${vars.borderRadiusSmall};
   border-bottom-right-radius: ${vars.borderRadiusSmall};
+  border-left: ${({ btn }) =>
+    btn === 'red' ? 'none' : `solid ${vars.pixel} ${vars.colorWhite}`};
 `
 
 const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {
@@ -87,10 +110,10 @@ const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {
     case 'link':
       return (
         <StyledLink className={`btn ${buttonStyle}`} to={href}>
-          {buttonStyle === 'red' ? (
+          {['red', 'outline'].includes(buttonStyle) ? (
             <>
               <TextWrapper>{children}</TextWrapper>
-              <IconWrapper>
+              <IconWrapper btn={buttonStyle}>
                 <img src={arrowSrc} alt="" />
               </IconWrapper>
             </>

@@ -27,7 +27,8 @@ const vars = {
   fontWeightBolder: '700',
   colorAlmostBlack: '#141414',
   colorBlack: '#0A0A0A',
-  colorWhite: '#EAEAEA',
+  colorPureWhite: '#FFFFFF',
+  colorWhite: '#E8EBEB',
   colorRed: '#610103',
   colorDarkRed: '#450C01',
   colorGreen: '#236d6f',
@@ -36,6 +37,7 @@ const vars = {
   colorTransparent: 'transparent',
   borderRadiusSmall: '0.313em',
   borderRadiusLarge: '1.875em',
+  /** 1px */
   pixel: '0.063rem',
   /** 576px */
   breakpointSmall: '36em',

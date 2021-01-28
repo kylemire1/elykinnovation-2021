@@ -30,6 +30,10 @@ const MainContent = styled.div`
     font-weight: ${vars.fontWeightBolder};
   }
 
+  a {
+    margin-top: 1rem;
+  }
+
   @media (min-width: ${vars.breakpointLarge}) {
     margin-bottom: 0;
   }
@@ -44,12 +48,21 @@ const SideContent = styled.div`
     font-size: ${vars.fontSizeHeading2};
     font-weight: ${vars.fontWeightBolder};
   }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    justify-self: end;
+  }
 `
 
 const SideCard = styled.div`
   border: solid ${vars.pixel} ${vars.colorGreenSmall};
-  padding: 1.5em;
+  padding: 1.5em 2em;
   border-radius: ${vars.borderRadiusLarge};
+  min-height: 30rem;
+
+  ul {
+    margin-bottom: 0;
+  }
 `
 
 const WysiwygContentWithSideCard = ({

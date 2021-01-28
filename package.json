@@ -10,6 +10,7 @@
   "dependencies": {
     "@react-icons/all-files": "^4.1.0",
     "@wordpress/block-library": "^2.27.0",
+    "babel-plugin-polished": "^1.1.0",
     "babel-plugin-styled-components": "^1.12.0",
     "gatsby": "^2.30.3",
     "gatsby-image": "^2.9.0",
@@ -17,6 +18,7 @@
     "gatsby-plugin-catch-links": "^2.4.0",
     "gatsby-plugin-manifest": "^2.10.0",
     "gatsby-plugin-offline": "^3.8.0",
+    "gatsby-plugin-polished": "^1.0.4",
     "gatsby-plugin-react-helmet": "^3.8.0",
     "gatsby-plugin-sass": "^3.0.0",
     "gatsby-plugin-sharp": "^2.12.0",
@@ -26,6 +28,7 @@
     "gatsby-transformer-sharp": "^2.9.0",
     "html-react-parser": "^1.1.1",
     "lodash": "^4.17.20",
+    "polished": "^4.1.0",
     "react": "^17.0.1",
     "react-accessible-dropdown-menu-hook": "^2.2.0",
     "react-dom": "^17.0.1",

@@ -164,7 +164,7 @@ const ContactSection = () => {
   const formattedPhoneNumber = phoneNumber.replace(/\D/g, '')
 
   return (
-    <FooterSection color={vars.colorWhite}>
+    <FooterSection color={vars.colorPureWhite}>
       <Container>
         <ContactGrid>
           <div>

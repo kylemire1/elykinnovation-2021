@@ -69,6 +69,7 @@ export const HeroHeading = styled.h1`
 
 export const SoloHeading = styled.h2`
   font-size: ${vars.fontSizeHeading4};
+  font-weight: ${vars.fontWeightBolder};
   color: ${({ color }) => color};
   margin-bottom: 1rem;
 `
