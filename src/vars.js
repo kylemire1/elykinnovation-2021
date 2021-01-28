@@ -32,7 +32,7 @@ const vars = {
   colorDarkRed: '#450C01',
   colorGreen: '#236d6f',
   /** Selected to look the same as colorGreen when applied to small text / border elements */
-  colorGreenSmall: '#318486',
+  colorGreenSmall: '#45888a',
   colorTransparent: 'transparent',
   borderRadiusSmall: '0.313em',
   borderRadiusLarge: '1.875em',

@@ -30,7 +30,7 @@ const SideTextWrapper = styled.div`
 
 const SideText = styled.div`
   width: 100%;
-
+  z-index: 1;
   h2,
   h3,
   h4,
@@ -40,8 +40,9 @@ const SideText = styled.div`
 
   ul {
     padding: 0;
+    list-style: none;
     li {
-      background-image: none;
+      background-image: none !important;
       padding: 0.5em 0.75em;
       margin: 0.5em 0;
       border: solid ${vars.pixel};
@@ -75,7 +76,7 @@ const SideText = styled.div`
       flex-wrap: wrap;
       padding-left: 1em;
       li {
-        background-image: none;
+        background-image: none !important;
         padding: 0.5em 0.75em;
         margin: 0.25em;
         border-color: ${({ position }) =>
@@ -97,7 +98,7 @@ const SideTextBg = styled.div`
     height: 35.625rem;
     width: 35.625rem;
     background-color: ${vars.colorGreen};
-    z-index: -1;
+    z-index: 0;
     border-radius: 999rem;
   }
 
@@ -109,6 +110,7 @@ const SideTextBg = styled.div`
     left: 50%;
     top: 50%;
     transform: translate(-55%, -55%);
+    z-index: 2;
   }
 
   @media (min-width: ${vars.breakpointExtraLarge}) {

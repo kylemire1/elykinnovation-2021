@@ -8,7 +8,7 @@ const StyledServiceCardBG = styled.div`
   position: absolute;
   ${({ position }) => (position === 'left' ? 'right: 5.5rem' : 'left: 5.5rem')};
   top: 0;
-  z-index: -1;
+  z-index: 0;
   height: 42rem;
   flex-direction: ${({ position }) =>
     position === 'left' ? 'row-reverse' : 'row'};

@@ -15,6 +15,8 @@ const ServiceCard = styled.div`
   padding: 2rem;
   background-color: ${vars.colorBlack};
   border-radius: ${vars.borderRadiusLarge};
+  position: relative;
+  z-index: 2;
 
   @media (min-width: ${vars.breakpointLarge}) {
     padding: 2rem 3rem;
@@ -56,7 +58,7 @@ const LargeServiceCard = ({
   buttonText,
 }) => {
   return (
-    <ServiceCard bg="colorAlmostBlack">
+    <ServiceCard>
       <CardContent>
         <CardHeading bg="colorBlack">
           <span>{smallGreenHeadingText} </span>
