@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
-import { Container, SoloHeading } from './styled/global'
+import { Container } from './styled/global'
 
 import vars from '../vars'
 import heroBgSrc from '../../content/assets/subpage-hero-small-bg.svg'

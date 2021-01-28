@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Header from './header'
@@ -8,9 +8,9 @@ import { MainContent } from './styled/global'
 
 import useMenuData from '../utils/hooks/useMenuData'
 import getMenuItemSlugs from '../utils/getMenuItemSlugs'
-import canUseDom from '../utils/canUseDom'
 
 const Layout = ({ isHomePage, children, currentPageSlug }) => {
+  const [isPrimary, setIsPrimary] = useState(false)
   // This is a custom hook to query for menu data.
   // Hooks are a built-in tool of React that let us separate a lot of the business logic out of our components and let them just worry about displaying the template.
   // See https://reactjs.org/docs/hooks-custom.html for more info
@@ -30,17 +30,17 @@ const Layout = ({ isHomePage, children, currentPageSlug }) => {
     }
   `)
 
-  let isPrimaryPage = true
-  if (canUseDom && primaryMenuData.length > 0) {
-    isPrimaryPage =
-      getMenuItemSlugs(primaryMenuData).includes(currentPageSlug) ||
-      currentPageSlug === 'home'
-  }
+  useEffect(() => {
+    const slugs = getMenuItemSlugs(primaryMenuData)
+    if (slugs && slugs.includes(currentPageSlug)) {
+      setIsPrimary(true)
+    }
+  }, [primaryMenuData, currentPageSlug])
 
   return (
     <div
       className={`body-wrapper ${currentPageSlug} ${
-        isPrimaryPage ? 'primary' : 'secondary'
+        isPrimary ? 'primary' : 'secondary'
       }`}
     >
       <SEO title={title} />
