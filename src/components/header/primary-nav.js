@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 
 import NavItem from './nav-item'
@@ -55,6 +55,14 @@ export const StyledPrimaryNav = styled.div`
 `
 
 const PrimaryNav = ({ itemProps, menuItems, currentPageSlug }) => {
+  const [currentItem, setCurrentItem] = useState(false)
+
+  useEffect(() => {
+    if (url && url.includes(currentPageSlug)) {
+      setCurrentItem(true)
+    }
+  }, [])
+
   return (
     <StyledPrimaryNav>
       <ul>
@@ -64,7 +72,7 @@ const PrimaryNav = ({ itemProps, menuItems, currentPageSlug }) => {
               key={`primary_nav_item_${itemIndex}`}
               href={url}
               itemProps={itemProps[itemIndex]}
-              currentItem={url.replaceAll('/', '').includes(currentPageSlug)}
+              currentItem={currentItem}
             >
               {label}
             </NavItem>
