@@ -8,5 +8,7 @@ import canUseDom from './canUseDom'
 export default function getMenuItemSlugs(menuData) {
   if (!canUseDom()) return
 
-  return menuData.map(item => item.url.replaceAll('/', ''))
+  return (
+    menuData.length > 0 && menuData.map(item => item.url.replaceAll('/', ''))
+  )
 }
