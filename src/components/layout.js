@@ -32,7 +32,10 @@ const Layout = ({ isHomePage, children, currentPageSlug }) => {
 
   useEffect(() => {
     const slugs = getMenuItemSlugs(primaryMenuData)
-    if (slugs && slugs.includes(currentPageSlug)) {
+    if (
+      (slugs && slugs.includes(currentPageSlug)) ||
+      currentPageSlug === 'home'
+    ) {
       setIsPrimary(true)
     }
   }, [primaryMenuData, currentPageSlug])
