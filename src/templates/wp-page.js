@@ -14,6 +14,7 @@ import SubpageHeroLarge from '../components/subpage-hero-large'
 import TextWithImageSection from '../components/text-with-image-section'
 import IndustrySection from '../components/industry-section'
 import WysiwygContent from '../components/wysiwyg-content'
+import SubpageHeroSmall from '../components/subpage-hero-small'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -105,6 +106,14 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_SubpageHeroSmall':
+              return (
+                <SubpageHeroSmall
+                  key={`SubpageHeroSmall_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -140,6 +149,7 @@ export const pageQuery = graphql`
           ...TextWithImageSection
           ...IndustriesSection
           ...WysiwygContent
+          ...SubpageHeroSmall
         }
       }
     }
