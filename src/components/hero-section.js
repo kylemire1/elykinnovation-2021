@@ -2,11 +2,13 @@ import React from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
+import Button from './button'
 import { Container } from './styled/global'
 
 import vars from '../vars'
 
 const StyledHero = styled.section`
+  position: relative;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -33,10 +35,26 @@ const StyledHero = styled.section`
   }
 `
 
-const HeroSection = ({ heroImage, heroText }) => {
+const ButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 15%;
+
+  .btn {
+    box-shadow: 0 20px 40px #021717;
+  }
+`
+
+const HeroSection = ({ heroImage, heroText, buttonLink, buttonText }) => {
   return (
     <StyledHero bg={heroImage?.sourceUrl}>
       <Container>{heroText && <h1>{heroText}</h1>}</Container>
+      {buttonLink && buttonText && (
+        <ButtonWrapper>
+          <Button elementType="link" buttonStyle="green" href={buttonLink}>
+            {buttonText}
+          </Button>
+        </ButtonWrapper>
+      )}
     </StyledHero>
   )
 }
@@ -44,6 +62,8 @@ const HeroSection = ({ heroImage, heroText }) => {
 export const fragment = graphql`
   fragment HeroSection on WpPage_Layoutsections_Components_HomepageHero {
     fieldGroupName
+    buttonLink
+    buttonText
     heroText
     heroImage {
       sourceUrl

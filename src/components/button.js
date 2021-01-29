@@ -1,11 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Link } from 'gatsby'
+import { darken } from 'polished'
 
 import vars from '../vars'
 import arrowSrc from '../../content/assets/arrow.svg'
 
-const StyledLink = styled(Link)`
+const styles = css`
   text-align: center;
   color: ${vars.colorWhite};
   text-decoration: none;
@@ -22,7 +23,7 @@ const StyledLink = styled(Link)`
     &:hover,
     &:focus,
     &:focus-within {
-      background-color: ${vars.colorBlack};
+      background-color: ${darken(0.05, vars.colorGreen)};
       transition: background-color 250ms ${vars.ease};
     }
   }
@@ -31,7 +32,6 @@ const StyledLink = styled(Link)`
   &.outline {
     display: inline-grid;
     grid-template-columns: 1fr 2.813em;
-
     transition: background 250ms ${vars.ease};
 
     img {
@@ -72,18 +72,12 @@ const StyledLink = styled(Link)`
   }
 `
 
-const StyledButton = styled.button`
-  text-align: center;
-  color: ${vars.colorWhite};
-  text-decoration: none;
-  border-radius: ${vars.borderRadiusSmall};
-  cursor: pointer;
+const StyledLink = styled(Link)`
+  ${styles}
+`
 
-  &.red {
-    display: inline-grid;
-    grid-template-columns: 1fr 2.813em;
-    background: ${vars.colorRed};
-  }
+const StyledButton = styled.button`
+  ${styles}
 `
 
 const TextWrapper = styled.div`
@@ -124,7 +118,11 @@ const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {
       )
     default:
       return (
-        <StyledButton className={buttonStyle} onClick={handleClick}>
+        <StyledButton
+          className={buttonStyle}
+          onClick={handleClick}
+          role="button"
+        >
           <TextWrapper>{children}</TextWrapper>
           <IconWrapper>
             <img src={arrowSrc} alt="" />

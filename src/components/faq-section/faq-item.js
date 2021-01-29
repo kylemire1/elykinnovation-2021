@@ -24,42 +24,6 @@ const StyledFaqItem = styled.div`
     border-color: ${rgba(vars.colorGreenSmall, 1)};
     transition: border-color 250ms ${vars.ease};
   }
-
-  svg {
-    max-width: 1.75rem;
-    transform: rotate(0);
-    will-change: transform;
-    transition: transform 250ms ${vars.ease};
-
-    path {
-      fill: ${vars.colorGreenSmall};
-      transition: fill 250ms ${vars.ease};
-    }
-
-    .plus-line {
-      opacity: 1;
-      transition: opacity 250ms ${vars.ease};
-    }
-  }
-
-  &.open {
-    border-color: ${rgba(vars.colorGreenSmall, 1)};
-    transition: border-color 250ms ${vars.ease};
-    svg {
-      transform: rotate(90deg);
-      will-change: transform;
-      transition: transform 250ms ${vars.ease};
-      path {
-        fill: ${vars.colorRed};
-        transition: fill 250ms ${vars.ease};
-      }
-
-      .plus-line {
-        opacity: 0;
-        transition: opacity 250ms ${vars.ease};
-      }
-    }
-  }
 `
 
 const FaqItemInner = styled.div`
@@ -117,14 +81,65 @@ const Answer = styled.div`
   }
 `
 
+const PlusButton = styled.button`
+  background: none;
+  border: none;
+  width: 100%;
+  max-width: 1.75rem;
+
+  svg {
+    max-width: 1.75rem;
+    transform: rotate(0);
+    will-change: transform;
+    transition: transform 250ms ${vars.ease};
+
+    path {
+      fill: ${vars.colorGreenSmall};
+      transition: fill 250ms ${vars.ease};
+    }
+
+    .plus-line {
+      opacity: 1;
+      transition: opacity 250ms ${vars.ease};
+    }
+  }
+
+  &.open {
+    border-color: ${rgba(vars.colorGreenSmall, 1)};
+    transition: border-color 250ms ${vars.ease};
+    svg {
+      transform: rotate(90deg);
+      will-change: transform;
+      transition: transform 250ms ${vars.ease};
+      path {
+        fill: ${vars.colorRed};
+        transition: fill 250ms ${vars.ease};
+      }
+
+      .plus-line {
+        opacity: 0;
+        transition: opacity 250ms ${vars.ease};
+      }
+    }
+  }
+`
+
 const FaqItem = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = () => {
     setIsOpen(!isOpen)
   }
   return (
-    <StyledFaqItem className={isOpen ? 'open' : 'closed'}>
-      <Plus onClick={toggleOpen} />
+    <StyledFaqItem>
+      <PlusButton
+        className={isOpen ? 'open' : 'closed'}
+        onClick={toggleOpen}
+        role="button"
+        aria-label={`${isOpen ? 'Collapse' : 'Expand'} FAQ`}
+        aria-expanded={isOpen}
+      >
+        <Plus />
+      </PlusButton>
       <FaqItemInner onClick={toggleOpen}>
         <Question>{question}</Question>
         <Answer className={isOpen ? 'open' : 'closed'}>{parse(answer)}</Answer>

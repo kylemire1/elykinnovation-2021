@@ -11,6 +11,8 @@ const CardGrid = styled.div`
   display: grid;
   gap: 1.5rem;
   margin-top: ${({ $offset }) => ($offset ? '-7em' : 0)};
+  position: relative;
+  z-index: 1;
 
   ul {
     margin: 0;
