@@ -36,9 +36,7 @@ const StyledHero = styled.section`
 const HeroSection = ({ heroImage, heroText }) => {
   return (
     <StyledHero bg={heroImage?.sourceUrl}>
-      <Container>
-        <h1>{heroText}</h1>
-      </Container>
+      <Container>{heroText && <h1>{heroText}</h1>}</Container>
     </StyledHero>
   )
 }

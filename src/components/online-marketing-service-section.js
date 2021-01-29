@@ -54,10 +54,12 @@ const OnlineMarketingServiceSection = ({
   return (
     <Section bg={sectionBackgroundColor}>
       <Container>
-        <SectionHeading>
-          {smallGreenHeadingText && <span>{smallGreenHeadingText} </span>}
-          {mainHeadingText}
-        </SectionHeading>
+        {mainHeadingText && (
+          <SectionHeading>
+            {smallGreenHeadingText && <span>{smallGreenHeadingText} </span>}
+            {mainHeadingText}
+          </SectionHeading>
+        )}
         <BoxGrid>
           {boxes &&
             boxes.map(({ boxText }, boxIndex) => (
@@ -70,15 +72,17 @@ const OnlineMarketingServiceSection = ({
               </BoxGridItem>
             ))}
         </BoxGrid>
-        <Button
-          elementType="link"
-          buttonStyle={
-            sectionBackgroundColor === 'colorGreen' ? 'outline' : 'red'
-          }
-          href={buttonLink}
-        >
-          {buttonText}
-        </Button>
+        {buttonText && buttonLink && (
+          <Button
+            elementType="link"
+            buttonStyle={
+              sectionBackgroundColor === 'colorGreen' ? 'outline' : 'red'
+            }
+            href={buttonLink}
+          >
+            {buttonText}
+          </Button>
+        )}
       </Container>
     </Section>
   )

@@ -45,8 +45,10 @@ const TextWithImageSection = ({
       <Container>
         <Content>
           <TextContentWrapper>
-            <SoloHeading color={vars.colorGreen}>{headingText}</SoloHeading>
-            {parse(textContent)}
+            {headingText && (
+              <SoloHeading color={vars.colorGreen}>{headingText}</SoloHeading>
+            )}
+            {textContent && parse(textContent)}
           </TextContentWrapper>
           {image && (
             <ImageWithStroke

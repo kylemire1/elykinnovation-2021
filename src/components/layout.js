@@ -38,6 +38,8 @@ const Layout = ({ isHomePage, children, currentPageSlug }) => {
       !currentPageSlug
     ) {
       setIsPrimary(true)
+    } else {
+      setIsPrimary(false)
     }
   }, [primaryMenuData, currentPageSlug])
 

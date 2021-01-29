@@ -77,7 +77,7 @@ const WysiwygContentWithSideCard = ({
       <Container>
         <ContentGrid>
           <MainContent>
-            {parse(mainContent)}
+            {mainContent && parse(mainContent)}
             {showButton && (
               <Button buttonStyle="red" elementType="link" href={buttonLink}>
                 {buttonText}
@@ -85,7 +85,7 @@ const WysiwygContentWithSideCard = ({
             )}
           </MainContent>
           <SideContent>
-            <SideCard>{parse(cardContent)}</SideCard>
+            {cardContent && <SideCard>{parse(cardContent)}</SideCard>}
           </SideContent>
         </ContentGrid>
       </Container>

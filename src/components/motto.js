@@ -66,7 +66,9 @@ const Motto = ({
               {mainHeadingText}
             </MottoHeading>
           </MottoHeadingWrapper>
-          <MottoContent>{parse(paragraphContent)}</MottoContent>
+          <MottoContent>
+            {paragraphContent && parse(paragraphContent)}
+          </MottoContent>
         </MottoWrapper>
       </Container>
     </Section>

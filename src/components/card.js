@@ -105,7 +105,7 @@ const Card = ({ largeHeading, title, body, link, backgroundColor }) => {
       bg={backgroundColor}
       className={largeHeading ? 'large-heading' : ''}
     >
-      <h2>{parse(title)}</h2>
+      {title && <h2>{parse(title)}</h2>}
       {body && (
         <div className={`margin ${!link ? 'no-link' : null}`}>
           {parse(body)}

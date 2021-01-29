@@ -36,10 +36,12 @@ const SixCards = ({
   return (
     <Section bg={sectionBackgroundColor} angled={angledBackgroundTransition}>
       <Container>
-        <SectionHeading bg={sectionBackgroundColor}>
-          <span>{smallGreenHeadingText}</span>
-          {mainHeadingText}
-        </SectionHeading>
+        {mainHeadingText && (
+          <SectionHeading bg={sectionBackgroundColor}>
+            {smallGreenHeadingText && <span>{smallGreenHeadingText}</span>}
+            {mainHeadingText}
+          </SectionHeading>
+        )}
         <CardGrid $button={buttonLink && buttonText}>
           {cards.map(({ cardTitle, cardBody, cardLink }, cardIndex) => (
             <Card

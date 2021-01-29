@@ -17,12 +17,12 @@ const Plus = ({ onClick }) => {
           d="M16,22a1,1,0,0,1-1-1V11a1,1,0,0,1,2,0V21A1,1,0,0,1,16,22Z"
           transform="translate(168.012 557)"
           fill="#45888a"
-          className="plus-line"
         />
         <path
           d="M21,17H11a1,1,0,0,1,0-2H21a1,1,0,0,1,0,2Z"
           transform="translate(168.012 557)"
           fill="#45888a"
+          className="plus-line"
         />
       </g>
     </svg>

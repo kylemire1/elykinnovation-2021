@@ -24,7 +24,9 @@ const WysiwygContent = ({
   return (
     <Section bg={sectionBackgroundColor} angled={angledBackgroundTransition}>
       <Container>
-        <ContentWrapper>{parse(wysiwygContent)}</ContentWrapper>
+        {wysiwygContent && (
+          <ContentWrapper>{parse(wysiwygContent)}</ContentWrapper>
+        )}
       </Container>
     </Section>
   )

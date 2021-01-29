@@ -37,10 +37,12 @@ const PortfolioPreview = ({
       graphic={backgroundGraphic}
     >
       <Container>
-        <SectionHeading bg={sectionBackgroundColor}>
-          <span>{smallGreenHeadingText}</span>
-          {mainHeadingText}
-        </SectionHeading>
+        {mainHeadingText && (
+          <SectionHeading bg={sectionBackgroundColor}>
+            {smallGreenHeadingText && <span>{smallGreenHeadingText}</span>}
+            {mainHeadingText}
+          </SectionHeading>
+        )}
         <PortfolioGrid $button={buttonLink && buttonText}>
           {clients.length > 0 &&
             clients.map((client, clientIndex) => (
@@ -50,9 +52,11 @@ const PortfolioPreview = ({
               />
             ))}
         </PortfolioGrid>
-        <Button buttonStyle="red" elementType="link" href={buttonLink}>
-          {buttonText}
-        </Button>
+        {buttonLink && buttonText && (
+          <Button buttonStyle="red" elementType="link" href={buttonLink}>
+            {buttonText}
+          </Button>
+        )}
       </Container>
     </Section>
   )

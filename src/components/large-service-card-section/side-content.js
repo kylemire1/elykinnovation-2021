@@ -141,7 +141,7 @@ const SideContent = ({
   ) : (
     <SideTextWrapper position={cardPosition}>
       <SideText ref={ref} position={cardPosition} padding={extraPadding}>
-        {parse(sideText)}
+        {sideText && parse(sideText)}
       </SideText>
       <SideTextBg
         $width={width}

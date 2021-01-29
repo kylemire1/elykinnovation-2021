@@ -27,6 +27,9 @@ const StyledFaqItem = styled.div`
 
   svg {
     max-width: 1.75rem;
+    transform: rotate(0);
+    will-change: transform;
+    transition: transform 250ms ${vars.ease};
 
     path {
       fill: ${vars.colorGreenSmall};
@@ -43,6 +46,9 @@ const StyledFaqItem = styled.div`
     border-color: ${rgba(vars.colorGreenSmall, 1)};
     transition: border-color 250ms ${vars.ease};
     svg {
+      transform: rotate(90deg);
+      will-change: transform;
+      transition: transform 250ms ${vars.ease};
       path {
         fill: ${vars.colorRed};
         transition: fill 250ms ${vars.ease};

@@ -54,24 +54,28 @@ const SubpageHeroLarge = ({
       <Container>
         <HeroContent>
           <div>
-            <HeroHeading>
-              <span>{smallGreenHeadingText} </span>
-              {mainHeadingText}
-            </HeroHeading>
-            {parse(paragraphText)}
+            {mainHeadingText && (
+              <HeroHeading>
+                {smallGreenHeadingText && <span>{smallGreenHeadingText} </span>}
+                {mainHeadingText}
+              </HeroHeading>
+            )}
+            {paragraphText && parse(paragraphText)}
           </div>
           <ImageWrapper>
-            <Image
-              backgroundColor="transparent"
-              fixed={[
-                imageData.mobile,
-                {
-                  ...imageData.desktop,
-                  media: `(min-width: ${vars.breakpointLarge})`,
-                },
-              ]}
-              alt={imageData.altText}
-            />
+            {image && (
+              <Image
+                backgroundColor="transparent"
+                fixed={[
+                  imageData.mobile,
+                  {
+                    ...imageData.desktop,
+                    media: `(min-width: ${vars.breakpointLarge})`,
+                  },
+                ]}
+                alt={imageData.altText}
+              />
+            )}
           </ImageWrapper>
         </HeroContent>
       </Container>

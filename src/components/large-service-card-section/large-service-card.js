@@ -60,11 +60,13 @@ const LargeServiceCard = ({
   return (
     <ServiceCard>
       <CardContent>
-        <CardHeading bg="colorBlack">
-          <span>{smallGreenHeadingText} </span>
-          {mainHeadingText}
-        </CardHeading>
-        {parse(cardContent)}
+        {mainHeadingText && (
+          <CardHeading bg="colorBlack">
+            {smallGreenHeadingText && <span>{smallGreenHeadingText} </span>}
+            {mainHeadingText}
+          </CardHeading>
+        )}
+        {cardContent && parse(cardContent)}
         {buttonText && buttonLink && (
           <ServiceCardButton>
             <Button elementType="link" buttonStyle="red" href={buttonLink}>

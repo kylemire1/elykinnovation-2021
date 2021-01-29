@@ -103,7 +103,7 @@ const AccessibilitySection = () => {
           </AccessibilityHeading>
 
           <AccessibilityStatement>
-            {parse(accessibilityPolicy)}
+            {accessibilityPolicy && parse(accessibilityPolicy)}
           </AccessibilityStatement>
         </AccessibilityRow>
       </Container>
