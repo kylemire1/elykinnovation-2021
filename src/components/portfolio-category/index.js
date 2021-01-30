@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import slugify from 'slugify'
@@ -37,9 +37,13 @@ const LinkWrapper = styled.div`
 `
 
 const PortfolioCategory = ({ categoryName, projects }) => {
-  const slug = categoryName
-    ? slugify(categoryName.toLowerCase().replaceAll('websites', ''))
-    : 'none'
+  const [slug, setSlug] = useState(null)
+
+  useEffect(() => {
+    if (!slug && categoryName) {
+      setSlug(slugify(categoryName.toLowerCase().replaceAll('websites', '')))
+    }
+  }, [categoryName, slug])
 
   return (
     <Section bg="colorWhite">
