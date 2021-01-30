@@ -40,7 +40,7 @@ const ButtonWrapper = styled.div`
   bottom: 15%;
 
   .btn {
-    box-shadow: 0 20px 40px #021717;
+    box-shadow: 0 1.25rem 2.5rem #021717;
   }
 `
 

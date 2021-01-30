@@ -17,6 +17,8 @@ import WysiwygContent from '../components/wysiwyg-content'
 import SubpageHeroSmall from '../components/subpage-hero-small'
 import WysiwygContentWithSideCard from '../components/wysiwyg-content-with-side-card'
 import FaqSection from '../components/faq-section'
+import PortfolioCategory from '../components/portfolio-category'
+import PortfolioMenu from '../components/portfolio-menu'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -129,6 +131,22 @@ const WpPageTemplate = ({ data }) => {
                 <FaqSection key={`FaqSection_${sectionIndex}`} {...section} />
               )
 
+            case 'page_Layoutsections_Components_PortfolioCategory':
+              return (
+                <PortfolioCategory
+                  key={`PortfolioCategory_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
+            case 'page_Layoutsections_Components_PortfolioMenu':
+              return (
+                <PortfolioMenu
+                  key={`PortfolioMenu_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -167,6 +185,8 @@ export const pageQuery = graphql`
           ...SubpageHeroSmall
           ...WysiwygContentWithSideCard
           ...FaqSection
+          ...PortfolioCategory
+          ...PortfolioMenu
         }
       }
     }

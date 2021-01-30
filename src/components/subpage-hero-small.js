@@ -12,12 +12,9 @@ const StyledHero = styled.section`
   display: flex;
   align-items: center;
   background-color: ${vars.colorAlmostBlack};
-
-  @media (min-width: ${vars.breakpointLarge}) {
-    background-image: url(${heroBgSrc});
-    background-repeat: no-repeat;
-    background-position: top -${vars.pixel} center;
-  }
+  background-image: url(${heroBgSrc});
+  background-repeat: no-repeat;
+  background-position: top -${vars.pixel} center;
 `
 
 const Heading = styled.h1`
