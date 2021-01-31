@@ -73,3 +73,45 @@ export const SoloHeading = styled.h2`
   color: ${({ color }) => color};
   margin-bottom: 1rem;
 `
+
+export const FormControl = styled.div`
+  display: block;
+  height: 100%;
+
+  label,
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+  }
+
+  label {
+    font-weight: ${vars.fontWeightBold};
+    margin-bottom: 0.5rem;
+  }
+
+  input {
+    height: 2.5rem;
+    padding: 0.5em;
+    font-size: ${vars.fontSizeText};
+  }
+
+  input,
+  textarea,
+  select {
+    border: solid ${vars.pixel} ${vars.colorGreenSmall};
+    border-radius: ${vars.borderRadiusSmall};
+  }
+
+  textarea {
+    height: 10rem;
+    padding: 0.5em;
+    @media (min-width: ${vars.breakpointLarge}) {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: ${({ $height }) => `calc(100% - ${$height}px - .5rem)`};
+    }
+  }
+`

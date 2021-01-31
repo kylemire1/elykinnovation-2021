@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Plus = ({ onClick }) => {
+const PlusIcon = ({ onClick }) => {
   return (
     <svg
       onClick={onClick}
@@ -29,4 +29,4 @@ const Plus = ({ onClick }) => {
   )
 }
 
-export default Plus
+export default PlusIcon

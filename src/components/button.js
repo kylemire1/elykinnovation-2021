@@ -9,6 +9,8 @@ import arrowSrc from '../../content/assets/arrow.svg'
 const styles = css`
   text-align: center;
   color: ${vars.colorWhite};
+  font-size: ${vars.fontSizeText};
+  font-weight: ${vars.fontWeightNormal};
   text-decoration: none;
   border-radius: ${vars.borderRadiusSmall};
   cursor: pointer;
@@ -77,6 +79,7 @@ const StyledLink = styled(Link)`
 `
 
 const StyledButton = styled.button`
+  border: none;
   ${styles}
 `
 
@@ -123,10 +126,16 @@ const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {
           onClick={handleClick}
           role="button"
         >
-          <TextWrapper>{children}</TextWrapper>
-          <IconWrapper>
-            <img src={arrowSrc} alt="" />
-          </IconWrapper>
+          {['red', 'outline'].includes(buttonStyle) ? (
+            <>
+              <TextWrapper>{children}</TextWrapper>
+              <IconWrapper btn={buttonStyle}>
+                <img src={arrowSrc} alt="" />
+              </IconWrapper>
+            </>
+          ) : (
+            <>{children}</>
+          )}
         </StyledButton>
       )
   }

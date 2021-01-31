@@ -34,7 +34,7 @@ const Layout = ({ isHomePage, children, currentPageSlug }) => {
     const slugs = getMenuItemSlugs(primaryMenuData)
     if (
       (slugs && slugs.includes(currentPageSlug)) ||
-      ['home', '404'].includes(currentPageSlug) ||
+      ['home', 'contact', '404'].includes(currentPageSlug) ||
       !currentPageSlug
     ) {
       setIsPrimary(true)

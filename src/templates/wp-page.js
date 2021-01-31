@@ -19,6 +19,7 @@ import WysiwygContentWithSideCard from '../components/wysiwyg-content-with-side-
 import FaqSection from '../components/faq-section'
 import PortfolioCategory from '../components/portfolio-category'
 import PortfolioMenu from '../components/portfolio-menu'
+import ContactUsLayout from '../components/contact-us-layout'
 
 const WpPageTemplate = ({ data }) => {
   const layoutSections = data.page.layoutSections.components
@@ -147,6 +148,14 @@ const WpPageTemplate = ({ data }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_ContactUsLayout':
+              return (
+                <ContactUsLayout
+                  key={`ContactUsLayout_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -187,6 +196,7 @@ export const pageQuery = graphql`
           ...FaqSection
           ...PortfolioCategory
           ...PortfolioMenu
+          ...ContactUsLayout
         }
       }
     }

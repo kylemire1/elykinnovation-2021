@@ -3,7 +3,7 @@ import parse from 'html-react-parser'
 import styled from 'styled-components'
 import { rgba } from 'polished'
 
-import Plus from '../icons/plus'
+import PlusIcon from '../icons/plus-icon'
 
 import vars from '../../vars'
 
@@ -138,7 +138,7 @@ const FaqItem = ({ question, answer }) => {
         aria-label={`${isOpen ? 'Collapse' : 'Expand'} FAQ`}
         aria-expanded={isOpen}
       >
-        <Plus />
+        <PlusIcon />
       </PlusButton>
       <FaqItemInner onClick={toggleOpen}>
         <Question>{question}</Question>
