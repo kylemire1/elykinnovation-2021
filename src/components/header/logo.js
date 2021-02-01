@@ -9,7 +9,7 @@ const LogoWrapper = styled.div`
   background-color: ${vars.colorRed};
   display: flex;
   align-items: center;
-  width: 32%;
+  width: 65%;
   position: relative;
 
   a {

@@ -7,23 +7,27 @@ import vars from '../../vars'
 
 const StyledMenuItem = styled.li`
   background-image: none !important;
-  margin-top: 0;
+  margin-top: 1.5rem;
   margin: 0.25rem;
-  padding: 0.25rem;
+  padding: 0.25em 0.5em;
+  border: solid ${vars.pixel} ${vars.colorGreenSmall};
+  border-radius: ${vars.borderRadiusSmall};
+  transition: border-radius 250ms ${vars.ease};
+
+  :hover,
+  :focus,
+  :focus-within {
+    border-radius: ${vars.borderRadiusLarge};
+    transition: border-radius 250ms ${vars.ease};
+  }
 
   a {
-    padding: 1em;
-    border: solid ${vars.pixel} ${vars.colorGreenSmall};
-    border-radius: ${vars.borderRadiusSmall};
-    transition: border-radius 250ms ${vars.ease};
     color: ${vars.colorGreenSmallSubpage};
     text-decoration: none;
+  }
 
-    :hover,
-    :focus {
-      border-radius: ${vars.borderRadiusLarge};
-      transition: border-radius 250ms ${vars.ease};
-    }
+  @media (min-width: ${vars.breakpointLarge}) {
+    padding: 1em;
   }
 `
 

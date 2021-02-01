@@ -109,7 +109,7 @@ const StyledOr = styled.div`
     text-transform: uppercase;
     color: ${vars.colorBlack};
     font-weight: ${vars.fontWeightBold};
-    background-color: ${vars.colorWhite};
+    background-color: ${vars.colorPureWhite};
     display: inline-block;
     z-index: 1;
   }

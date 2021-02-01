@@ -46,10 +46,9 @@ const FlexNav = styled.nav`
   background: ${vars.colorBlack};
   border-radius: ${vars.borderRadiusLarge};
   overflow-y: hidden;
-  overflow-y: hidden;
   padding: 1em 0;
   opacity: 0;
-  transform: translateY(-2rem);
+  transform: translateY(-50rem);
   transition: all 500ms ${vars.ease};
 
   &.visible {
