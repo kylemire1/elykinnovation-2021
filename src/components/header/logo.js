@@ -36,6 +36,10 @@ const LogoWrapper = styled.div`
     right: 0;
     border-color: transparent ${vars.colorBlack} transparent transparent;
   }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    width: 32%;
+  }
 `
 
 const Logo = () => {
