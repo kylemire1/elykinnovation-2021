@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Button from '../button'
+import Button from './button'
 
-import vars from '../../vars'
+import vars from '../vars'
 
 const PaginationButtons = styled.div`
   display: flex;
@@ -17,33 +17,41 @@ const PaginationButtons = styled.div`
 `
 
 const Pagination = ({ next, previous }) => {
-  console.log({ next, previous })
+  const nextClientName =
+    next?.acfPostFields?.launchAnnouncementFields?.clientName
+  const previousClientName =
+    previous?.acfPostFields?.launchAnnouncementFields?.clientName
+
   return (
     <PaginationButtons>
       <div>
-        {previous && (
-          <Button
-            elementType="link"
-            buttonStyle="outline"
-            href={previous.uri}
-            arrowDirection="left"
-          >
-            {previous.acfPostFields.launchAnnouncementFields.clientName ||
-              'Previous Client'}
-          </Button>
-        )}
-      </div>
-      <div>
-        {next && (
+        {next ? (
           <Button
             elementType="link"
             buttonStyle="outline"
             href={next.uri}
             arrowDirection="left"
           >
-            {next.acfPostFields.launchAnnouncementFields.clientName ||
-              'Next Client'}
+            {`Next Project${nextClientName ? `: ${nextClientName}` : ''}`}
           </Button>
+        ) : (
+          "You're all caught up!"
+        )}
+      </div>
+      <div>
+        {previous ? (
+          <Button
+            elementType="link"
+            buttonStyle="outline"
+            href={previous.uri}
+            arrowDirection="right"
+          >
+            {`Previous Project${
+              previousClientName ? `: ${previousClientName}` : ''
+            }`}
+          </Button>
+        ) : (
+          'Sorry, nothing left to show!'
         )}
       </div>
     </PaginationButtons>

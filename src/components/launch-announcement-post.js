@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Image from 'gatsby-image'
 import parse from 'html-react-parser'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
+import { darken } from 'polished'
 
 import SubpageHeroSmall from './subpage-hero-small'
 import { Section, Container, SoloHeading } from './styled/global'
@@ -74,6 +74,26 @@ const PaginationWrapper = styled.section`
   padding: 1rem 0;
 `
 
+const ClientBlurb = styled.div`
+  p {
+    font-size: ${vars.fontSizeHeading1};
+    font-weight: ${vars.fontWeightBolder};
+    line-height: 1.5;
+  }
+
+  a {
+    color: ${darken(0, vars.colorWhite)};
+    transition: color 250ms ${vars.ease};
+    text-decoration: underline !important;
+
+    :hover,
+    :focus {
+      color: ${darken(0.095, vars.colorWhite)};
+      transition: color 250ms ${vars.ease};
+    }
+  }
+`
+
 const LaunchAnnouncementPost = ({
   title,
   next,
@@ -99,7 +119,7 @@ const LaunchAnnouncementPost = ({
     mobile: mockupImage?.localFile?.childImageSharp?.mobile,
     altText: mockupImage?.altText,
   }
-  console.log({ mockupImage })
+
   return (
     <article>
       <SubpageHeroSmall headingText={clientName} />
@@ -169,6 +189,12 @@ const LaunchAnnouncementPost = ({
               </MockupWrapper>
             </DetailsWrapper>
           </PostGrid>
+        </Container>
+      </Section>
+      <Section bg="colorGreen">
+        <Container>
+          <ClientBlurb>{clientBlurb && parse(clientBlurb)}</ClientBlurb>
+          <Pagination next={next} previous={previous} />
         </Container>
       </Section>
     </article>

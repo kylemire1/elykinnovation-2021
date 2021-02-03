@@ -53,8 +53,8 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
           id: post.id,
 
           // We also use the next and previous id's to query them and add links!
-          previousPostId: previous ? previous.id : null,
-          nextPostId: next ? next.id : null,
+          previousPostId: next ? next.id : null,
+          nextPostId: previous ? previous.id : null,
         },
       })
     )

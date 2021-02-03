@@ -4,7 +4,8 @@ import { Link } from 'gatsby'
 import { darken } from 'polished'
 
 import vars from '../vars'
-import arrowSrc from '../../content/assets/arrow.svg'
+import arrowRightSrc from '../../content/assets/arrow.svg'
+import arrowLeftSrc from '../../content/assets/arrow-left.svg'
 
 const styles = css`
   text-align: center;
@@ -32,7 +33,7 @@ const styles = css`
 
   &.red,
   &.outline {
-    display: flex;
+    display: inline-flex;
     grid-template-columns: 1fr 2.813em;
     transition: background 250ms ${vars.ease};
 
@@ -48,7 +49,9 @@ const styles = css`
       background: ${vars.colorDarkRed};
 
       img {
-        transform: translateX(0.125rem);
+        transform: translateX(
+          ${({ arrow }) => (arrow === 'right' ? '0.125rem' : '-0.125rem')}
+        );
         transition: transform 250ms ${vars.ease};
       }
     }
@@ -104,8 +107,14 @@ const IconWrapper = styled.div`
     arrow === 'left' ? vars.borderRadiusSmall : 0};
   border-bottom-left-radius: ${({ arrow }) =>
     arrow === 'left' ? vars.borderRadiusSmall : 0};
-  border-left: ${({ btn }) =>
-    btn === 'red' ? 'none' : `solid ${vars.pixel} ${vars.colorWhite}`};
+  border-left: ${({ btn, arrow }) =>
+    btn === 'red' || arrow !== 'right'
+      ? 'none'
+      : `solid ${vars.pixel} ${vars.colorWhite}`};
+  border-right: ${({ btn, arrow }) =>
+    btn === 'red' || arrow !== 'left'
+      ? 'none'
+      : `solid ${vars.pixel} ${vars.colorWhite}`};
   width: 3rem;
 
   img {
@@ -113,7 +122,9 @@ const IconWrapper = styled.div`
       arrow === 'right' ? 'rotateX(0)' : 'rotateX(180deg)'};
   }
 `
-
+// This component could use a refactor
+// Each style of button should be abstracted into its own component
+// so this component could just focus on doing the switch to show the correct button.
 const Button = ({
   elementType,
   buttonStyle,
@@ -125,20 +136,24 @@ const Button = ({
   switch (elementType) {
     case 'link':
       return (
-        <StyledLink className={`btn ${buttonStyle}`} to={href}>
+        <StyledLink
+          arrow={arrowDirection}
+          className={`btn ${buttonStyle}`}
+          to={href}
+        >
           {['red', 'outline'].includes(buttonStyle) ? (
             <>
               {arrowDirection === 'right' ? (
                 <>
                   <TextWrapper>{children}</TextWrapper>
                   <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
-                    <img src={arrowSrc} alt="" />
+                    <img src={arrowRightSrc} alt="" />
                   </IconWrapper>
                 </>
               ) : (
                 <>
                   <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
-                    <img src={arrowSrc} alt="" />
+                    <img src={arrowLeftSrc} alt="" />
                   </IconWrapper>
                   <TextWrapper>{children}</TextWrapper>
                 </>
@@ -160,7 +175,7 @@ const Button = ({
             <>
               <TextWrapper>{children}</TextWrapper>
               <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
-                <img src={arrowSrc} alt="" />
+                <img src={arrowRightSrc} alt="" />
               </IconWrapper>
             </>
           ) : (
