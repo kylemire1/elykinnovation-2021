@@ -34,6 +34,13 @@ module.exports = {
           previewRequestConcurrency: 2,
           perPage: 15,
         },
+        type: {
+          MediaItem: {
+            localFile: {
+              requestConcurrency: 5,
+            },
+          },
+        },
       },
     },
 
