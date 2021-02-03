@@ -1,13 +1,10 @@
-import React from 'react'
-import { Link, graphql } from 'gatsby'
-import Image from 'gatsby-image'
-import parse from 'html-react-parser'
+import React, { useState, useEffect } from 'react'
+import { graphql } from 'gatsby'
 
 // We're using Gutenberg so we need the block styles
 import '@wordpress/block-library/build-style/style.css'
 import '@wordpress/block-library/build-style/theme.css'
 
-import Bio from '../components/bio'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 
@@ -16,17 +13,27 @@ import LaunchAnnouncementPost from '../components/launch-announcement-post'
 import DevPagePost from '../components/dev-page-post'
 
 const BlogPostTemplate = ({ data: { previous, next, post } }) => {
-  const postType = post?.acfPostFields?.postType
-  const postTitle = post.title
-  const description =
-    post?.acfPostFields?.launchAnnouncementFields?.clientBlurb || ''
+  const [postData, setPostData] = useState(null)
+
+  useEffect(() => {
+    if (post && !postData) {
+      setPostData({
+        postType: post?.acfPostFields?.postType,
+        postTitle: post?.title,
+        postDescription: stripHtml(
+          post?.acfPostFields?.launchAnnouncementFields?.clientBlurb
+        ).replaceAll('\n', ''),
+      })
+    }
+  }, [post, postData])
+
   return (
     <Layout>
       <SEO
-        title={postTitle}
-        description={stripHtml(description).replaceAll('\n', '')}
+        title={postData?.postTitle}
+        description={postData?.postDescription}
       />
-      {post && postType === 'launch-announcement' ? (
+      {post && postData?.postType === 'launch-announcement' ? (
         <LaunchAnnouncementPost {...post} next={next} previous={previous} />
       ) : (
         <DevPagePost {...post} />
