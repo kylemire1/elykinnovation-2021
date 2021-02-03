@@ -29,6 +29,11 @@ module.exports = {
         url:
           process.env.WPGRAPHQL_URL ||
           `https://kyle.elykinnovation.com/graphql`,
+        schema: {
+          requestConcurrency: 5,
+          previewRequestConcurrency: 2,
+          perPage: 20,
+        },
       },
     },
 

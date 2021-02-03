@@ -32,7 +32,7 @@ const styles = css`
 
   &.red,
   &.outline {
-    display: inline-grid;
+    display: flex;
     grid-template-columns: 1fr 2.813em;
     transition: background 250ms ${vars.ease};
 
@@ -96,23 +96,53 @@ const IconWrapper = styled.div`
   justify-content: center;
   background-color: ${({ btn }) =>
     btn === 'red' ? vars.colorDarkRed : vars.colorGreenSmall};
-  border-top-right-radius: ${vars.borderRadiusSmall};
-  border-bottom-right-radius: ${vars.borderRadiusSmall};
+  border-top-right-radius: ${({ arrow }) =>
+    arrow === 'right' ? vars.borderRadiusSmall : 0};
+  border-bottom-right-radius: ${({ arrow }) =>
+    arrow === 'right' ? vars.borderRadiusSmall : 0};
+  border-top-left-radius: ${({ arrow }) =>
+    arrow === 'left' ? vars.borderRadiusSmall : 0};
+  border-bottom-left-radius: ${({ arrow }) =>
+    arrow === 'left' ? vars.borderRadiusSmall : 0};
   border-left: ${({ btn }) =>
     btn === 'red' ? 'none' : `solid ${vars.pixel} ${vars.colorWhite}`};
+  width: 3rem;
+
+  img {
+    transform: ${({ arrow }) =>
+      arrow === 'right' ? 'rotateX(0)' : 'rotateX(180deg)'};
+  }
 `
 
-const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {
+const Button = ({
+  elementType,
+  buttonStyle,
+  children,
+  href,
+  handleClick,
+  arrowDirection = 'right',
+}) => {
   switch (elementType) {
     case 'link':
       return (
         <StyledLink className={`btn ${buttonStyle}`} to={href}>
           {['red', 'outline'].includes(buttonStyle) ? (
             <>
-              <TextWrapper>{children}</TextWrapper>
-              <IconWrapper btn={buttonStyle}>
-                <img src={arrowSrc} alt="" />
-              </IconWrapper>
+              {arrowDirection === 'right' ? (
+                <>
+                  <TextWrapper>{children}</TextWrapper>
+                  <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
+                    <img src={arrowSrc} alt="" />
+                  </IconWrapper>
+                </>
+              ) : (
+                <>
+                  <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
+                    <img src={arrowSrc} alt="" />
+                  </IconWrapper>
+                  <TextWrapper>{children}</TextWrapper>
+                </>
+              )}
             </>
           ) : (
             <>{children}</>
@@ -129,7 +159,7 @@ const Button = ({ elementType, buttonStyle, children, href, handleClick }) => {
           {['red', 'outline'].includes(buttonStyle) ? (
             <>
               <TextWrapper>{children}</TextWrapper>
-              <IconWrapper btn={buttonStyle}>
+              <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
                 <img src={arrowSrc} alt="" />
               </IconWrapper>
             </>

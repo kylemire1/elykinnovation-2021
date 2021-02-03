@@ -2,6 +2,7 @@ import { graphql } from 'gatsby'
 import React from 'react'
 import styled from 'styled-components'
 import parse from 'html-react-parser'
+import { lighten } from 'polished'
 
 import { Container, Section, SectionHeading } from './styled/global'
 
@@ -38,6 +39,17 @@ const MottoHeading = styled(SectionHeading)`
 `
 
 const MottoContent = styled.div`
+  a {
+    color: ${lighten(0, vars.colorGreenSmall)};
+    transition: color 250ms ${vars.ease};
+
+    :hover,
+    :focus {
+      color: ${lighten(0.05, vars.colorGreenSmall)};
+      transition: color 250ms ${vars.ease};
+    }
+  }
+
   @media (min-width: ${vars.breakpointLarge}) {
     display: flex;
     align-items: center;
@@ -46,6 +58,8 @@ const MottoContent = styled.div`
     p {
       margin-bottom: 0;
       font-size: ${vars.fontSizeTextLarge};
+      color: ${({ bg }) =>
+        bg !== 'colorWhite' ? vars.colorWhite : vars.colorAlmostBlack};
     }
   }
 `
@@ -61,12 +75,18 @@ const Motto = ({
       <Container>
         <MottoWrapper>
           <MottoHeadingWrapper>
-            <MottoHeading>
+            <MottoHeading
+              color={
+                sectionBackgroundColor !== 'colorWhite'
+                  ? vars.colorWhite
+                  : vars.colorAlmostBlack
+              }
+            >
               <span className="green-subtext">{smallGreenHeadingText}</span>
               {mainHeadingText}
             </MottoHeading>
           </MottoHeadingWrapper>
-          <MottoContent>
+          <MottoContent bg={sectionBackgroundColor}>
             {paragraphContent && parse(paragraphContent)}
           </MottoContent>
         </MottoWrapper>
