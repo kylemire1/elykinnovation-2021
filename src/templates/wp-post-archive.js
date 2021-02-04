@@ -23,7 +23,7 @@ const PostGrid = styled.ol`
 
 const BlogIndex = ({
   data,
-  pageContext: { nextPagePath, previousPagePath, totalPages },
+  pageContext: { nextPagePath, previousPagePath, totalPages, currentPage },
 }) => {
   const posts = data.allWpPost.nodes
 
@@ -42,7 +42,6 @@ const BlogIndex = ({
       </Layout>
     )
   }
-  console.log({ totalPages, nextPagePath, previousPagePath })
   return (
     <Layout>
       <SEO title="All posts" />
@@ -60,6 +59,7 @@ const BlogIndex = ({
               totalPages={totalPages}
               next={nextPagePath}
               previous={previousPagePath}
+              currentPage={currentPage}
             />
           )}
         </Container>
