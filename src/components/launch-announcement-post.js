@@ -9,7 +9,7 @@ import { Section, Container, SoloHeading } from './styled/global'
 import Motto from './motto'
 
 import vars from '../vars'
-import Pagination from './pagination'
+import PostPagination from './post-pagination'
 
 const PostGrid = styled.div`
   display: grid;
@@ -134,7 +134,7 @@ const LaunchAnnouncementPost = ({
       </Section>
       <PaginationWrapper>
         <Container>
-          <Pagination next={next} previous={previous} />
+          <PostPagination next={next} previous={previous} />
         </Container>
       </PaginationWrapper>
       <Section bg="colorWhite">
@@ -194,7 +194,7 @@ const LaunchAnnouncementPost = ({
       <Section bg="colorGreen">
         <Container>
           <ClientBlurb>{clientBlurb && parse(clientBlurb)}</ClientBlurb>
-          <Pagination next={next} previous={previous} />
+          <PostPagination next={next} previous={previous} />
         </Container>
       </Section>
     </article>

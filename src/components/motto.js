@@ -12,7 +12,7 @@ const MottoWrapper = styled.div`
   display: grid;
 
   @media (min-width: ${vars.breakpointLarge}) {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1fr 1.6fr;
     gap: 1rem;
 
     > div:first-child {
@@ -32,6 +32,7 @@ const MottoHeadingWrapper = styled.div`
 const MottoHeading = styled(SectionHeading)`
   font-size: ${vars.fontSizeHeading4};
   margin-bottom: 1rem;
+  margin-right: 0.25rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
     font-size: ${vars.fontSizeHeading5};

@@ -42,7 +42,7 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
         path: post.uri,
 
         // use the blog post template as the page component
-        component: path.resolve(`./src/templates/blog-post.js`),
+        component: path.resolve(`./src/templates/wp-post.js`),
 
         // `context` is available in the template as a prop and
         // as a variable in GraphQL.
@@ -63,10 +63,24 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
 /**
  * This function creates pages in Gatsby from the pages defined in the Wordpress admin area
  */
-const createWordpressPages = async ({ pages, gatsbyUtilities }) =>
-  Promise.all(
-    pages.map(({ page }) =>
-      gatsbyUtilities.actions.createPage({
+const createWordpressPages = async ({ pages, gatsbyUtilities }) => {
+  const graphqlResult = await gatsbyUtilities.graphql(`
+    {
+      wpPage(isPostsPage: {eq: true}) {
+        uri
+      }
+    }
+  `)
+
+  const postsPageUri = graphqlResult.data.wpPage.uri
+
+  return Promise.all(
+    pages.map(({ page }) => {
+      if (page.uri === postsPageUri) {
+        return null
+      }
+
+      return gatsbyUtilities.actions.createPage({
         // Use the WordPress uri as the Gatsby page path
         path: page.uri,
 
@@ -82,8 +96,9 @@ const createWordpressPages = async ({ pages, gatsbyUtilities }) =>
           id: page.id,
         },
       })
-    )
+    })
   )
+}
 
 /**
  * This function creates all the individual blog pages in this site
@@ -96,10 +111,14 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           postsPerPage
         }
       }
+      wpPage(isPostsPage: {eq: true}) {
+        uri
+      }
     }
   `)
 
   const { postsPerPage } = graphqlResult.data.wp.readingSettings
+  const postsPageUri = graphqlResult.data.wpPage.uri
 
   const postsChunkedIntoArchivePages = chunk(posts, postsPerPage)
   const totalPages = postsChunkedIntoArchivePages.length
@@ -109,8 +128,10 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
       const pageNumber = index + 1
 
       const getPagePath = page => {
-        if (page > 0 && page <= totalPages) {
-          return `/blog/${page}`
+        if (page === 1 && page <= totalPages) {
+          return `${postsPageUri}`
+        } else if (page > 1 && page <= totalPages) {
+          return `${postsPageUri}page/${page}`
         }
 
         return null
@@ -122,7 +143,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
         path: getPagePath(pageNumber),
 
         // use the blog post archive template as the page component
-        component: path.resolve(`./src/templates/blog-post-archive.js`),
+        component: path.resolve(`./src/templates/wp-post-archive.js`),
 
         // context is available in the template as a prop and
         // as a variable in GraphQL.
@@ -135,6 +156,7 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           // We need to tell the template how many posts to display too
           postsPerPage,
 
+          totalPages,
           nextPagePath: getPagePath(pageNumber + 1),
           previousPagePath: getPagePath(pageNumber - 1),
         },

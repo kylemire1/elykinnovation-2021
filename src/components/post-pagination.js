@@ -16,7 +16,7 @@ const PaginationButtons = styled.div`
   }
 `
 
-const Pagination = ({ next, previous }) => {
+const PostPagination = ({ next, previous }) => {
   const nextClientName =
     next?.acfPostFields?.launchAnnouncementFields?.clientName
   const previousClientName =
@@ -58,4 +58,4 @@ const Pagination = ({ next, previous }) => {
   )
 }
 
-export default Pagination
+export default PostPagination
