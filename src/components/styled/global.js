@@ -38,9 +38,11 @@ export const SectionHeading = styled.h2`
     bg === 'colorWhite' ? vars.colorBlack : vars.colorWhite};
   text-transform: capitalize;
   max-width: 54rem;
+  font-weight: ${vars.fontWeightBolder};
 
   span {
     font-size: 1.125rem;
+    font-weight: ${vars.fontWeightBold};
     display: block;
     color: ${({ bg }) =>
       bg === 'colorWhite' ? vars.colorGreen : vars.colorGreenSmall};

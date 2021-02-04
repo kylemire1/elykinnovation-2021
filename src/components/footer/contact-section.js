@@ -72,13 +72,8 @@ const ContactInfo = styled.div`
 const FooterHeading = styled(SectionHeading)`
   color: ${vars.colorBlack};
   font-size: ${vars.fontSizeHeading4};
-  font-weight: ${vars.fontWeightBolder};
   margin-bottom: 0;
   text-transform: capitalize;
-
-  span {
-    font-weight: ${vars.fontWeightBold};
-  }
 `
 
 const ContactGrid = styled.div`

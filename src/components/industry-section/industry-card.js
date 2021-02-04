@@ -40,6 +40,7 @@ const CardText = styled.div`
   p {
     font-size: ${vars.fontSizeHeading1};
     text-align: center;
+    font-weight: ${vars.fontWeightBold};
     color: ${vars.colorWhite};
     margin-bottom: 0;
     text-shadow: 2px 2px 7px rgba(0, 0, 0, 1);
@@ -71,7 +72,10 @@ const IndustryCard = ({
   const cardImage = featuredClientImage?.localFile?.childImageSharp?.fluid
   return (
     <StyledCard>
-      <Link to={featuredClientLink}>
+      <Link
+        aria-label={`Featured ${industryName} client ${featuredClientName}`}
+        to={featuredClientLink}
+      >
         <ImageWrapper>
           <CardText>
             <p>{industryName}</p>

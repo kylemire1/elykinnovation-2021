@@ -87,25 +87,24 @@ const ArchivePagination = ({ next, previous, totalPages, currentPage }) => {
           */}
           {Array.from({ length: totalPages }).map((_, pageIndex) => {
             const currPageNumber = pageIndex + 1
-            if (currPageNumber <= totalPages) {
-              let linkHref = postsPageUri
-              if (currPageNumber !== 1) {
-                linkHref = `${linkHref}page/${currPageNumber}`
-              }
-              return (
-                <li
-                  key={`archive_pagination_index_${pageIndex}`}
-                  className={currPageNumber === currentPage ? 'current' : ''}
-                >
-                  <Link
-                    to={linkHref}
-                    aria-label={`Go to page ${currPageNumber}`}
-                  >
-                    {currPageNumber}
-                  </Link>
-                </li>
-              )
+            if (currPageNumber > totalPages) {
+              return null
             }
+
+            let linkHref = postsPageUri
+            if (currPageNumber !== 1) {
+              linkHref = `${linkHref}page/${currPageNumber}`
+            }
+            return (
+              <li
+                key={`archive_pagination_index_${pageIndex}`}
+                className={currPageNumber === currentPage ? 'current' : ''}
+              >
+                <Link to={linkHref} aria-label={`Go to page ${currPageNumber}`}>
+                  {currPageNumber}
+                </Link>
+              </li>
+            )
           })}
         </PageNumberList>
       </div>

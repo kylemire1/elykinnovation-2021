@@ -20,7 +20,7 @@ module.exports = {
        * to your WordPress site.
        *
        * visit the plugin docs to learn more
-       * https://github.com/gatsbyjs/gatsby-source-wordpress-experimental/blob/master/README.md
+       * https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-wordpress
        *
        */
       resolve: `gatsby-source-wordpress`,
@@ -29,6 +29,8 @@ module.exports = {
         url:
           process.env.WPGRAPHQL_URL ||
           `https://kyle.elykinnovation.com/graphql`,
+        // these options slow down the bulld process,
+        // but are helpful if your graphql server is getting overloaded while building
         schema: {
           requestConcurrency: 5,
           previewRequestConcurrency: 2,
@@ -82,12 +84,6 @@ module.exports = {
 
     // See https://www.gatsbyjs.com/plugins/gatsby-plugin-react-helmet/?=gatsby-plugin-react-helmet
     `gatsby-plugin-react-helmet`,
-
-    /**
-     * this (optional) plugin enables Progressive Web App + Offline functionality
-     * To learn more, visit: https://gatsby.dev/offline
-     */
-    // `gatsby-plugin-offline`,
 
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-sass`,

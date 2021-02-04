@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
@@ -21,7 +21,7 @@ const PostGrid = styled.ol`
   }
 `
 
-const BlogIndex = ({
+const WpPostArchive = ({
   data,
   pageContext: { nextPagePath, previousPagePath, totalPages, currentPage },
 }) => {
@@ -68,7 +68,7 @@ const BlogIndex = ({
   )
 }
 
-export default BlogIndex
+export default WpPostArchive
 
 export const pageQuery = graphql`
   query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {

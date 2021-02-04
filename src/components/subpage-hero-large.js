@@ -11,6 +11,7 @@ import heroBgSrc from '../../content/assets/portfolio-bg-pattern.svg'
 
 const StyledHero = styled.section`
   min-height: 42.5rem;
+  background-color: ${vars.colorAlmostBlack};
 
   @media (min-width: ${vars.breakpointLarge}) {
     background-image: url(${heroBgSrc});
