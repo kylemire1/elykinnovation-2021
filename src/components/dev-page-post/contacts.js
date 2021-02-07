@@ -26,7 +26,8 @@ const Contacts = ({ contacts, projectManager }) => {
     <>
       <DevPageHeading>Contact Information</DevPageHeading>
       <ContactRow>
-        {contacts.length > 0 &&
+        {contacts &&
+          contacts.length > 0 &&
           contacts.map(contact => <Contact key={contact.name} {...contact} />)}
         {projectManager.length > 0 &&
           projectManager.map((manager, managerIndex) => (

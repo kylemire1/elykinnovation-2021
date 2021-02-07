@@ -16,7 +16,8 @@ const Designs = ({
   return (
     <>
       <DevPageHeading>Designs</DevPageHeading>
-      {designs.length > 0 &&
+      {designs &&
+        designs.length > 0 &&
         designs.map((design, designIndex) => (
           <DevPageRound
             key={`design_${design.title}_${designIndex}`}

@@ -16,7 +16,8 @@ const Wireframes = ({
   return (
     <>
       <DevPageHeading>Wireframes</DevPageHeading>
-      {wireframes.length > 0 &&
+      {wireframes &&
+        wireframes.length > 0 &&
         wireframes.map((wireframe, wireframeIndex) => (
           <DevPageRound
             key={`wireframe_${wireframe.title}_${wireframeIndex}`}

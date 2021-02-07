@@ -34,7 +34,8 @@ const Content = ({
     <>
       <DevPageHeading>Content</DevPageHeading>
       <ContentUploadWrapper>
-        {contentUploads.length > 0 &&
+        {contentUploads &&
+          contentUploads.length > 0 &&
           contentUploads.map((contentUpload, uploadIndex) => (
             <a
               key={`${contentUpload?.name}_${uploadIndex}`}
