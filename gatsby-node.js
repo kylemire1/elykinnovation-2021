@@ -31,8 +31,8 @@ exports.createPages = async gatsbyUtilities => {
 /**
  * This function creates all the individual blog pages in this site
  */
-const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
-  Promise.all(
+const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) => {
+  return Promise.all(
     posts.map(({ previous, post, next }) =>
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
@@ -41,8 +41,11 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
         // This is a good idea so that internal links and menus work 👍
         path: post.uri,
 
-        // use the blog post template as the page component
-        component: path.resolve(`./src/templates/wp-post.js`),
+        // use the appropriate post template as the page component
+        component:
+          post.acfPostFields.postType === 'launch-announcement'
+            ? path.resolve(`./src/templates/wp-launch-announcement-post.js`)
+            : path.resolve(`./src/templates/wp-dev-post.js`),
 
         // `context` is available in the template as a prop and
         // as a variable in GraphQL.
@@ -53,12 +56,22 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) =>
           id: post.id,
 
           // We also use the next and previous id's to query them and add links!
-          previousPostId: next ? next.id : null,
-          nextPostId: previous ? previous.id : null,
+          // We're re-assigning graphql's built-in 'next' to previous and vice-versa because it makes more
+          // visual sense in our UI this way.
+          previousPostId:
+            next && next.acfPostFields.postType === post.acfPostFields.postType
+              ? next.id
+              : null,
+          nextPostId:
+            previous &&
+            previous.acfPostFields.postType === post.acfPostFields.postType
+              ? previous.id
+              : null,
         },
       })
     )
   )
+}
 
 /**
  * This function creates pages in Gatsby from the pages defined in the Wordpress admin area
@@ -181,6 +194,9 @@ async function getPosts({ graphql, reporter }) {
         edges {
           previous {
             id
+            acfPostFields {
+              postType
+            }
           }
 
           # note: this is a GraphQL alias. It renames "node" to "post" for this query
@@ -188,10 +204,16 @@ async function getPosts({ graphql, reporter }) {
           post: node {
             id
             uri
+            acfPostFields {
+              postType
+            }
           }
 
           next {
             id
+            acfPostFields {
+              postType
+            }
           }
         }
       }

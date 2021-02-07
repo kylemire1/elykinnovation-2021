@@ -6,7 +6,6 @@ import SEO from '../components/seo'
 
 import stripHtml from '../utils/stripHtml'
 import LaunchAnnouncementPost from '../components/launch-announcement-post'
-import DevPagePost from '../components/dev-page-post'
 
 const BlogPostTemplate = ({ data: { previous, next, post } }) => {
   const [postData, setPostData] = useState(null)
@@ -14,7 +13,6 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
   useEffect(() => {
     if (post && !postData) {
       setPostData({
-        postType: post?.acfPostFields?.postType,
         postTitle: post?.title,
         postDescription: stripHtml(
           post?.acfPostFields?.launchAnnouncementFields?.clientBlurb
@@ -29,10 +27,8 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         title={postData?.postTitle}
         description={postData?.postDescription}
       />
-      {post && postData?.postType === 'launch-announcement' ? (
+      {post && (
         <LaunchAnnouncementPost {...post} next={next} previous={previous} />
-      ) : (
-        <DevPagePost {...post} />
       )}
     </Layout>
   )
@@ -41,7 +37,7 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
 export default BlogPostTemplate
 
 export const pageQuery = graphql`
-  query BlogPostById(
+  query LaunchAnnouncementById(
     # these variables are passed in via createPage.pageContext in gatsby-node.js
     $id: String!
     $previousPostId: String
@@ -52,7 +48,6 @@ export const pageQuery = graphql`
       id
       title
       acfPostFields {
-        postType
         launchAnnouncementFields {
           clientBlurb
           clientName
@@ -83,9 +78,6 @@ export const pageQuery = graphql`
               }
             }
           }
-        }
-        devPageFields {
-          projectName
         }
       }
     }

@@ -117,3 +117,7 @@ export const FormControl = styled.div`
     }
   }
 `
+export const Hr = styled.hr`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+`
