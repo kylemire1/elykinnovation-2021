@@ -35,8 +35,8 @@ body {
       }
     }
     .check li {
-      background-image: url('../content/assets/check-bullet.svg');
-      background-position: top 0.25em left;
+      background-image: url('../content/assets/check-bullet.svg') !important;
+      background-position: top 0.25em left !important;
     }
   }
 
