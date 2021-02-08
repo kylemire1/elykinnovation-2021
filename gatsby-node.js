@@ -3,7 +3,7 @@ const chunk = require(`lodash/chunk`)
 
 // This is a simple debugging tool
 // dd() will prettily dump to the terminal and kill the process
-// const { dd } = require(`dumper.js`)
+const { dd } = require(`dumper.js`)
 
 /**
  * exports.createPages is a built-in Gatsby Node API.
@@ -82,13 +82,35 @@ const createWordpressPages = async ({ pages, gatsbyUtilities }) => {
       wpPage(isPostsPage: {eq: true}) {
         uri
       }
+      primaryMenu: allWpMenu(filter: {slug: {eq: "primary-menu"}}) {
+        nodes {
+          slug
+          menuItems {
+            nodes {
+              connectedNode {
+                node {
+                  ... on WpPage {
+                    databaseId
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   `)
 
   const postsPageUri = graphqlResult.data.wpPage.uri
+  const primaryMenuPageIds = graphqlResult.data.primaryMenu.nodes.map(node =>
+    node.menuItems.nodes.map(node => node.connectedNode.node.databaseId)
+  )[0]
 
   return Promise.all(
     pages.map(({ page }) => {
+      const isPrimaryPage =
+        primaryMenuPageIds.includes(page.databaseId) || page.uri === '/'
+
       if (page.uri === postsPageUri) {
         return null
       }
@@ -107,6 +129,7 @@ const createWordpressPages = async ({ pages, gatsbyUtilities }) => {
           // so our blog post template knows which blog post
           // the current page is (when you open it in a browser)
           id: page.id,
+          isPrimaryPage,
         },
       })
     })
@@ -247,6 +270,7 @@ async function getPages({ graphql, reporter }) {
           page: node {
             uri
             id
+            databaseId
           }
         }
       }

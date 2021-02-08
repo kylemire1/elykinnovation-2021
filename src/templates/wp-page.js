@@ -21,13 +21,19 @@ import PortfolioCategory from '../components/portfolio-category'
 import PortfolioMenu from '../components/portfolio-menu'
 import ContactUsLayout from '../components/contact-us-layout'
 
-const WpPageTemplate = ({ data }) => {
+const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
   const isHomePage = data.page.isFrontPage
   const currentPageSlug = data.page.slug
+  const seoData = data.page.seo
 
   return (
-    <Layout isHomePage={isHomePage} currentPageSlug={currentPageSlug}>
+    <Layout
+      seoData={seoData}
+      isHomePage={isHomePage}
+      isPrimaryPage={pageContext.isPrimaryPage}
+      currentPageSlug={currentPageSlug}
+    >
       {layoutSections &&
         layoutSections.map((section, sectionIndex) => {
           switch (section.fieldGroupName) {
@@ -172,6 +178,10 @@ export const pageQuery = graphql`
     $id: String!
   ) {
     page: wpPage(id: { eq: $id }) {
+      seo {
+        title
+        metaDesc
+      }
       slug
       id
       isFrontPage

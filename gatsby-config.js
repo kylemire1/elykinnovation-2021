@@ -7,6 +7,9 @@
  */
 
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://www.elykinnovation.com/`,
+  },
   /**
    * Adding plugins to this array adds them to your Gatsby site.
    *
@@ -100,5 +103,6 @@ module.exports = {
     },
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-polished`,
+    `gatsby-plugin-sitemap`,
   ],
 }

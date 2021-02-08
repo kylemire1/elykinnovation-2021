@@ -13,7 +13,8 @@ const StyledPostItem = styled.li`
   border-color: ${rgba(vars.colorGreen, 0)};
   border-radius: ${vars.borderRadiusLarge};
   transition: border-color 250ms ${vars.ease};
-  padding: 1.5em 2em;
+  padding: 2em;
+  background-image: none !important;
 
   a {
     color: currentColor;
@@ -30,6 +31,7 @@ const StyledPostItem = styled.li`
 const PostHeader = styled.header`
   h2 {
     color: ${vars.colorGreen};
+    font-size: ${vars.fontSizeHeading1};
   }
 `
 const PostExcerpt = styled.div`

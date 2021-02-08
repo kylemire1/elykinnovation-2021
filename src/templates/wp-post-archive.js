@@ -4,8 +4,8 @@ import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
-import SubpageHeroSmall from '../components/subpage-hero-small'
 import PostItem from '../components/post-item'
+import SubpageHeroSmall from '../components/subpage-hero-small'
 import { Section, Container } from '../components/styled/global'
 
 import vars from '../vars'
@@ -30,7 +30,10 @@ const WpPostArchive = ({
   if (!posts.length) {
     return (
       <Layout>
-        <SEO title="All posts" />
+        <SEO
+          title={data?.wpPage?.seo?.title}
+          description={data?.wpPage?.seo?.metaDesc}
+        />
         <Section>
           <Container>
             <p>
@@ -44,7 +47,10 @@ const WpPostArchive = ({
   }
   return (
     <Layout>
-      <SEO title="All posts" />
+      <SEO
+        title={data?.wpPage?.seo?.title}
+        description={data?.wpPage?.seo?.metaDesc}
+      />
       <SubpageHeroSmall headingText="Launch Pad" />
       <Section bg="colorWhite">
         <Container>
@@ -87,6 +93,12 @@ export const pageQuery = graphql`
         uri
         date(formatString: "MMMM DD, YYYY")
         title
+      }
+    }
+    wpPage(isPostsPage: { eq: true }) {
+      seo {
+        title
+        metaDesc
       }
     }
   }

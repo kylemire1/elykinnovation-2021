@@ -15,9 +15,13 @@ const SEO = ({ description, lang, meta, title }) => {
     graphql`
       query {
         wp {
-          generalSettings {
-            title
-            description
+          seo {
+            contentTypes {
+              page {
+                metaDesc
+                title
+              }
+            }
           }
         }
 
@@ -29,16 +33,15 @@ const SEO = ({ description, lang, meta, title }) => {
     `
   )
 
-  const metaDescription = description || wp.generalSettings?.description
-  const defaultTitle = wp.generalSettings?.title
+  const metaDescription = description || wp?.seo?.contentTypes?.page?.metaDesc
+  const seoTitle = title || wp?.seo?.contentTypes?.page?.title
 
   return (
     <Helmet
       htmlAttributes={{
         lang,
       }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
+      title={seoTitle}
       meta={[
         {
           name: `description`,
@@ -46,7 +49,7 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           property: `og:title`,
-          content: title,
+          content: seoTitle,
         },
         {
           property: `og:description`,
@@ -66,7 +69,7 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: seoTitle,
         },
         {
           name: `twitter:description`,
