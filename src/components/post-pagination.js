@@ -10,6 +10,7 @@ const PaginationButtons = styled.div`
   flex-direction: column;
   align-items: center;
   color: ${vars.colorWhite};
+  min-height: 3rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
     flex-direction: row;

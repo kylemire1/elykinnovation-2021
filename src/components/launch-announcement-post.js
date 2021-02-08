@@ -71,6 +71,7 @@ const MockupWrapper = styled.div`
 
 const PaginationWrapper = styled.section`
   background-color: ${vars.colorGreen};
+  color: ${vars.colorWhite};
   padding: 1rem 0;
 `
 
@@ -93,6 +94,10 @@ const ClientBlurb = styled.div`
       transition: color 250ms ${vars.ease};
     }
   }
+`
+
+const StyledSection = styled(Section)`
+  color: ${vars.colorWhite};
 `
 
 const LaunchAnnouncementPost = ({
@@ -192,12 +197,12 @@ const LaunchAnnouncementPost = ({
           </PostGrid>
         </Container>
       </Section>
-      <Section bg="colorGreen">
+      <StyledSection bg="colorGreen">
         <Container>
           <ClientBlurb>{clientBlurb && parse(clientBlurb)}</ClientBlurb>
           <PostPagination next={next} previous={previous} />
         </Container>
-      </Section>
+      </StyledSection>
     </article>
   )
 }
