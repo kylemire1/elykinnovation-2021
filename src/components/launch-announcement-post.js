@@ -79,6 +79,7 @@ const ClientBlurb = styled.div`
     font-size: ${vars.fontSizeHeading1};
     font-weight: ${vars.fontWeightBolder};
     line-height: 1.5;
+    color: ${vars.colorWhite};
   }
 
   a {

@@ -19,6 +19,10 @@ export const Section = styled.section`
   padding: ${({ angled }) => (angled ? '7em 0 2em' : '2rem 0')};
   clip-path: ${({ angled }) =>
     angled ? 'polygon(0% 0%, 50% 3%, 100% 0%, 100% 100%, 0% 100%)' : 'none'};
+  color: ${({ bg }) =>
+    bg !== 'colorWite' && bg !== 'colorPureWhite'
+      ? vars.colorWhite
+      : vars.colorAlmostBlack};
 
   @media (min-width: ${vars.breakpointLarge}) {
     background-image: ${({ graphic }) =>
