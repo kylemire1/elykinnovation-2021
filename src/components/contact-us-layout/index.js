@@ -6,7 +6,6 @@ import { Section, Container, SoloHeading } from '../styled/global'
 
 import vars from '../../vars'
 import ContactItem from './contact-item'
-import ContactForm from './contact-form'
 
 const CONTACT_WIDTH = '50rem'
 
@@ -31,6 +30,9 @@ const IntroText = styled(SoloHeading)`
   text-align: center;
   color: ${vars.colorWhite};
 `
+const IntroSubText = styled.p`
+  color: ${vars.colorWhite};
+`
 
 const ContactGrid = styled.div`
   display: grid;
@@ -38,7 +40,7 @@ const ContactGrid = styled.div`
   align-items: start;
   justify-items: center;
   max-width: 75%;
-  margin-bottom: 2rem;
+  margin-bottom: -2rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
     grid-template-columns: repeat(2, 1fr);
@@ -77,7 +79,7 @@ const ContactUsLayout = ({
         <IntroWrapper>
           <IntroContainer>
             <IntroText>{introHeading}</IntroText>
-            <p>{introText}</p>
+            <IntroSubText>{introText}</IntroSubText>
             <ContactGrid>
               <ContactItem
                 contactType="address"
@@ -98,11 +100,6 @@ const ContactUsLayout = ({
             </ContactGrid>
           </IntroContainer>
         </IntroWrapper>
-        <FormWrapper>
-          <FormContainer>
-            <ContactForm />
-          </FormContainer>
-        </FormWrapper>
       </Container>
     </Section>
   )

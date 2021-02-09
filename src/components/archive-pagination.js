@@ -69,7 +69,7 @@ const ArchivePagination = ({ next, previous, totalPages, currentPage }) => {
     }
   `)
   const postsPageUri = result?.wpPage?.uri
-  console.log({ postsPageUri })
+
   return (
     <PaginationRow>
       <LinkWrapper>

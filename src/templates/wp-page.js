@@ -20,6 +20,7 @@ import FaqSection from '../components/faq-section'
 import PortfolioCategory from '../components/portfolio-category'
 import PortfolioMenu from '../components/portfolio-menu'
 import ContactUsLayout from '../components/contact-us-layout'
+import ContactForm from '../components/contact-form'
 
 const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
@@ -162,6 +163,11 @@ const WpPageTemplate = ({ data, pageContext }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_ContactForm':
+              return (
+                <ContactForm key={`ContactForm_${sectionIndex}`} {...section} />
+              )
+
             default:
               return null
           }
@@ -207,6 +213,7 @@ export const pageQuery = graphql`
           ...PortfolioCategory
           ...PortfolioMenu
           ...ContactUsLayout
+          ...ContactForm
         }
       }
     }

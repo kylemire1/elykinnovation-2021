@@ -79,6 +79,7 @@ export const SoloHeading = styled.h2`
 export const FormControl = styled.div`
   display: block;
   height: 100%;
+  margin-bottom: 1.5rem;
 
   label,
   input,
@@ -108,13 +109,6 @@ export const FormControl = styled.div`
   textarea {
     height: 10rem;
     padding: 0.5em;
-    @media (min-width: ${vars.breakpointLarge}) {
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: ${({ $height }) => `calc(100% - ${$height}px - .5rem)`};
-    }
   }
 `
 export const Hr = styled.hr`
