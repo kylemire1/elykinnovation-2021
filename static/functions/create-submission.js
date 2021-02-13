@@ -1,10 +1,9 @@
 // This is a Netlify function. There is more configuration involved than just this file to get this working!
 // See the Gatsby docs here for how to set it up: https://support.gatsbyjs.com/hc/en-us/articles/360054529274-Deploying-Netlify-Functions-from-Gatsby-Cloud
 // To learn how to set things up on the WordPress side, watch this video: https://www.youtube.com/watch?v=ZRQ94PMNEcg
-
 import fetch from 'node-fetch'
 
-export async function handler(event) {
+exports.handler = async function (event) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
