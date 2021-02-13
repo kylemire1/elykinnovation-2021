@@ -47,20 +47,6 @@ const ContactGrid = styled.div`
   }
 `
 
-const FormWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
-
-const FormContainer = styled.div`
-  width: 100%;
-  max-width: ${CONTACT_WIDTH};
-  padding: 2em;
-  border-radius: ${vars.borderRadiusLarge};
-  background-color: ${vars.colorWhite};
-`
-
 const ContactUsLayout = ({
   addressLine1,
   addressLine2,

@@ -96,7 +96,6 @@ export const FormControl = styled.div`
   input {
     height: 2.5rem;
     padding: 0.5em;
-    font-size: ${vars.fontSizeText};
   }
 
   input,
@@ -104,6 +103,7 @@ export const FormControl = styled.div`
   select {
     border: solid ${vars.pixel} ${vars.colorGreenSmall};
     border-radius: ${vars.borderRadiusSmall};
+    font-size: ${vars.fontSizeText};
   }
 
   textarea {
@@ -114,4 +114,26 @@ export const FormControl = styled.div`
 export const Hr = styled.hr`
   margin-top: 2rem;
   margin-bottom: 2rem;
+`
+
+export const ErrorMessage = styled.div`
+  padding: 1em;
+  background-color: ${vars.colorRed};
+  color: ${vars.colorWhite};
+  border-radius: ${vars.borderRadiusSmall};
+  margin: 1em 0;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: currentColor;
+    text-decoration: underline !important;
+  }
+`
+
+export const SuccessMessage = styled(ErrorMessage)`
+  background-color: ${vars.colorTransparent};
+  border: solid ${vars.pixel} ${vars.colorGreenSmall};
 `

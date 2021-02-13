@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
-import { Mutation } from 'react-apollo'
-import gql from 'graphql-tag'
+import parse from 'html-react-parser'
+import Loader from 'react-loader-spinner'
 
 import Input from './input'
 import Textarea from './textarea'
-import { Section, Container } from '../styled/global'
+import { Section, Container, ErrorMessage, SoloHeading } from '../styled/global'
 
 import vars from '../../vars'
 import Select from './select'
@@ -39,53 +39,43 @@ const SubmitButton = styled.button`
   padding: 1em 4em;
   cursor: pointer;
   width: 100%;
+  height: 4rem;
   font-size: ${vars.fontSizeText};
 
   @media (min-width: ${vars.breakpointLarge}) {
-    width: auto;
+    max-width: 20rem;
   }
 `
 
-const CONTACT_MUTATION = gql`
-  mutation CreateSubmissionMutation(
-    $clientMutationId: String!
-    $name: String!
-    $email: String!
-    $phone: String
-    $interest: String!
-    $message: String!
-  ) {
-    createSubmission(
-      input: {
-        clientMutationId: $clientMutationId
-        name: $name
-        email: $email
-        phone: $phone
-        interest: $interest
-        message: $message
-      }
-    ) {
-      success
-      data
-    }
-  }
+const ThankYou = styled.div`
+  padding: 2em;
 `
 
 const INITIAL_STATE = {
   name: '',
   phone: '',
   email: '',
-  interest: '',
+  interest: 'Not Sure',
   message: '',
 }
 
 const ContactForm = ({
   sectionBackgroundColor,
   formFields,
-  recipientEmail,
   submitButtonText,
 }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [submittedSuccess, setSubmittedSuccess] = useState(false)
   const [formValues, setFormValues] = useState(INITIAL_STATE)
+  const formRef = useRef()
+
+  useEffect(() => {
+    setSubmittedSuccess(false)
+    setError(false)
+    setIsLoading(false)
+    setFormValues(INITIAL_STATE)
+  }, [])
 
   const handleChange = e => {
     const { name, value } = e.currentTarget
@@ -93,74 +83,111 @@ const ContactForm = ({
       ...formValues,
       [name]: value,
     })
+    setError(null)
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    setIsLoading(true)
+    setSubmittedSuccess(false)
+    try {
+      const submissionResponse = await fetch(
+        '/.netlify/functions/create-submission',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ...formValues }),
+        }
+      )
+      const submissionData = await submissionResponse.json()
+
+      if (!submissionData?.data?.createSubmission.success) {
+        throw new Error('Submission Failed')
+      }
+
+      setFormValues(INITIAL_STATE)
+      formRef.current.reset()
+      setIsLoading(false)
+      setSubmittedSuccess(true)
+    } catch (err) {
+      setIsLoading(false)
+      setError(
+        `There was a problem submitting your message. Please try again or call <a href="tel:+19049981935">904.998.1935</a>
+        `
+      )
+    }
   }
 
   return (
     <Section bg={sectionBackgroundColor}>
       <Container>
-        <Mutation mutation={CONTACT_MUTATION}>
-          {(createSubmission, { loading, error, data }) =>
-            console.log({ loading, error, data }) || (
-              <StyledForm
-                bg="colorWhite"
-                onSubmit={async event => {
-                  event.preventDefault()
-                  createSubmission({
-                    variables: {
-                      clientMutationId: 'example123',
-                      name: formValues.name,
-                      email: formValues.email,
-                      phone: formValues.phone,
-                      interest: formValues.interest,
-                      message: formValues.message,
-                    },
-                  })
-                }}
-              >
-                {formFields &&
-                  formFields.length > 0 &&
-                  formFields.map((field, fieldIndex) => {
-                    switch (field.fieldGroupName) {
-                      case 'page_Layoutsections_Components_ContactForm_FormFields_Input':
-                        return (
-                          <Input
-                            key={`ContactForm_${field}_${fieldIndex}`}
-                            {...field}
-                            formValues={formValues}
-                            handleChange={handleChange}
-                          />
-                        )
-                      case 'page_Layoutsections_Components_ContactForm_FormFields_Textarea':
-                        return (
-                          <Textarea
-                            key={`ContactForm_${field}_${fieldIndex}`}
-                            {...field}
-                            formValues={formValues}
-                            handleChange={handleChange}
-                          />
-                        )
-                      case 'page_Layoutsections_Components_ContactForm_FormFields_Select':
-                        return (
-                          <Select
-                            key={`ContactForm_${field}_${fieldIndex}`}
-                            {...field}
-                            formValues={formValues}
-                            handleChange={handleChange}
-                          />
-                        )
-                      default:
-                        return (
-                          <div key={`Contactform_Default_${fieldIndex}`}>
-                            Default
-                          </div>
-                        )
-                    }
-                  })}
-                <SubmitButton>{submitButtonText}</SubmitButton>
-              </StyledForm>
-            )
-          }
-        </Mutation>
+        <StyledForm ref={formRef} bg="colorWhite">
+          {!submittedSuccess &&
+            formFields &&
+            formFields.length > 0 &&
+            formFields.map((field, fieldIndex) => {
+              switch (field.fieldGroupName) {
+                case 'page_Layoutsections_Components_ContactForm_FormFields_Input':
+                  return (
+                    <Input
+                      key={`ContactForm_${field}_${fieldIndex}`}
+                      {...field}
+                      formValues={formValues}
+                      handleChange={handleChange}
+                    />
+                  )
+                case 'page_Layoutsections_Components_ContactForm_FormFields_Textarea':
+                  return (
+                    <Textarea
+                      key={`ContactForm_${field}_${fieldIndex}`}
+                      {...field}
+                      formValues={formValues}
+                      handleChange={handleChange}
+                    />
+                  )
+                case 'page_Layoutsections_Components_ContactForm_FormFields_Select':
+                  return (
+                    <Select
+                      key={`ContactForm_${field}_${fieldIndex}`}
+                      {...field}
+                      formValues={formValues}
+                      handleChange={handleChange}
+                    />
+                  )
+                default:
+                  return (
+                    <div key={`Contactform_Default_${fieldIndex}`}>Default</div>
+                  )
+              }
+            })}
+          {error && (
+            <ErrorMessage>
+              <p>{parse(error)}</p>
+            </ErrorMessage>
+          )}
+          {submittedSuccess && (
+            <ThankYou>
+              <SoloHeading color={vars.colorAlmostBlack}>Thank You</SoloHeading>
+              We've received your message and will be in touch shortly!
+            </ThankYou>
+          )}
+          {!submittedSuccess && (
+            <SubmitButton onClick={handleSubmit}>
+              {!isLoading ? (
+                submitButtonText
+              ) : (
+                <Loader
+                  type="Oval"
+                  color={vars.colorWhite}
+                  height={30}
+                  width={30}
+                />
+              )}
+            </SubmitButton>
+          )}
+        </StyledForm>
       </Container>
     </Section>
   )
