@@ -67,11 +67,11 @@
   },
   "scripts": {
     "build": "gatsby build",
-    "develop": "GATSBY_ENV=development gatsby develop",
+    "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "GATSBY_ENV=development gatsby develop",
+    "start": "gatsby develop",
     "serve": "gatsby serve",
-    "clean": "gatsby clean && GATSBY_ENV=development gatsby develop",
+    "clean": "gatsby clean && gatsby develop",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "lambda": "netlify-lambda build ./static/functions"
   }
