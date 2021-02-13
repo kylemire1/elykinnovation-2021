@@ -41,7 +41,7 @@ exports.handler = async function (event) {
     .then(result => result.data)
     .catch(err => {
       return {
-        statusCode: 401,
+        statusCode: 200,
         body: JSON.stringify({
           error: err,
           message:
@@ -92,7 +92,7 @@ exports.handler = async function (event) {
     .then(result => result)
     .catch(err => {
       return {
-        statusCode: 401,
+        statusCode: 200,
         headers,
         body: JSON.stringify({
           error: err,
@@ -104,7 +104,7 @@ exports.handler = async function (event) {
 
   if (!submissionResult) {
     return {
-      statusCode: 500,
+      statusCode: 200,
       headers,
       body: JSON.stringify({
         error: err,
