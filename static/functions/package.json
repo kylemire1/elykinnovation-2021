@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "description": "Dependencies for netlify functions",
   "main": "create-submission.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
