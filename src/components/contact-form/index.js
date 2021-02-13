@@ -114,8 +114,7 @@ const ContactForm = ({
     } catch (err) {
       setIsLoading(false)
       setError(
-        `There was a problem submitting your message. Please try again or call <a href="tel:+19049981935">904.998.1935</a>
-        `
+        `There was a problem submitting your message. Please try again or call <a href="tel:+19049981935">904.998.1935</a>`
       )
     }
   }

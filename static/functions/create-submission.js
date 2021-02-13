@@ -4,7 +4,7 @@
 
 import fetch from 'node-fetch'
 
-exports.handler = async function (event) {
+export async function handler(event) {
   const headers = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Headers': 'Content-Type',
