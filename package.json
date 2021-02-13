@@ -72,6 +72,7 @@
     "start": "GATSBY_ENV=development gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean && GATSBY_ENV=development gatsby develop",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "lambda": "netlify-lambda build ./public/functions"
   }
 }
