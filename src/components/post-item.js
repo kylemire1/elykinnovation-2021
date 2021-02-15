@@ -15,6 +15,7 @@ const StyledPostItem = styled.li`
   transition: border-color 250ms ${vars.ease};
   padding: 2em;
   background-image: none !important;
+  background-color: ${vars.colorPureWhite};
 
   a {
     color: currentColor;

@@ -27,7 +27,7 @@ const useMenuData = () => {
     menu => menu.slug === 'secondary-menu'
   )[0]?.menuItems?.nodes
   const mobileMenuData = [...primaryMenuData, ...secondaryMenuData]
-  console.log({ mobileMenuData })
+
   const menuItemsCount =
     (primaryMenuData.length || 0) + (secondaryMenuData.length || 0)
 
