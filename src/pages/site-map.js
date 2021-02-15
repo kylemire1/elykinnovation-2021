@@ -37,7 +37,7 @@ const SiteMap = ({ data }) => {
 
 export const siteMapQuery = graphql`
   query SiteMapQuery {
-    allWpPage(sort: { fields: uri, order: ASC }) {
+    allWpPage(sort: { fields: title, order: ASC }) {
       nodes {
         uri
         title
