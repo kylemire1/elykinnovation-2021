@@ -103,7 +103,7 @@ const Header = ({ currentPageSlug }) => {
     primaryMenuData.length,
     itemProps.length
   )
-  console.log({ mobileMenuData })
+
   return (
     <StyledHeader>
       <Container>
