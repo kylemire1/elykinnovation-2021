@@ -9,6 +9,8 @@
 html {
   font-size: 85%;
   font-weight: 300;
+  width: 100vw;
+  overflow-x: hidden;
 
   @media (min-width: 992px) {
     font-size: 100%;
@@ -36,7 +38,11 @@ body {
     }
     .check li {
       background-image: url('../content/assets/check-bullet.svg') !important;
-      background-position: top 0.25em left !important;
+      background-position: top 0.12em left !important;
+
+      @media (min-width: 62em) {
+        background-position: top 0.25em left !important;
+      }
     }
   }
 

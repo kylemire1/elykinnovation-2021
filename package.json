@@ -44,6 +44,7 @@
     "react-helmet": "^5.2.1",
     "react-loader-spinner": "^4.0.0",
     "react-query": "^3.9.1",
+    "react-transition-group": "^4.4.1",
     "react-use-dimensions": "^1.2.1",
     "sass": "^1.32.4",
     "slugify": "^1.4.6",

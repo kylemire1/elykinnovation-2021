@@ -9,6 +9,7 @@ export const StyledPrimaryNav = styled.div`
   order: 1;
   border-radius: ${vars.borderRadiusLarge};
   margin: 0 1em;
+  display: none;
 
   ul {
     list-style: none;
@@ -27,10 +28,10 @@ export const StyledPrimaryNav = styled.div`
     background-color: ${vars.colorAlmostBlack};
     border: solid ${vars.pixel} ${vars.colorGreen};
     border-radius: ${vars.borderRadiusLarge};
-    .
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
+    display: block;
     order: 2;
     margin: 0;
     ul {
@@ -48,7 +49,7 @@ export const StyledPrimaryNav = styled.div`
       }
 
       li + li {
-        margin-left: 1.5em;
+        margin-left: 1em;
       }
     }
   }

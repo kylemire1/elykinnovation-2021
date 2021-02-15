@@ -39,7 +39,7 @@ const StyledSecondaryNav = styled(StyledPrimaryNav)`
 
 const SecondaryNav = ({ itemProps, menuItems, currentPageSlug }) => {
   return (
-    <StyledSecondaryNav>
+    <StyledSecondaryNav className="secondary-nav">
       <ul>
         {menuItems.length > 0 &&
           menuItems.map(({ url, label }, itemIndex) => (

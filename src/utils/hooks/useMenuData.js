@@ -26,11 +26,15 @@ const useMenuData = () => {
   const secondaryMenuData = queryResult?.allWpMenu?.nodes.filter(
     menu => menu.slug === 'secondary-menu'
   )[0]?.menuItems?.nodes
-
+  const mobileMenuData = [...primaryMenuData, ...secondaryMenuData]
+  console.log({ mobileMenuData })
   const menuItemsCount =
     (primaryMenuData.length || 0) + (secondaryMenuData.length || 0)
 
-  return [{ primaryMenuData, secondaryMenuData }, menuItemsCount]
+  return [
+    { primaryMenuData, secondaryMenuData, mobileMenuData },
+    menuItemsCount,
+  ]
 }
 
 export default useMenuData
