@@ -21,6 +21,7 @@ import PortfolioCategory from '../components/portfolio-category'
 import PortfolioMenu from '../components/portfolio-menu'
 import ContactUsLayout from '../components/contact-us-layout'
 import ContactForm from '../components/contact-form'
+import MembershipLogos from '../components/membership-logos'
 
 const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
@@ -168,6 +169,14 @@ const WpPageTemplate = ({ data, pageContext }) => {
                 <ContactForm key={`ContactForm_${sectionIndex}`} {...section} />
               )
 
+            case 'page_Layoutsections_Components_MembershipLogos':
+              return (
+                <MembershipLogos
+                  key={`ContactForm_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -214,6 +223,7 @@ export const pageQuery = graphql`
           ...PortfolioMenu
           ...ContactUsLayout
           ...ContactForm
+          ...MembershipLogos
         }
       }
     }
