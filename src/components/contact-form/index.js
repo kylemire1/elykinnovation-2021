@@ -157,7 +157,7 @@ const ContactForm = ({
                   )
                 default:
                   return (
-                    <div key={`Contactform_Default_${fieldIndex}`}>Default</div>
+                    <div key={`Contactform_Default_${fieldIndex}`}>A component is not yet defined for that type of form field</div>
                   )
               }
             })}
