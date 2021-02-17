@@ -11,7 +11,7 @@ const StyledHeading = styled(SoloHeading)`
   text-align: center;
 `
 
-const MembershipGrid = styled.div`
+const LogoRow = styled.div`
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -41,7 +41,7 @@ const MembershipLogos = ({
     <Section bg={sectionBackgroundColor}>
       <Container>
         <StyledHeading>{headingText}</StyledHeading>
-        <MembershipGrid size={memberships?.length || 1}>
+        <LogoRow>
           {memberships &&
             memberships.length &&
             memberships.map((membership, membershipIndex) => (
@@ -50,7 +50,7 @@ const MembershipLogos = ({
                 {...membership}
               />
             ))}
-        </MembershipGrid>
+        </LogoRow>
       </Container>
     </Section>
   )
@@ -68,7 +68,7 @@ export const fragment = graphql`
       organizationLogo {
         localFile {
           childImageSharp {
-            fixed(width: 200) {
+            fixed(width: 168) {
               ...GatsbyImageSharpFixed_noBase64
             }
           }

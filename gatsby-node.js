@@ -37,43 +37,49 @@ exports.createPages = async gatsbyUtilities => {
  */
 const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) => {
   return Promise.all(
-    posts.map(({ previous, post, next }) =>
-      // createPage is an action passed to createPages
-      // See https://www.gatsbyjs.com/docs/actions#createPage for more info
-      gatsbyUtilities.actions.createPage({
-        // Use the WordPress uri as the Gatsby page path
-        // This is a good idea so that internal links and menus work 👍
-        path: post.uri,
+    posts.map(({ previous, post, next }) => {
+      if (post.acfPostFields.postType !== 'launch-announcement') {
+        return
+      }
 
-        // use the appropriate post template as the page component
-        component:
-          post.acfPostFields.postType === 'launch-announcement'
-            ? path.resolve(`./src/templates/wp-launch-announcement-post.js`)
-            : path.resolve(`./src/templates/wp-dev-post.js`),
+      return (
+        // createPage is an action passed to createPages
+        // See https://www.gatsbyjs.com/docs/actions#createPage for more info
+        gatsbyUtilities.actions.createPage({
+          // Use the WordPress uri as the Gatsby page path
+          // This is a good idea so that internal links and menus work 👍
+          path: post.uri,
 
-        // `context` is available in the template as a prop and
-        // as a variable in GraphQL.
-        context: {
-          // we need to add the post id here
-          // so our blog post template knows which blog post
-          // the current page is (when you open it in a browser)
-          id: post.id,
+          // use the appropriate post template as the page component
+          component: path.resolve(
+            `./src/templates/wp-launch-announcement-post.js`
+          ),
 
-          // We also use the next and previous id's to query them and add links!
-          // We're re-assigning graphql's built-in 'next' to previous and vice-versa because it makes more
-          // visual sense in our UI this way.
-          previousPostId:
-            next && next.acfPostFields.postType === post.acfPostFields.postType
-              ? next.id
-              : null,
-          nextPostId:
-            previous &&
-            previous.acfPostFields.postType === post.acfPostFields.postType
-              ? previous.id
-              : null,
-        },
-      })
-    )
+          // `context` is available in the template as a prop and
+          // as a variable in GraphQL.
+          context: {
+            // we need to add the post id here
+            // so our blog post template knows which blog post
+            // the current page is (when you open it in a browser)
+            id: post.id,
+
+            // We also use the next and previous id's to query them and add links!
+            // We're re-assigning graphql's built-in 'next' to previous and vice-versa because it makes more
+            // visual sense in our UI this way.
+            previousPostId:
+              next &&
+              next.acfPostFields.postType === post.acfPostFields.postType
+                ? next.id
+                : null,
+            nextPostId:
+              previous &&
+              previous.acfPostFields.postType === post.acfPostFields.postType
+                ? previous.id
+                : null,
+          },
+        })
+      )
+    })
   )
 }
 
@@ -292,16 +298,16 @@ async function getPages({ graphql, reporter }) {
   return graphqlResult.data.allWpPage.edges
 }
 
-exports.onPostBuild = async (gatsbyNodeHelpers) => {
-  const { reporter } = gatsbyNodeHelpers;
+exports.onPostBuild = async gatsbyNodeHelpers => {
+  const { reporter } = gatsbyNodeHelpers
 
-  const reportOut = (report) => {
-    const { stderr, stdout } = report;
-    if (stderr) reporter.error(stderr);
-    if (stdout) reporter.info(stdout);
-  };
+  const reportOut = report => {
+    const { stderr, stdout } = report
+    if (stderr) reporter.error(stderr)
+    if (stdout) reporter.info(stdout)
+  }
 
   // NOTE: the gatsby build process automatically copies /static/functions to /public/functions
   // If you use yarn, replace "npm install" with "yarn install"
-  reportOut(await exec("cd ./public/functions && npm install"));
-};
+  reportOut(await exec('cd ./public/functions && npm install'))
+}

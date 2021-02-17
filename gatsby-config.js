@@ -33,7 +33,7 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `https://kyle.elykinnovation.com/graphql`,
+          `https://fallback.elykinnovation.com/graphql`,
         // these options slow down the bulld process,
         // but are helpful if your graphql server is getting overloaded while building
         schema: {

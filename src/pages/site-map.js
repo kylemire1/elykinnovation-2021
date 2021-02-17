@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 
 import Layout from '../components/layout'
@@ -11,8 +11,18 @@ const SiteMapLink = styled(Link)`
   color: ${vars.colorGreenSmallSubpage};
 `
 
-const SiteMap = ({ data }) => {
-  const pages = data?.allWpPage?.nodes
+const SiteMap = () => {
+  const result = useStaticQuery(graphql`
+    query SiteMapQuery {
+      allWpPage(sort: { fields: title, order: ASC }) {
+        nodes {
+          uri
+          title
+        }
+      }
+    }
+  `)
+  const pages = result?.allWpPage?.nodes
   return (
     <Layout>
       <Section bg="colorWhite">
@@ -34,16 +44,5 @@ const SiteMap = ({ data }) => {
     </Layout>
   )
 }
-
-export const siteMapQuery = graphql`
-  query SiteMapQuery {
-    allWpPage(sort: { fields: title, order: ASC }) {
-      nodes {
-        uri
-        title
-      }
-    }
-  }
-`
 
 export default SiteMap
