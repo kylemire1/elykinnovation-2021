@@ -20,10 +20,36 @@ const StyledSecondaryNav = styled(StyledPrimaryNav)`
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
+    position: relative;
     order: 1;
     max-width: 55%;
     margin-left: auto;
     margin-right: 0;
+    padding-left: 1.5rem;
+    background-color: ${vars.colorRed};
+    border-radius: 0;
+
+    ::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      right: -200%;
+      top: 0;
+      bottom: 0;
+      background-color: ${vars.colorRed};
+    }
+
+    ::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 1.813rem 1.813rem 0;
+      left: -1.813rem;
+      top: 0;
+      border-color: transparent ${vars.colorRed} transparent transparent;
+    }
 
     ul {
       justify-content: space-between;
@@ -48,6 +74,7 @@ const SecondaryNav = ({ itemProps, menuItems, currentPageSlug }) => {
               href={url}
               itemProps={itemProps[itemIndex]}
               currentPageSlug={currentPageSlug}
+              secondary
             >
               {label}
             </NavItem>

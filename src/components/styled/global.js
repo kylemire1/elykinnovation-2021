@@ -4,7 +4,7 @@ import vars from '../../vars'
 import portfolioBgSrc from '../../../content/assets/portfolio-bg-pattern.svg'
 
 export const MainContent = styled.main`
-  margin-top: ${({ home }) => (home ? 0 : '5rem')};
+  margin-top: ${({ home }) => (home ? 0 : '4.8rem')};
 `
 
 export const Container = styled.div`

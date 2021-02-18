@@ -50,7 +50,7 @@ const FlexNav = styled.nav`
     top: 0;
     max-height: 100%;
     justify-content: space-between;
-    padding: 0.5em 0;
+    padding: 0 0 0.5em;
     transform: translateY(0);
   }
 `
