@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'gatsby'
 import styled from 'styled-components'
+import { darken } from 'polished'
 
 import vars from '../../vars'
 
@@ -30,9 +31,17 @@ const StyledLink = styled(Link)`
     color: ${vars.colorGreenSmall};
     transition: color 250ms ${vars.ease};
   }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    &:hover,
+    &:focus {
+      color: ${({ $secondary }) =>
+        $secondary ? darken(0.1, vars.colorWhite) : vars.colorGreenSmall};
+    }
+  }
 `
 
-const NavItem = ({ children, itemProps, href, currentPageSlug }) => {
+const NavItem = ({ secondary, children, itemProps, href, currentPageSlug }) => {
   const [currentItem, setCurrentItem] = useState(false)
   useEffect(() => {
     if (href && href.includes(currentPageSlug)) {
@@ -42,7 +51,7 @@ const NavItem = ({ children, itemProps, href, currentPageSlug }) => {
 
   return (
     <StyledNavItem className={currentItem ? 'current' : null}>
-      <StyledLink {...itemProps} to={href}>
+      <StyledLink $secondary={secondary} {...itemProps} to={href}>
         {children}
       </StyledLink>
     </StyledNavItem>

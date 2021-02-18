@@ -14,6 +14,7 @@ const LogoWrapper = styled.div`
 
   a {
     z-index: 1;
+    padding-top: 0.25rem;
   }
 
   &::before {
@@ -41,7 +42,7 @@ const LogoWrapper = styled.div`
     width: 38%;
 
     &::after {
-      border-width: 0 4.95rem 4.95rem 0;
+      border-width: 0 5rem 5rem 0;
     }
   }
 `

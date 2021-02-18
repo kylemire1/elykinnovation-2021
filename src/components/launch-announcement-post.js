@@ -5,11 +5,12 @@ import parse from 'html-react-parser'
 import { darken } from 'polished'
 
 import SubpageHeroSmall from './subpage-hero-small'
-import { Section, Container, SoloHeading } from './styled/global'
 import Motto from './motto'
+import PostPagination from './post-pagination'
+import { Section, Container, SoloHeading } from './styled/global'
 
 import vars from '../vars'
-import PostPagination from './post-pagination'
+import ballLogoSrc from '../../content/assets/ball-logo.svg'
 
 const PostGrid = styled.div`
   display: grid;
@@ -96,6 +97,28 @@ const ClientBlurb = styled.div`
   }
 `
 
+const StyledContainer = styled(Container)`
+  @media (min-width: ${vars.breakpointLarge}) {
+    position: relative;
+    z-index: 0;
+
+    ::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      opacity: 0.15;
+      bottom: -2%;
+      right: -15%;
+      width: 750px;
+      height: 750px;
+      background-image: url(${ballLogoSrc});
+      background-size: contain;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+  }
+`
+
 const StyledSection = styled(Section)`
   color: ${vars.colorWhite};
 `
@@ -144,7 +167,7 @@ const LaunchAnnouncementPost = ({
         </Container>
       </PaginationWrapper>
       <Section bg="colorWhite">
-        <Container>
+        <StyledContainer>
           <PostGrid>
             <HomePageImageWrapper>
               {fullHomePageScreenshot && (
@@ -195,7 +218,7 @@ const LaunchAnnouncementPost = ({
               </MockupWrapper>
             </DetailsWrapper>
           </PostGrid>
-        </Container>
+        </StyledContainer>
       </Section>
       <StyledSection bg="colorGreen">
         <Container>
