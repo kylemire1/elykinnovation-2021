@@ -37,7 +37,6 @@ export const SectionHeading = styled.h2`
   color: ${({ bg }) =>
     bg === 'colorWhite' ? vars.colorBlack : vars.colorWhite};
   text-transform: capitalize;
-  max-width: 54rem;
   font-weight: ${vars.fontWeightBolder};
 
   span {
@@ -48,6 +47,10 @@ export const SectionHeading = styled.h2`
       bg === 'colorWhite' ? vars.colorGreen : vars.colorGreenSmall};
     text-transform: uppercase;
     margin-bottom: 0.3rem;
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    max-width: 54rem;
   }
 `
 export const HeroHeading = styled.h1`

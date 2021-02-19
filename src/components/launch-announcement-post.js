@@ -109,8 +109,8 @@ const StyledContainer = styled(Container)`
       opacity: 0.15;
       bottom: -2%;
       right: -15%;
-      width: 750px;
-      height: 750px;
+      width: 46.875rem;
+      height: 46.875rem;
       background-image: url(${ballLogoSrc});
       background-size: contain;
       background-position: center center;
@@ -158,6 +158,8 @@ const LaunchAnnouncementPost = ({
             mainHeadingText={title}
             smallGreenHeadingText="The Project"
             paragraphContent={projectSummary}
+            sectionBackgroundColor="colorBlack"
+            launchPost
           />
         </Container>
       </Section>
