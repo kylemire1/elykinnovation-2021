@@ -86,6 +86,7 @@ const PlusButton = styled.button`
   border: none;
   width: 100%;
   max-width: 1.75rem;
+  cursor: pointer;
 
   svg {
     max-width: 1.75rem;
