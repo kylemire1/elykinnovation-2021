@@ -33,7 +33,7 @@ const LogoWrapper = styled.div`
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 5.6rem 5.6rem 0;
+    border-width: 0 5.9rem 5.9rem 0;
     right: 0;
     border-color: transparent ${vars.colorBlack} transparent transparent;
   }
