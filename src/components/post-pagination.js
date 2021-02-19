@@ -12,9 +12,17 @@ const PaginationButtons = styled.div`
   color: ${vars.colorWhite};
   min-height: 3rem;
 
+  > * + * {
+    margin-top: 1rem;
+  }
+
   @media (min-width: ${vars.breakpointLarge}) {
     flex-direction: row;
     justify-content: space-between;
+
+    > * + * {
+      margin-top: 0;
+    }
   }
 `
 
