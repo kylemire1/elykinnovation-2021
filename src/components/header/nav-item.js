@@ -15,7 +15,8 @@ const StyledNavItem = styled.li`
     &.current {
       background-color: transparent;
       a {
-        color: ${vars.colorGreenSmall};
+        color: ${({ $secondary }) =>
+          $secondary ? darken(0.35, vars.colorWhite) : vars.colorGreenSmall};
       }
     }
   }
@@ -50,7 +51,10 @@ const NavItem = ({ secondary, children, itemProps, href, currentPageSlug }) => {
   }, [href, currentPageSlug])
 
   return (
-    <StyledNavItem className={currentItem ? 'current' : null}>
+    <StyledNavItem
+      $secondary={secondary}
+      className={currentItem ? 'current' : null}
+    >
       <StyledLink $secondary={secondary} {...itemProps} to={href}>
         {children}
       </StyledLink>

@@ -196,6 +196,10 @@ export const pageQuery = graphql`
       seo {
         title
         metaDesc
+        twitterDescription
+        twitterTitle
+        facebookDescription: opengraphDescription
+        facebookTitle: opengraphTitle
       }
       slug
       id

@@ -25,11 +25,12 @@ const WpPostArchive = ({
   data,
   pageContext: { nextPagePath, previousPagePath, totalPages, currentPage },
 }) => {
-  const posts = data.allWpPost.nodes
-
+  const posts = data?.allWpPost?.nodes
+  const currentPageSlug = data.wpPage.slug
+  console.log({ currentPageSlug })
   if (!posts.length) {
     return (
-      <Layout>
+      <Layout currentPageSlug={currentPageSlug}>
         <SEO
           title={data?.wpPage?.seo?.title}
           description={data?.wpPage?.seo?.metaDesc}
@@ -46,7 +47,7 @@ const WpPostArchive = ({
     )
   }
   return (
-    <Layout>
+    <Layout currentPageSlug={currentPageSlug}>
       <SEO
         title={data?.wpPage?.seo?.title}
         description={data?.wpPage?.seo?.metaDesc}
@@ -96,6 +97,7 @@ export const pageQuery = graphql`
       }
     }
     wpPage(isPostsPage: { eq: true }) {
+      slug
       seo {
         title
         metaDesc
