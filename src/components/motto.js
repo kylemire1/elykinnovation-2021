@@ -94,7 +94,7 @@ const Motto = ({
   launchPost,
 }) => {
   const [containerRef, { height }] = useDimensions()
-  console.log({ sectionBackgroundColor })
+
   return (
     <Section bg={sectionBackgroundColor}>
       <Container ref={containerRef}>

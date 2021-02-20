@@ -10,10 +10,8 @@ const Layout = ({
   isHomePage,
   children,
   currentPageSlug,
-  currentPageId,
   isPrimaryPage,
 }) => {
-  console.log({ currentPageSlug })
   return (
     <div
       className={`body-wrapper ${currentPageSlug} ${

@@ -27,7 +27,7 @@ const WpPostArchive = ({
 }) => {
   const posts = data?.allWpPost?.nodes
   const currentPageSlug = data.wpPage.slug
-  console.log({ currentPageSlug })
+
   if (!posts.length) {
     return (
       <Layout currentPageSlug={currentPageSlug}>
