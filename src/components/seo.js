@@ -10,8 +10,19 @@ import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-const SEO = ({ description, lang, meta, title }) => {
-  const { wp, wpUser } = useStaticQuery(
+import defaultImageSrc from '../../content/assets/default-social-media-image.jpg'
+
+const SEO = ({
+  description,
+  lang,
+  meta,
+  title,
+  twitterDescription,
+  twitterTitle,
+  facebookDescription,
+  facebookTitle,
+}) => {
+  const { wp } = useStaticQuery(
     graphql`
       query {
         wp {
@@ -24,15 +35,11 @@ const SEO = ({ description, lang, meta, title }) => {
             }
           }
         }
-
-        # if there's more than one user this would need to be filtered to the main user
-        wpUser {
-          twitter: name
-        }
       }
     `
   )
 
+  // Use default description and title for pages if one isn't provided.
   const metaDescription = description || wp?.seo?.contentTypes?.page?.metaDesc
   const seoTitle = title || wp?.seo?.contentTypes?.page?.title
 
@@ -49,11 +56,11 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           property: `og:title`,
-          content: seoTitle,
+          content: facebookTitle || seoTitle,
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: facebookDescription || metaDescription,
         },
         {
           property: `og:type`,
@@ -65,21 +72,26 @@ const SEO = ({ description, lang, meta, title }) => {
         },
         {
           name: `twitter:creator`,
-          content: wpUser?.twitter || ``,
+          content: 'https://twitter.com/elykinnovation?lang=en',
         },
         {
           name: `twitter:title`,
-          content: seoTitle,
+          content: twitterTitle || seoTitle,
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
+          content: twitterDescription || metaDescription,
+        },
+        {
+          name: `twitter:image`,
+          content: defaultImageSrc,
         },
       ].concat(meta)}
     />
   )
 }
 
+// This sets default props for a component in case one isn't passed in.
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
@@ -87,6 +99,10 @@ SEO.defaultProps = {
   title: ``,
 }
 
+// This is an optional setting that lets you define what data types each prop has to be.
+// You can also set whether or not a prop is required.
+// It will only provide a warning in the console if you break one of the rules though.
+// It's not a full type checking system.
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,

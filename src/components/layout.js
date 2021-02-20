@@ -18,7 +18,14 @@ const Layout = ({
         isPrimaryPage ? 'primary' : 'secondary'
       }`}
     >
-      <SEO title={seoData?.title} description={seoData?.metaDesc} />
+      <SEO
+        title={seoData?.title}
+        description={seoData?.metaDesc}
+        facebookDescription={seoData?.facebookDescription}
+        facebookTitle={seoData?.facebookTitle}
+        twitterDescription={seoData?.twitterDescription}
+        twitterTitle={seoData?.twitterTitle}
+      />
       <Header currentPageSlug={currentPageSlug} />
 
       <MainContent home={isHomePage}>{children}</MainContent>

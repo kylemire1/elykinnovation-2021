@@ -18,11 +18,14 @@ const StyledFaqItem = styled.div`
   border-color: ${rgba(vars.colorGreenSmall, 0)};
   transition: border-color 250ms ${vars.ease};
 
+  &.open {
+    border-color: ${rgba(vars.colorGreenSmall, 1)};
+  }
+
   :hover,
   :focus,
   :focus-within {
     border-color: ${rgba(vars.colorGreenSmall, 1)};
-    transition: border-color 250ms ${vars.ease};
   }
 `
 
@@ -106,7 +109,6 @@ const PlusButton = styled.button`
   }
 
   &.open {
-    border-color: ${rgba(vars.colorGreenSmall, 1)};
     transition: border-color 250ms ${vars.ease};
     svg {
       transform: rotate(90deg);
@@ -131,7 +133,7 @@ const FaqItem = ({ question, answer }) => {
     setIsOpen(!isOpen)
   }
   return (
-    <StyledFaqItem>
+    <StyledFaqItem className={isOpen ? 'open' : 'closed'}>
       <PlusButton
         className={isOpen ? 'open' : 'closed'}
         onClick={toggleOpen}

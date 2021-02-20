@@ -43,7 +43,7 @@ const MottoHeading = styled(SectionHeading)`
   @media (min-width: ${vars.breakpointLarge}) {
     font-size: ${vars.fontSizeHeading5};
     display: inline;
-    max-width: ${({ $post }) => ($post ? '34rem' : '27rem')};
+    max-width: ${({ $post }) => ($post ? '34.5rem' : '27rem')};
   }
 `
 
@@ -94,7 +94,7 @@ const Motto = ({
   launchPost,
 }) => {
   const [containerRef, { height }] = useDimensions()
-  console.log({ sectionBackgroundColor })
+
   return (
     <Section bg={sectionBackgroundColor}>
       <Container ref={containerRef}>
