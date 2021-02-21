@@ -97,7 +97,7 @@ const ContactGrid = styled.div`
 const StyledOr = styled.div`
   position: relative;
   width: 100%;
-  z-index: 99;
+  z-index: 10;
   margin: 0.3rem 0.25rem 0.75rem;
 
   span {
