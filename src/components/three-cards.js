@@ -14,6 +14,22 @@ const CardGrid = styled.div`
   position: relative;
   z-index: 1;
 
+  &.animate > div {
+    transform: translateY(50%);
+    opacity: 0;
+    animation-duration: 900ms;
+    animation-timing-function: ${vars.ease};
+    animation-name: slidein;
+    animation-fill-mode: forwards;
+
+    &:nth-child(2) {
+      animation-delay: 150ms;
+    }
+    &:nth-child(3) {
+      animation-delay: 300ms;
+    }
+  }
+
   ul {
     margin: 0;
   }
@@ -31,6 +47,18 @@ const CardGrid = styled.div`
     grid-template-columns: repeat(3, 1fr);
     margin-top: ${({ $offset }) => ($offset ? '-8em' : 0)};
   }
+
+  @keyframes slidein {
+    from {
+      transform: translateY(50%);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 `
 
 const ThreeCards = ({
@@ -41,13 +69,18 @@ const ThreeCards = ({
   largeHeadings,
   sectionHeading,
   angledBackgroundTransition,
+  entranceAnimation,
 }) => {
   return (
     <Section bg={sectionBackgroundColor} angled={angledBackgroundTransition}>
       <Container>
         {sectionHeading && <SoloHeading>{sectionHeading}</SoloHeading>}
         {cards && (
-          <CardGrid bg={cardBackgroundColor} $offset={offsetTop}>
+          <CardGrid
+            className={entranceAnimation ? 'animate' : ''}
+            bg={cardBackgroundColor}
+            $offset={offsetTop}
+          >
             {cards.map(({ cardTitle, cardBody, cardLink }, cardIndex) => (
               <Card
                 key={`${cardTitle}_card_${cardIndex}`}
@@ -69,6 +102,7 @@ export const fragment = graphql`
   fragment ThreeCardRow on WpPage_Layoutsections_Components_ThreeCardRow {
     fieldGroupName
     cardBackgroundColor
+    entranceAnimation
     cards {
       cardTitle
       cardBody
