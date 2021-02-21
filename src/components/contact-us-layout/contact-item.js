@@ -15,7 +15,6 @@ const StyledContactItem = styled.a`
   text-decoration: none;
   background-color: ${rgba(vars.colorGreen, 0)};
   padding: 1em;
-  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -67,7 +66,7 @@ const ContactItem = ({ contactType, contactInfo, contactLink }) => {
     <StyledContactItem
       href={contactLink}
       rel="noopener noreferrer"
-      target={`${contactType !== 'phoneNumber' && '_blank'}`}
+      target={`${contactType === 'phoneNumber' ? '_self' : '_blank'}`}
     >
       <IconWrapper aria-hidden>
         {contactType === 'address' ? <PinIcon /> : <PhoneIcon />}

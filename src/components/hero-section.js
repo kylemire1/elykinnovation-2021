@@ -19,7 +19,7 @@ const StyledHero = styled.section`
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-attachment: scroll;
   background-blend-mode: overlay;
   z-index: 0;
 
@@ -32,6 +32,10 @@ const StyledHero = styled.section`
     @media (min-width: ${vars.breakpointLarge}) {
       font-size: ${vars.fontSizeHeading7};
     }
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    background-attachment: fixed;
   }
 `
 

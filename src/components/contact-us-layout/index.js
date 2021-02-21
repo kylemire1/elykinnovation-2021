@@ -7,8 +7,6 @@ import { Section, Container, SoloHeading } from '../styled/global'
 import vars from '../../vars'
 import ContactItem from './contact-item'
 
-const CONTACT_WIDTH = '50rem'
-
 const IntroWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -17,7 +15,7 @@ const IntroWrapper = styled.div`
 
 const IntroContainer = styled.div`
   width: 100%;
-  max-width: ${CONTACT_WIDTH};
+  max-width: 50rem;
   display: flex;
   flex-direction: column;
   align-items: center;
