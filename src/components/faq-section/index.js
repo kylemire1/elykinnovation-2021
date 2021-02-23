@@ -23,7 +23,7 @@ const FaqGrid = styled.div`
 
 const FaqSection = ({ sectionHeading, faqs }) => {
   return (
-    <Section>
+    <Section bg="colorWhite">
       <Container>
         <FaqHeading color={vars.colorAlmostBlack}>{sectionHeading}</FaqHeading>
         <FaqGrid>
