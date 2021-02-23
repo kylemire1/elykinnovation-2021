@@ -15,6 +15,7 @@ const PostGrid = styled.ol`
   list-style: none;
   display: grid;
   gap: 1.5rem;
+  padding-left: 0;
 
   @media (min-width: ${vars.breakpointMedium}) {
     grid-template-columns: repeat(2, 1fr);

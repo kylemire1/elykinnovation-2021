@@ -26,7 +26,7 @@ const MainContent = styled.div`
   h4,
   h5 {
     color: ${vars.colorGreen};
-    font-size: ${vars.fontSizeHeading4};
+    font-size: ${vars.fontSizeHeading2};
     font-weight: ${vars.fontWeightBolder};
   }
 
@@ -36,6 +36,13 @@ const MainContent = styled.div`
 
   @media (min-width: ${vars.breakpointLarge}) {
     margin-bottom: 0;
+
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-size: ${vars.fontSizeHeading4};
+    }
   }
 `
 

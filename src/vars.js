@@ -42,6 +42,8 @@ const vars = {
   borderRadiusLarge: '1.875em',
   /** 1px */
   pixel: '0.063rem',
+  /** 400px */
+  breakpointExtraSmall: '25em',
   /** 576px */
   breakpointSmall: '36em',
   /** 768px */

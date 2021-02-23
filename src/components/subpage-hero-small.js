@@ -12,13 +12,16 @@ const StyledHero = styled.section`
   display: flex;
   align-items: center;
   background-color: ${vars.colorAlmostBlack};
-  background-image: url(${heroBgSrc});
-  background-repeat: no-repeat;
-  background-position: top -${vars.pixel} center;
+
+  @media (min-width: ${vars.breakpointMedium}) {
+    background-image: url(${heroBgSrc});
+    background-repeat: no-repeat;
+    background-position: top -${vars.pixel} center;
+  }
 `
 
 const Heading = styled.h1`
-  font-size: ${vars.fontSizeHeading6};
+  font-size: ${vars.fontSizeHeading4};
   margin-bottom: 0;
 
   @media (min-width: ${vars.breakpointLarge}) {
