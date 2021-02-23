@@ -14,29 +14,31 @@ const FooterRow = styled.div`
   justify-content: flex-start;
   flex-direction: column;
 
-  > div + div {
-    margin-top: 1rem;
-  }
-
   @media (min-width: ${vars.breakpointLarge}) {
-    > div + div {
-      margin-top: 0;
-    }
-
     flex-direction: row;
     justify-content: space-between;
   }
 `
 
 const Copyright = styled.div`
+  order: 3;
+  margin-top: 1rem;
+
   p {
     font-size: ${vars.fontSizeTextSmall};
     margin-bottom: 0;
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    order: 1;
+    margin-top: 0;
   }
 `
 const Links = styled.div`
   width: 100%;
   max-width: 25rem;
+  order: 2;
+  margin-top: 1rem;
 
   ul {
     margin: 0;
@@ -64,6 +66,7 @@ const Links = styled.div`
   @media (min-width: ${vars.breakpointLarge}) {
     width: auto;
     justify-content: space-between;
+    margin-top: 0;
 
     li + li {
       margin-left: 1rem;
@@ -74,6 +77,8 @@ const Socials = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  order: 1;
 
   div,
   svg {

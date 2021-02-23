@@ -33,16 +33,22 @@ const LogoWrapper = styled.div`
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 0 5.9rem 5.9rem 0;
+    border-width: 0 5.5rem 5.5rem 0;
     right: 0;
     border-color: transparent ${vars.colorBlack} transparent transparent;
+  }
+
+  @media (min-width: ${vars.breakpointExtraSmall}) {
+    &::after {
+      border-width: 0 6rem 6rem 0;
+    }
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
     width: 38%;
 
     &::after {
-      border-width: 0 5rem 5rem 0;
+      border-width: 0 5.5rem 5.5rem 0;
     }
   }
 `
