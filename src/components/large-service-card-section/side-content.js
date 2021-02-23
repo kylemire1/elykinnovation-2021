@@ -35,7 +35,7 @@ const SideText = styled.div`
   h3,
   h4,
   h5 {
-    font-size: ${vars.fontSizeHeading3};
+    font-size: ${vars.fontSizeHeading2};
   }
 
   ul {
@@ -68,6 +68,7 @@ const SideText = styled.div`
     h4,
     h5 {
       text-align: center;
+      font-size: ${vars.fontSizeHeading3};
     }
 
     ul {

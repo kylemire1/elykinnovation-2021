@@ -12,7 +12,16 @@ const ContentWrapper = styled.div`
   h3,
   h4,
   h5 {
-    font-size: ${vars.fontSizeHeading4};
+    font-size: ${vars.fontSizeHeading2};
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-size: ${vars.fontSizeHeading2};
+    }
   }
 `
 

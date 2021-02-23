@@ -36,7 +36,7 @@ const MottoHeadingWrapper = styled.div`
 `
 
 const MottoHeading = styled(SectionHeading)`
-  font-size: ${vars.fontSizeHeading4};
+  font-size: ${vars.fontSizeHeading3};
   margin-bottom: 1rem;
   margin-right: 1rem;
 

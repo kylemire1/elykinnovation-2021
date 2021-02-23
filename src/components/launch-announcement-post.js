@@ -13,20 +13,26 @@ import vars from '../vars'
 import ballLogoSrc from '../../content/assets/ball-logo.svg'
 
 const PostGrid = styled.div`
-  display: grid;
+  display: block;
   gap: 1.5rem;
 
   @media (min-width: ${vars.breakpointLarge}) {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
   }
 `
 
 const HomePageImageWrapper = styled.div`
-  grid-column: 1 / 2;
-  grid-row: 1 / 3;
+  margin-bottom: 1.5rem;
 
   .gatsby-image-wrapper {
     border-radius: ${vars.borderRadiusSmall};
+  }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    margin-bottom: 0;
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
   }
 `
 

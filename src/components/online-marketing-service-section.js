@@ -23,7 +23,7 @@ const BoxGridItem = styled.div`
   border: solid ${vars.pixel};
   border-color: ${({ border }) => vars[border]};
   border-radius: ${vars.borderRadiusSmall};
-  padding: 3em 3em;
+  padding: 3em 1em;
   display: flex;
   align-items: center;
   justify-content: center;

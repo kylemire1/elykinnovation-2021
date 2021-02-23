@@ -145,7 +145,7 @@ const Button = ({
             <>
               {arrowDirection === 'right' ? (
                 <>
-                  <TextWrapper>{children}</TextWrapper>
+                  <TextWrapper className="text-wrapper">{children}</TextWrapper>
                   <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
                     <img src={arrowRightSrc} alt="" />
                   </IconWrapper>
@@ -155,7 +155,7 @@ const Button = ({
                   <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
                     <img src={arrowLeftSrc} alt="" />
                   </IconWrapper>
-                  <TextWrapper>{children}</TextWrapper>
+                  <TextWrapper className="text-wrapper">{children}</TextWrapper>
                 </>
               )}
             </>
@@ -173,7 +173,7 @@ const Button = ({
         >
           {['red', 'outline'].includes(buttonStyle) ? (
             <>
-              <TextWrapper>{children}</TextWrapper>
+              <TextWrapper className="text-wrapper">{children}</TextWrapper>
               <IconWrapper arrow={arrowDirection} btn={buttonStyle}>
                 <img src={arrowRightSrc} alt="" />
               </IconWrapper>

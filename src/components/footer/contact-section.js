@@ -13,7 +13,7 @@ const PhoneNumber = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: ${vars.fontSizeHeading4};
+  font-size: ${vars.fontSizeHeading3};
   font-weight: ${vars.fontWeightBolder};
   color: ${vars.colorBlack};
   text-decoration: none;
@@ -43,6 +43,8 @@ const PhoneNumber = styled.a`
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
+    font-size: ${vars.fontSizeHeading4};
+
     .icon-right {
       display: none;
     }
@@ -71,9 +73,13 @@ const ContactInfo = styled.div`
 
 const FooterHeading = styled(SectionHeading)`
   color: ${vars.colorBlack};
-  font-size: ${vars.fontSizeHeading4};
+  font-size: ${vars.fontSizeHeading3};
   margin-bottom: 0;
   text-transform: capitalize;
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    font-size: ${vars.fontSizeHeading4};
+  }
 `
 
 const ContactGrid = styled.div`

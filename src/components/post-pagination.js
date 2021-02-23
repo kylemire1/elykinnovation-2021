@@ -14,14 +14,26 @@ const PaginationButtons = styled.div`
 
   > * + * {
     margin-top: 1rem;
+    width: 100%;
+  }
+
+  a,
+  .text-wrapper {
+    width: 100%;
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
     flex-direction: row;
     justify-content: space-between;
 
+    a,
+    .text-wrapper {
+      width: auto;
+    }
+
     > * + * {
       margin-top: 0;
+      width: auto;
     }
   }
 `

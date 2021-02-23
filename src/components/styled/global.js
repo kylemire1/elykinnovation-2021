@@ -32,15 +32,15 @@ export const Section = styled.section`
 `
 
 export const SectionHeading = styled.h2`
-  font-size: ${vars.fontSizeHeading3};
-  margin-bottom: 0.75em;
+  font-size: ${vars.fontSizeHeading2};
+  margin-bottom: 1.5rem;
   color: ${({ bg }) =>
     bg === 'colorWhite' ? vars.colorBlack : vars.colorWhite};
   text-transform: capitalize;
   font-weight: ${vars.fontWeightBolder};
 
   span {
-    font-size: 1.125rem;
+    font-size: ${vars.fontSizeText};
     font-weight: ${vars.fontWeightBold};
     display: block;
     color: ${({ bg }) =>
@@ -51,10 +51,12 @@ export const SectionHeading = styled.h2`
 
   @media (min-width: ${vars.breakpointLarge}) {
     max-width: 54rem;
+    font-size: ${vars.fontSizeHeading2};
+    margin-bottom: 0.75em;
   }
 `
 export const HeroHeading = styled.h1`
-  font-size: ${vars.fontSizeHeading7};
+  font-size: ${vars.fontSizeHeading4};
   font-weight: ${vars.fontWeightBolder};
   margin-bottom: 1.25rem;
   color: ${({ bg }) =>
@@ -70,13 +72,21 @@ export const HeroHeading = styled.h1`
     font-weight: ${vars.fontWeightBold};
     margin-bottom: 0.3rem;
   }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    font-size: ${vars.fontSizeHeading7};
+  }
 `
 
 export const SoloHeading = styled.h2`
-  font-size: ${vars.fontSizeHeading4};
+  font-size: ${vars.fontSizeHeading2};
   font-weight: ${vars.fontWeightBolder};
   color: ${({ color }) => color};
   margin-bottom: 1rem;
+
+  @media (min-width: ${vars.breakpointMedium}) {
+    font-size: ${vars.fontSizeHeading4};
+  }
 `
 
 export const FormControl = styled.div`

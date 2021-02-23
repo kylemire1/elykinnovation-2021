@@ -34,6 +34,10 @@ const StyledContactItem = styled.a`
       width: 100%;
     }
   }
+
+  @media (min-width: ${vars.breakpointLarge}) {
+    height: 100%;
+  }
 `
 
 const IconWrapper = styled.div`

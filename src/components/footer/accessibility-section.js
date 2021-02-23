@@ -37,12 +37,13 @@ const IconWrapper = styled.div`
 `
 
 const AccessibilityHeading = styled.h3`
-  font-size: ${vars.fontSizeHeading3};
+  font-size: ${vars.fontSizeHeading2};
   text-align: center;
   display: flex;
   align-items: center;
 
   @media (min-width: ${vars.breakpointLarge}) {
+    font-size: ${vars.fontSizeHeading3};
     padding: 0.5em;
     margin-bottom: 0;
   }
