@@ -82,7 +82,7 @@ const WysiwygContentWithSideCard = ({
   showButton,
 }) => {
   return (
-    <Section bg={'colorTransparent'}>
+    <Section bg="colorWhite">
       <Container>
         <ContentGrid>
           <MainContent>
