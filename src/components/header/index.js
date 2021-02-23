@@ -16,6 +16,12 @@ import vars from '../../vars'
 import getArraySlice from '../../utils/getArraySlice'
 import useMenuData from '../../utils/hooks/useMenuData'
 
+const StyledContainer = styled(Container)`
+  @media (min-width: ${vars.breakpointLarge}) {
+    height: 5.5rem;
+  }
+`
+
 const StyledHeader = styled.header`
   background-color: ${vars.colorBlack};
   color: ${vars.colorWhite};
@@ -25,11 +31,16 @@ const StyledHeader = styled.header`
   left: 0;
   right: 0;
   z-index: 50;
+
+  @media (min-width: ${vars.breakpointExtraLarge}) {
+    height: 5.5rem;
+  }
 `
 
 const NavWrapper = styled.div`
   display: flex;
   position: relative;
+  height: 100%;
 `
 
 const FlexNav = styled.nav`
@@ -106,7 +117,7 @@ const Header = ({ currentPageSlug }) => {
 
   return (
     <StyledHeader>
-      <Container>
+      <StyledContainer>
         <NavWrapper>
           <Logo />
           <MobileNavButton
@@ -142,7 +153,7 @@ const Header = ({ currentPageSlug }) => {
             </MobileNavWrapper>
           </CSSTransition>
         </NavWrapper>
-      </Container>
+      </StyledContainer>
     </StyledHeader>
   )
 }
