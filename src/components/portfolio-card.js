@@ -11,6 +11,7 @@ const StyledCard = styled.div`
   border-radius: ${vars.borderRadiusSmall};
   position: relative;
   cursor: pointer;
+  color: ${vars.colorWhite};
 
   a {
     color: currentColor;
