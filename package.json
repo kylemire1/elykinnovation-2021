@@ -69,7 +69,7 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "cd ./public/functions/ && npm install && gatsby build && cd ../ && gatsby build",
+    "build": "cd public/functions/ && npm install && gatsby build && cd ../ && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "gatsby develop",
