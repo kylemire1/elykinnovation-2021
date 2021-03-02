@@ -1,4 +1,4 @@
-const fetch = require('isomorphic-fetch')
+const fetch = require('node-fetch')
 
 // This file is a Netlify function. Netlify automatically ships it off to AWS Lambda to run it on the server side.
 // There is more configuration involved than just this file to get this working!
