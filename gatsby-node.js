@@ -312,5 +312,7 @@ exports.onPostBuild = async gatsbyNodeHelpers => {
   // NOTE: the gatsby build process automatically copies /static/functions to /public/functions
   // The exec() functions executes command line scripts. Here we're using it to build the functions
   // If you use yarn, replace "npm install" with "yarn install"
-  reportOut(await exec('cd ./public/functions && npm install'))
+  reportOut(
+    await exec('cd ./public/functions && npm cache clean && npm install')
+  )
 }
