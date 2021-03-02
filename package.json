@@ -54,7 +54,6 @@
   },
   "devDependencies": {
     "dumper.js": "^1.3.1",
-    "netlify-lambda": "^2.0.3",
     "prettier": "2.2.1"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
@@ -74,7 +73,6 @@
     "start": "gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean && gatsby develop",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "lambda": "netlify-lambda build ./static/functions"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   }
 }
