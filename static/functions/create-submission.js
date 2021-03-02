@@ -21,12 +21,16 @@ exports.handler = async function (event) {
     },
     body: JSON.stringify({
       query: `
-            mutation LoginMutation {
+            mutation LoginMutation(
+              $clientMutationId: String!
+              $username: String!
+              $password: String!
+            ) {
               login(
                 input: {
-                  password: "${process.env.WP_AUTH_PASSWORD}"
-                  username: "${process.env.WP_AUTH_USERNAME}"
-                  clientMutationId: "${generateMutationId()}"
+                  clientMutationId: $clientMutationId
+                  username: $username
+                  password: $password
                 }
               ) {
                 authToken
@@ -34,6 +38,11 @@ exports.handler = async function (event) {
               }
             }
           `,
+      variables: {
+        clientMutationId: generateMutationId(),
+        username: process.env.WP_AUTH_USERNAME,
+        password: process.env.WP_AUTH_PASSWORD,
+      },
     }),
   })
     .then(res => res.json())
