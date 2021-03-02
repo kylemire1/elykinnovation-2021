@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "encoding": "^0.1.13",
     "node-fetch": "^2.6.1"
   }
 }
