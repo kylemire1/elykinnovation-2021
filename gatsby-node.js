@@ -313,6 +313,6 @@ exports.onPostBuild = async gatsbyNodeHelpers => {
   // The exec() functions executes command line scripts. Here we're using it to build the functions
   // If you use yarn, replace "npm install" with "yarn install"
   reportOut(
-    await exec('cd ./public/functions && npm cache clean && npm install')
+    await exec('cd ./public/functions && npm install --cache /tmp/empty-cache')
   )
 }
