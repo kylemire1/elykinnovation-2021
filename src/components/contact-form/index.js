@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import parse from 'html-react-parser'
 import Loader from 'react-loader-spinner'
+import Recaptcha from 'react-recaptcha'
 
 import Input from './input'
 import Textarea from './textarea'
@@ -64,17 +65,20 @@ const ContactForm = ({
   formFields,
   submitButtonText,
 }) => {
+  const [canSubmit, setCanSubmit] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
   const [submittedSuccess, setSubmittedSuccess] = useState(false)
   const [formValues, setFormValues] = useState(INITIAL_STATE)
   const formRef = useRef()
+  const recaptchaRef = useRef()
 
   useEffect(() => {
     setSubmittedSuccess(false)
     setError(false)
     setIsLoading(false)
     setFormValues(INITIAL_STATE)
+    resetRecaptcha()
   }, [])
 
   const handleChange = e => {
@@ -119,6 +123,27 @@ const ContactForm = ({
     }
   }
 
+  const resetRecaptcha = () => {
+    if (typeof recaptchaRef.current !== 'undefined') {
+      recaptchaRef.current.reset()
+    }
+  }
+
+  const verifyRecaptcha = async response => {
+    const verificationResult = await fetch(
+      '/.netlify/functions/verify-recaptcha.js',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(response),
+      }
+    ).then(res => res.json())
+
+    console.log({ verificationResult })
+  }
+
   return (
     <Section bg={sectionBackgroundColor}>
       <Container>
@@ -157,7 +182,9 @@ const ContactForm = ({
                   )
                 default:
                   return (
-                    <div key={`Contactform_Default_${fieldIndex}`}>A component is not yet defined for that type of form field</div>
+                    <div key={`Contactform_Default_${fieldIndex}`}>
+                      A component is not yet defined for that type of form field
+                    </div>
                   )
               }
             })}
@@ -172,6 +199,12 @@ const ContactForm = ({
               We've received your message and will be in touch shortly!
             </ThankYou>
           )}
+          <Recaptcha
+            ref={recaptchaRef}
+            sitekey={process.env.GATSBY_RECAPTCHA_SITE_KEY}
+            render="explicit"
+            verifyCallback={verifyRecaptcha}
+          />
           {!submittedSuccess && (
             <SubmitButton onClick={handleSubmit}>
               {!isLoading ? (

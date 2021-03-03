@@ -106,5 +106,6 @@ module.exports = {
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-polished`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-recaptcha`,
   ],
 }
