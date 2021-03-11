@@ -20,6 +20,7 @@ import FaqSection from '../components/faq-section'
 import PortfolioCategory from '../components/portfolio-category'
 import PortfolioMenu from '../components/portfolio-menu'
 import ContactUsLayout from '../components/contact-us-layout'
+import H2ParagraphLeftImageRight from '../components/h2-paragraph-left-image-right-section'
 
 const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
@@ -158,6 +159,14 @@ const WpPageTemplate = ({ data, pageContext }) => {
               return (
                 <ContactUsLayout
                   key={`ContactUsLayout_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
+            case 'page_Layoutsections_Components_H2ParagraphLeftImageRight':
+              return (
+                <H2ParagraphLeftImageRight
+                  key={`H2ParagraphLeftImageRight_${sectionIndex}`}
                   {...section}
                 />
               )
