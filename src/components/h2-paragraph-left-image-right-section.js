@@ -16,7 +16,10 @@ const StyledH2ParagraphLeftImageRight = styled.section`
 const H2ParagraphLeftImageRight = ({ h2Text, paragraphText, rightImage }) => {
   return (
     <StyledH2ParagraphLeftImageRight>
-      <Container>CONTENT</Container>      
+      <Container>
+        <h2>{h2Text}</h2>
+        <div>{paragraphText}</div>
+      </Container>      
     </StyledH2ParagraphLeftImageRight>
   )
 }

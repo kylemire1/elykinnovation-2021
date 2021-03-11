@@ -216,6 +216,7 @@ export const pageQuery = graphql`
           ...PortfolioCategory
           ...PortfolioMenu
           ...ContactUsLayout
+          ...H2ParagraphLeftImageRight
         }
       }
     }
