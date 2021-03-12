@@ -28,7 +28,7 @@
     "gatsby-source-wordpress": "^4.0.0",
     "gatsby-source-wordpress-experimental": "^7.0.4",
     "gatsby-transformer-sharp": "^2.9.0",
-    "html-react-parser": "^1.1.1",
+    "html-react-parser": "^1.2.4",
     "lodash": "^4.17.20",
     "polished": "^4.1.0",
     "react": "^17.0.1",
