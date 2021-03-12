@@ -22,6 +22,7 @@ import PortfolioMenu from '../components/portfolio-menu'
 import ContactUsLayout from '../components/contact-us-layout'
 import ContactForm from '../components/contact-form'
 import MembershipLogos from '../components/membership-logos'
+import H2ParagraphLeftImageRight from '../components/h2-paragraph-left-image-right-section'
 
 const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
@@ -177,6 +178,14 @@ const WpPageTemplate = ({ data, pageContext }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_H2ParagraphLeftImageRight':
+              return (
+                <H2ParagraphLeftImageRight
+                  key={`H2ParagraphLeftImageRight_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -228,6 +237,7 @@ export const pageQuery = graphql`
           ...ContactUsLayout
           ...ContactForm
           ...MembershipLogos
+          ...H2ParagraphLeftImageRight
         }
       }
     }
