@@ -51,7 +51,7 @@ const ButtonWrapper = styled.div`
 const HeroSection = ({ heroImage, heroText, buttonLink, buttonText }) => {
   return (
     <StyledHero bg={heroImage?.sourceUrl}>
-      <Container>{heroText && <h1>{heroText}</h1>}</Container>
+      <Container>{heroText && <h1>Hero Text!</h1>}</Container>
       {buttonLink && buttonText && (
         <ButtonWrapper>
           <Button elementType="link" buttonStyle="green" href={buttonLink}>
