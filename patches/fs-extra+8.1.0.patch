@@ -1,0 +1,14 @@
+diff --git a/node_modules/fs-extra/lib/copy/copy.js b/node_modules/fs-extra/lib/copy/copy.js
+index 411fc64..3502f3e 100644
+--- a/node_modules/fs-extra/lib/copy/copy.js
++++ b/node_modules/fs-extra/lib/copy/copy.js
+@@ -186,9 +186,6 @@ function onLink (destStat, src, dest, opts, cb) {
+         if (opts.dereference) {
+           resolvedDest = path.resolve(process.cwd(), resolvedDest)
+         }
+-        if (stat.isSrcSubdir(resolvedSrc, resolvedDest)) {
+-          return cb(new Error(`Cannot copy '${resolvedSrc}' to a subdirectory of itself, '${resolvedDest}'.`))
+-        }
+ 
+         // do not copy if src is a subdir of dest since unlinking
+         // dest in this case would result in removing src contents
