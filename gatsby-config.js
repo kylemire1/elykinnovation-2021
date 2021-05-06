@@ -1,6 +1,6 @@
-require('dotenv').config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-})
+});
 /**
  * 👋 Hey there!
  * This file is the starting point for your new WordPress/Gatsby site! 🚀
@@ -11,6 +11,9 @@ require('dotenv').config({
 module.exports = {
   siteMetadata: {
     siteUrl: `https://www.elykinnovation.com/`,
+  },
+  flags: {
+    FUNCTIONS: true,
   },
   /**
    * Adding plugins to this array adds them to your Gatsby site.
@@ -107,4 +110,4 @@ module.exports = {
     `gatsby-plugin-polished`,
     `gatsby-plugin-sitemap`,
   ],
-}
+};

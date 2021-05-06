@@ -1,15 +1,15 @@
-import React from 'react'
-import { graphql } from 'gatsby'
-import styled from 'styled-components'
+import React from "react";
+import { graphql } from "gatsby";
+import styled from "styled-components";
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
-import PostItem from '../components/post-item'
-import SubpageHeroSmall from '../components/subpage-hero-small'
-import { Section, Container } from '../components/styled/global'
+import Layout from "../components/layout";
+import Seo from "../components/seo";
+import PostItem from "../components/post-item";
+import SubpageHeroSmall from "../components/subpage-hero-small";
+import { Section, Container } from "../components/styled/global";
 
-import vars from '../vars'
-import ArchivePagination from '../components/archive-pagination'
+import vars from "../vars";
+import ArchivePagination from "../components/archive-pagination";
 
 const PostGrid = styled.ol`
   list-style: none;
@@ -20,19 +20,19 @@ const PostGrid = styled.ol`
   @media (min-width: ${vars.breakpointMedium}) {
     grid-template-columns: repeat(2, 1fr);
   }
-`
+`;
 
 const WpPostArchive = ({
   data,
   pageContext: { nextPagePath, previousPagePath, totalPages, currentPage },
 }) => {
-  const posts = data?.allWpPost?.nodes
-  const currentPageSlug = data.wpPage.slug
+  const posts = data?.allWpPost?.nodes;
+  const currentPageSlug = data.wpPage.slug;
 
   if (!posts.length) {
     return (
       <Layout currentPageSlug={currentPageSlug}>
-        <SEO
+        <Seo
           title={data?.wpPage?.seo?.title}
           description={data?.wpPage?.seo?.metaDesc}
         />
@@ -45,11 +45,11 @@ const WpPostArchive = ({
           </Container>
         </Section>
       </Layout>
-    )
+    );
   }
   return (
     <Layout currentPageSlug={currentPageSlug}>
-      <SEO
+      <Seo
         title={data?.wpPage?.seo?.title}
         description={data?.wpPage?.seo?.metaDesc}
       />
@@ -57,8 +57,8 @@ const WpPostArchive = ({
       <Section bg="colorWhite">
         <Container>
           <PostGrid>
-            {posts.map(post => {
-              return <PostItem key={post.uri} {...post} />
+            {posts.map((post) => {
+              return <PostItem key={post.uri} {...post} />;
             })}
           </PostGrid>
 
@@ -73,10 +73,10 @@ const WpPostArchive = ({
         </Container>
       </Section>
     </Layout>
-  )
-}
+  );
+};
 
-export default WpPostArchive
+export default WpPostArchive;
 
 export const pageQuery = graphql`
   query WordPressPostArchive($offset: Int!, $postsPerPage: Int!) {
@@ -105,4 +105,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;

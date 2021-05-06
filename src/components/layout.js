@@ -1,9 +1,9 @@
-import React from 'react'
+import React from "react";
 
-import Header from './header'
-import Footer from './footer'
-import SEO from './seo'
-import { MainContent } from './styled/global'
+import Header from "./header";
+import Footer from "./footer";
+import Seo from "./seo";
+import { MainContent } from "./styled/global";
 
 const Layout = ({
   seoData,
@@ -15,10 +15,10 @@ const Layout = ({
   return (
     <div
       className={`body-wrapper ${currentPageSlug} ${
-        isPrimaryPage ? 'primary' : 'secondary'
+        isPrimaryPage ? "primary" : "secondary"
       }`}
     >
-      <SEO
+      <Seo
         title={seoData?.title}
         description={seoData?.metaDesc}
         facebookDescription={seoData?.facebookDescription}
@@ -32,7 +32,7 @@ const Layout = ({
 
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

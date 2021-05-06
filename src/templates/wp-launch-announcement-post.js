@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { graphql } from 'gatsby'
+import React, { useState, useEffect } from "react";
+import { graphql } from "gatsby";
 
-import Layout from '../components/layout'
-import SEO from '../components/seo'
+import Layout from "../components/layout";
+import Seo from "../components/seo";
 
-import stripHtml from '../utils/stripHtml'
-import LaunchAnnouncementPost from '../components/launch-announcement-post'
+import stripHtml from "../utils/stripHtml";
+import LaunchAnnouncementPost from "../components/launch-announcement-post";
 
 const BlogPostTemplate = ({ data: { previous, next, post } }) => {
-  const [postData, setPostData] = useState(null)
+  const [postData, setPostData] = useState(null);
 
   useEffect(() => {
     if (post && !postData) {
@@ -16,14 +16,14 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         postTitle: post?.title,
         postDescription: stripHtml(
           post?.acfPostFields?.launchAnnouncementFields?.clientBlurb
-        ).replaceAll('\n', ''),
-      })
+        ).replaceAll("\n", ""),
+      });
     }
-  }, [post, postData])
+  }, [post, postData]);
 
   return (
     <Layout>
-      <SEO
+      <Seo
         title={postData?.postTitle}
         description={postData?.postDescription}
       />
@@ -31,10 +31,10 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
         <LaunchAnnouncementPost {...post} next={next} previous={previous} />
       )}
     </Layout>
-  )
-}
+  );
+};
 
-export default BlogPostTemplate
+export default BlogPostTemplate;
 
 export const pageQuery = graphql`
   query LaunchAnnouncementById(
@@ -102,4 +102,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
