@@ -1,14 +1,19 @@
-import fetch from "node-fetch";
+import fetch from 'node-fetch'
+
+// This file is a Gatsby Cloud function. When hosting on Gatsby Cloud, it will automatically be deployed as an API route.
+// See the Gatsby docs here to get started: https://www.gatsbyjs.com/docs/how-to/functions/
+
+// To learn how to set the custom GraphQL up on the WordPress side, watch this video: https://www.youtube.com/watch?v=ZRQ94PMNEcg
 
 export default async function handler(req, res) {
-  const formData = req.body;
+  const formData = req.body
 
   try {
     // Authenticating with the WordPress site to get a JWT
     const loginData = await fetch(process.env.WPGRAPHQL_URL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         query: `
@@ -36,14 +41,14 @@ export default async function handler(req, res) {
         },
       }),
     })
-      .then((res) => res.json())
-      .then((result) => result.data);
+      .then(res => res.json())
+      .then(result => result.data)
 
     // Use the JWT to send an authenticated request with the form submission
     const submissionResult = await fetch(process.env.WPGRAPHQL_URL, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${loginData.login.authToken}`,
       },
       body: JSON.stringify({
@@ -77,25 +82,25 @@ export default async function handler(req, res) {
         },
       }),
     })
-      .then((res) => res.json())
-      .then((result) => result.data);
+      .then(res => res.json())
+      .then(result => result.data)
 
     if (!submissionResult.createSubmission.success) {
-      throw new Error();
+      throw new Error()
     }
 
     res.status(200).json({
       error: false,
-    });
-    return;
+    }).
+    return
   } catch (error) {
     res.status(200).json({
       error: true,
       message:
-        "Error submitting your form. Please try again or contact us at 904.998.1935",
-    });
-    return;
+        'Error submitting your form. Please try again or contact us at 904.998.1935',
+    })
+    return
   }
 }
 
-const generateMutationId = () => Math.random().toString(36).substring(7);
+const generateMutationId = () => Math.random().toString(36).substring(7)
