@@ -34,10 +34,11 @@ const PortfolioMenu = () => {
 
   const categoryComponents = portfolioData?.wpPage?.layoutSections?.components.filter(
     component =>
-      component.__typename ===
-      'WpPage_Layoutsections_Components_PortfolioCategory'
+      component.fieldGroupName ===
+      'page_Layoutsections_Components_PortfolioCategory'
   )
   const categoryNames = getCategoryNames(categoryComponents)
+
   return (
     <Section id="portfolio-top">
       <Container>
