@@ -235,7 +235,7 @@ export const pageQuery = graphql`
           ...PortfolioCategory
           ...PortfolioMenu
           ...ContactUsLayout
-          ...ContactForm
+          #...ContactForm
           ...MembershipLogos
           ...H2ParagraphLeftImageRight
         }
