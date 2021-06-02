@@ -210,7 +210,7 @@ const LaunchAnnouncementPost = ({
                 </FollowUpServices>
               </ServicesWrapper>
               <MockupWrapper>
-                {mockupImageData && (
+                {mockupImage && (
                   <Image
                     backgroundColor="transparent"
                     fixed={[
