@@ -154,7 +154,7 @@ export const SuccessMessage = styled(ErrorMessage)`
 `
 
 export const TitleHead = styled.div`
-  font-size: ${vars.fontSizeHeading1};
+  font-size: ${vars.fontSizeText};
   text-transform: uppercase;
   color: ${vars.colorGreenSmall};
   font-weight: ${vars.fontWeightBold};

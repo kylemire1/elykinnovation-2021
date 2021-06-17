@@ -25,6 +25,7 @@ import MembershipLogos from '../components/membership-logos'
 import H2ParagraphLeftImageRight from '../components/h2-paragraph-left-image-right-section'
 import Gallery from '../components/gallery'
 import AboutBlackCard from '../components/black-cards'
+import AboutWhiteCard from '../components/white-card'
 
 const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
@@ -198,6 +199,14 @@ const WpPageTemplate = ({ data, pageContext }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_AboutWhiteCard':
+              return (
+                <AboutWhiteCard
+                  key={`AboutWhiteCard_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -252,6 +261,7 @@ export const pageQuery = graphql`
           ...H2ParagraphLeftImageRight
           ...Gallery
           ...AboutBlackCard
+          ...AboutWhiteCard
         }
       }
     }
