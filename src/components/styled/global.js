@@ -152,3 +152,25 @@ export const SuccessMessage = styled(ErrorMessage)`
   background-color: ${vars.colorTransparent};
   border: solid ${vars.pixel} ${vars.colorGreenSmall};
 `
+
+export const TitleHead = styled.div`
+  font-size: ${vars.fontSizeHeading1};
+  text-transform: uppercase;
+  color: ${vars.colorGreenSmall};
+  font-weight: ${vars.fontWeightBold};
+  margin-top: 2rem;
+  margin-bottom: -0.5rem;
+  padding: ${({ angled }) => (angled ? '7.5rem 0 3rem' : '1rem 0')};
+`
+export const Card = styled.div`
+  padding: ${({ angled }) => (angled ? '7em 0 2em' : '1rem 0')};
+  color: ${({ bg }) =>
+    bg !== 'colorWhite' ? vars.colorWhite : vars.colorAlmostBlack};
+`
+export const CardGrid = styled.div`
+  background-color: black;
+  border-radius: 20px;
+  overflow: hidden;
+  border-right: 2em solid transparent;
+  display: inline-flex;
+`
