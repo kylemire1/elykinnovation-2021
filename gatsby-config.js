@@ -1,6 +1,6 @@
-require("dotenv").config({
+require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
-});
+})
 /**
  * 👋 Hey there!
  * This file is the starting point for your new WordPress/Gatsby site! 🚀
@@ -10,7 +10,7 @@ require("dotenv").config({
  */
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://www.elykinnovation.com/`,
+    siteUrl: `https://backoffice.elykinnovation.com/`,
   },
   flags: {
     FUNCTIONS: true,
@@ -36,7 +36,7 @@ module.exports = {
         // the only required plugin option for WordPress is the GraphQL url.
         url:
           process.env.WPGRAPHQL_URL ||
-          `https://fallback.elykinnovation.com/graphql`,
+          `https://backoffice.elykinnovation.com/graphql`,
         // these options slow down the bulld process,
         // but are helpful if your graphql server is getting overloaded while building
         schema: {
@@ -73,6 +73,7 @@ module.exports = {
      * See https://www.gatsbyjs.com/docs/gatsby-image/#setting-up-gatsby-image
      * if you're curious about it.
      */
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
 
@@ -109,5 +110,6 @@ module.exports = {
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-polished`,
     `gatsby-plugin-sitemap`,
+    `gatsby-plugin-image`,
   ],
-};
+}
