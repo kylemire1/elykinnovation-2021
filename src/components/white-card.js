@@ -61,6 +61,12 @@ const Inner = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 40rem;
+  margin: 0 auto;
+
+  @media (min-width: ${vars.breakpointMedium}) {
+    max-width: 100%;
+  }
 `
 
 const CardGrid = styled.div`
