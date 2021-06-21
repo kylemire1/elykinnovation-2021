@@ -25,6 +25,7 @@ import MembershipLogos from '../components/membership-logos'
 import H2ParagraphLeftImageRight from '../components/h2-paragraph-left-image-right-section'
 import Gallery from '../components/gallery'
 import AboutBlackCard from '../components/black-cards'
+import TextContentNoImages from '../components/text-content'
 import AboutWhiteCard from '../components/white-card'
 
 const WpPageTemplate = ({ data, pageContext }) => {
@@ -199,6 +200,14 @@ const WpPageTemplate = ({ data, pageContext }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_TextContentNoImages':
+              return (
+                <TextContentNoImages
+                  key={`TextContentNoImages_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             case 'page_Layoutsections_Components_AboutWhiteCard':
               return (
                 <AboutWhiteCard
@@ -261,6 +270,7 @@ export const pageQuery = graphql`
           ...H2ParagraphLeftImageRight
           ...Gallery
           ...AboutBlackCard
+          ...TextContentNoImages
           ...AboutWhiteCard
         }
       }
