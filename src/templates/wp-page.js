@@ -24,6 +24,7 @@ import ContactForm from '../components/contact-form'
 import MembershipLogos from '../components/membership-logos'
 import H2ParagraphLeftImageRight from '../components/h2-paragraph-left-image-right-section'
 import AboutBlackCard from '../components/black-cards'
+import TextContentNoImages from '../components/text-content'
 
 const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
@@ -195,6 +196,14 @@ const WpPageTemplate = ({ data, pageContext }) => {
                 />
               )
 
+            case 'page_Layoutsections_Components_TextContentNoImages':
+              return (
+                <TextContentNoImages
+                  key={`TextContentNoImages_${sectionIndex}`}
+                  {...section}
+                />
+              )
+
             default:
               return null
           }
@@ -248,6 +257,7 @@ export const pageQuery = graphql`
           ...MembershipLogos
           ...H2ParagraphLeftImageRight
           ...AboutBlackCard
+          ...TextContentNoImages
         }
       }
     }
