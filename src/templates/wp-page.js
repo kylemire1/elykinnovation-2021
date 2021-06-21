@@ -25,11 +25,8 @@ import MembershipLogos from '../components/membership-logos'
 import H2ParagraphLeftImageRight from '../components/h2-paragraph-left-image-right-section'
 import Gallery from '../components/gallery'
 import AboutBlackCard from '../components/black-cards'
-<<<<<<< HEAD
 import TextContentNoImages from '../components/text-content'
-=======
 import AboutWhiteCard from '../components/white-card'
->>>>>>> ed30cf2c390e222263d3bb306c4294b1d2f09e89
 
 const WpPageTemplate = ({ data, pageContext }) => {
   const layoutSections = data.page.layoutSections.components
@@ -203,17 +200,18 @@ const WpPageTemplate = ({ data, pageContext }) => {
                 />
               )
 
-<<<<<<< HEAD
             case 'page_Layoutsections_Components_TextContentNoImages':
               return (
                 <TextContentNoImages
                   key={`TextContentNoImages_${sectionIndex}`}
-=======
+                  {...section}
+                />
+              )
+
             case 'page_Layoutsections_Components_AboutWhiteCard':
               return (
                 <AboutWhiteCard
                   key={`AboutWhiteCard_${sectionIndex}`}
->>>>>>> ed30cf2c390e222263d3bb306c4294b1d2f09e89
                   {...section}
                 />
               )
