@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import PortfolioMenuItem from './portfolio-menu-item'
 import { Section, Container } from '../../components/styled/global'
 
+import vars from '../../vars'
 import iReplaceAll from '../../utils/iReplaceAll'
 
 const StyledMenu = styled.ul`
@@ -13,7 +14,11 @@ const StyledMenu = styled.ul`
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin-bottom: -4rem;
+  margin-bottom: -2rem;
+
+  @media (min-width: ${vars.breakpointMedium}) {
+    margin-bottom: -4rem;
+  }
 `
 
 const PortfolioMenu = () => {
@@ -32,11 +37,12 @@ const PortfolioMenu = () => {
     }
   `)
 
-  const categoryComponents = portfolioData?.wpPage?.layoutSections?.components.filter(
-    component =>
-      component.fieldGroupName ===
-      'page_Layoutsections_Components_PortfolioCategory'
-  )
+  const categoryComponents =
+    portfolioData?.wpPage?.layoutSections?.components.filter(
+      component =>
+        component.fieldGroupName ===
+        'page_Layoutsections_Components_PortfolioCategory'
+    )
   const categoryNames = getCategoryNames(categoryComponents)
 
   return (

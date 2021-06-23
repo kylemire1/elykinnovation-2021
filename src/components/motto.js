@@ -69,7 +69,6 @@ const MottoContent = styled.div`
     justify-content: center;
     margin-left: ${({ $post }) => ($post ? '1.5rem' : '1rem')};
     p {
-      margin-bottom: 0;
       font-size: ${vars.fontSizeTextLarge};
     }
   }
@@ -114,7 +113,7 @@ const Motto = ({
           </MottoHeadingWrapper>
           <MottoDivider $height={height} />
           <MottoContent $post={launchPost} bg={sectionBackgroundColor}>
-            {paragraphContent && parse(paragraphContent)}
+            <div>{paragraphContent && parse(paragraphContent)}</div>
           </MottoContent>
         </MottoWrapper>
       </Container>

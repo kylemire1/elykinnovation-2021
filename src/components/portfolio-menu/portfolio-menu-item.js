@@ -27,7 +27,7 @@ const StyledMenuItem = styled.li`
   }
 
   @media (min-width: ${vars.breakpointLarge}) {
-    padding: 1em;
+    padding: 0.5em;
   }
 `
 

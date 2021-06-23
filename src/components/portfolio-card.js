@@ -12,18 +12,19 @@ const StyledCard = styled.div`
   position: relative;
   cursor: pointer;
   color: ${vars.colorWhite};
+  opacity: 1;
+  transition: opacity 250ms ${vars.ease};
 
   a {
     color: currentColor;
     font-weight: ${vars.fontWeightBold};
-    opacity: 1;
-    transition: opacity 250ms ${vars.ease};
+  }
 
-    :focus,
-    :hover {
-      opacity: 0.75;
-      transition: opacity 250ms ${vars.ease};
-    }
+  :focus,
+  :hover,
+  :focus-within {
+    opacity: 0.9;
+    transition: opacity 250ms ${vars.ease};
   }
 `
 

@@ -17,7 +17,7 @@ const MobileNavButton = styled.button`
     height: 100%;
   }
 
-  @media (min-width: ${vars.breakpointLarge}) {
+  @media (min-width: ${vars.breakpointExtraLarge}) {
     display: none;
   }
 `
