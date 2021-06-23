@@ -11,12 +11,9 @@ import heroBgSrc from '../../content/assets/portfolio-bg-pattern.svg'
 
 const StyledHero = styled.section`
   min-height: 42.5rem;
-
-  @media (min-width: ${vars.breakpointLarge}) {
-    background-image: url(${heroBgSrc});
-    background-repeat: no-repeat;
-    background-position: top -${vars.pixel} center;
-  }
+  background-image: url(${heroBgSrc});
+  background-repeat: no-repeat;
+  background-position: top -${vars.pixel} center;
 `
 
 const HeroContent = styled.div`
@@ -65,6 +62,7 @@ const SubpageHeroLarge = ({
           <ImageWrapper>
             {image && (
               <Image
+                quality="100"
                 backgroundColor="transparent"
                 fixed={[
                   imageData.mobile,

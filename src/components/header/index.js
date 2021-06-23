@@ -17,7 +17,7 @@ import getArraySlice from '../../utils/getArraySlice'
 import useMenuData from '../../utils/hooks/useMenuData'
 
 const StyledContainer = styled(Container)`
-  @media (min-width: ${vars.breakpointLarge}) {
+  @media (min-width: ${vars.breakpointExtraLarge}) {
     height: 5.5rem;
   }
 `
@@ -46,7 +46,7 @@ const NavWrapper = styled.div`
 const FlexNav = styled.nav`
   display: none;
 
-  @media (min-width: ${vars.breakpointLarge}) {
+  @media (min-width: ${vars.breakpointExtraLarge}) {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
@@ -93,7 +93,7 @@ const MobileNavWrapper = styled.div`
     transition: all 250ms ${vars.ease};
   }
 
-  @media (min-width: ${vars.breakpointLarge}) {
+  @media (min-width: ${vars.breakpointExtraLarge}) {
     display: none;
   }
 `

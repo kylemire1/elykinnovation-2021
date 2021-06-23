@@ -19,7 +19,7 @@ const StyledSecondaryNav = styled(StyledPrimaryNav)`
     margin: 0.25em 0;
   }
 
-  @media (min-width: ${vars.breakpointLarge}) {
+  @media (min-width: ${vars.breakpointExtraLarge}) {
     position: relative;
     order: 1;
     max-width: 55%;

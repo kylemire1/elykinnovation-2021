@@ -182,6 +182,7 @@ const LaunchAnnouncementPost = ({
                 <Image
                   backgroundColor="transparent"
                   fluid={homePageImageData.fluid}
+                  placeholder="dominantColor"
                   alt={homePageImageData.altText}
                 />
               )}

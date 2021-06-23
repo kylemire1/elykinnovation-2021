@@ -6,6 +6,7 @@ import Layout from '../components/layout'
 import { Section, Container, SoloHeading } from '../components/styled/global'
 
 import vars from '../vars'
+import bullet from '../../content/assets/bullet.png'
 
 const SiteMapLink = styled(Link)`
   color: ${vars.colorGreenSmallSubpage};
@@ -25,10 +26,10 @@ const SiteMap = () => {
   const pages = result?.allWpPage?.nodes
   return (
     <Layout>
-      <Section bg="colorWhite">
+      <Section bg="colorBlack">
         <Container>
-          <SoloHeading color={vars.colorAlmostBlack}>Site Map</SoloHeading>
-          <ul>
+          <SoloHeading color={vars.colorWhite}>Site Map</SoloHeading>
+          <StyledList>
             {pages &&
               pages.length &&
               pages.map(({ uri, title }) => (
@@ -38,11 +39,17 @@ const SiteMap = () => {
                   </SiteMapLink>
                 </li>
               ))}
-          </ul>
+          </StyledList>
         </Container>
       </Section>
     </Layout>
   )
 }
+
+const StyledList = styled.ul`
+  li {
+    background-image: url(${bullet}) !important;
+  }
+`
 
 export default SiteMap

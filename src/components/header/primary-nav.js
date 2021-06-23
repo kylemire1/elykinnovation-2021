@@ -30,7 +30,7 @@ export const StyledPrimaryNav = styled.div`
     border-radius: ${vars.borderRadiusLarge};
   }
 
-  @media (min-width: ${vars.breakpointLarge}) {
+  @media (min-width: ${vars.breakpointExtraLarge}) {
     display: block;
     order: 2;
     margin: 0;
