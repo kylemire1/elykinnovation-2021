@@ -1,5 +1,5 @@
 import React from 'react'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import Image from 'gatsby-image'
 import parse from 'html-react-parser'
 import { graphql } from 'gatsby'
 import styled from 'styled-components'
@@ -53,7 +53,7 @@ const H2ParagraphLeftImageRight = ({ h2Text, paragraphText, rightImage }) => {
         </div>
         <div>
           {rightImage && (
-            <GatsbyImage
+            <Image
               backgroundColor="transparent"
               fixed={[
                 imageData.mobile,
