@@ -9,7 +9,6 @@ import PrimaryNav from './primary-nav'
 import SecondaryNav from './secondary-nav'
 import Logo from './logo'
 import { Container } from '../styled/global'
-import MobileNavButton from '../styled/mobile-nav-button'
 import MobileNav from './mobile-nav'
 
 import vars from '../../vars'
@@ -91,6 +90,26 @@ const MobileNavWrapper = styled.div`
     opacity: 0;
     transform: translateY(-5%);
     transition: all 250ms ${vars.ease};
+  }
+
+  @media (min-width: ${vars.breakpointExtraLarge}) {
+    display: none;
+  }
+`
+
+const MobileNavButton = styled.button`
+  display: block;
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: ${vars.colorWhite};
+  font-size: 1rem;
+  min-width: 3rem;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 
   @media (min-width: ${vars.breakpointExtraLarge}) {

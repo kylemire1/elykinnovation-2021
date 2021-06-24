@@ -61,7 +61,7 @@ const InfoWrapper = styled.div`
 `
 
 const ContactItem = ({ contactType, contactInfo, contactLink }) => {
-  // This is a custom hook to query for menu data.
+  // This is a custom hook to query for and then format contact info.
   // Hooks are a built-in tool of React that let us separate a lot of the business logic out of our components and let them just worry about displaying the template.
   // See https://reactjs.org/docs/hooks-custom.html for more info
   const { info } = useContactInfo(contactType, contactInfo)

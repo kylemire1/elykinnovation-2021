@@ -1,236 +1,213 @@
 import React, { useState, useRef, useEffect } from 'react'
-const ContactForm = () => <div>Placeholder</div>
-// import { graphql } from "gatsby";
-// import styled from "styled-components";
-// import parse from "html-react-parser";
-// import Loader from "react-loader-spinner";
+import styled from 'styled-components'
+import { graphql } from 'gatsby'
+import Loader from 'react-loader-spinner'
 
-// import Input from "./input";
-// import Textarea from "./textarea";
-// import {
-//   Section,
-//   Container,
-//   ErrorMessage,
-//   SoloHeading,
-// } from "../styled/global";
+import { Container, Section, ErrorMessage, SoloHeading } from '../styled/global'
 
-// import vars from "../../vars";
-// import Select from "./select";
+import vars from '../../vars'
+import Field from './field'
 
-// const StyledForm = styled.form`
-//   background-color: ${({ bg }) => vars[bg] || vars.colorTransparent};
-//   color: ${({ bg }) =>
-//     bg !== "colorWhite" ? vars.colorWhite : vars.colorAlmostBlack};
-//   padding: 2em;
-//   border-radius: ${vars.borderRadiusLarge};
-//   margin: 0 auto;
+export const fragment = graphql`
+  fragment ContactForm on WpPage_Layoutsections_Components_ContactForm {
+    fieldGroupName
+    submitButtonText
+    sectionBackgroundColor
+  }
+`
 
-//   .required {
-//     color: ${vars.colorRed};
-//   }
+const INITIAL_FORM_VALUES = {
+  name: '',
+  email: '',
+  phone: '',
+  interest: '',
+  message: '',
+}
 
-//   @media (min-width: ${vars.breakpointMedium}) {
-//     max-width: 75%;
-//   }
-// `;
+const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [submittedSuccess, setSubmittedSuccess] = useState(false)
+  const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES)
+  const formRef = useRef(null)
 
-// const SubmitButton = styled.button`
-//   display: block;
-//   margin: 0 auto;
-//   border: none;
-//   border-radius: ${vars.borderRadiusSmall};
-//   background-color: ${vars.colorGreen};
-//   color: ${vars.colorWhite};
-//   font-weight: ${vars.fontWeightNormal};
-//   padding: 1em 4em;
-//   cursor: pointer;
-//   width: 100%;
-//   height: 4rem;
-//   font-size: ${vars.fontSizeText};
+  useEffect(() => {
+    setSubmittedSuccess(false)
+    setError(false)
+    setIsLoading(false)
+    setFormValues(INITIAL_FORM_VALUES)
+  }, [])
 
-//   @media (min-width: ${vars.breakpointLarge}) {
-//     max-width: 20rem;
-//   }
-// `;
+  const handleChange = e => {
+    const { name, value } = e.currentTarget
+    setFormValues({
+      ...formValues,
+      [name]: value,
+    })
+    setError(null)
+  }
 
-// const ThankYou = styled.div`
-//   padding: 2em;
-// `;
+  const handleSubmit = async e => {
+    e.preventDefault()
+    setIsLoading(true)
+    setSubmittedSuccess(false)
+    try {
+      const submissionResponse = await fetch('/api/create-submission', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formValues }),
+      }).then(res => res.json())
 
-// const INITIAL_STATE = {
-//   name: "",
-//   phone: "",
-//   email: "",
-//   interest: "Not Sure",
-//   message: "",
-// };
+      setIsLoading(false)
 
-// const ContactForm = ({
-//   sectionBackgroundColor,
-//   formFields,
-//   submitButtonText,
-// }) => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [error, setError] = useState(null);
-//   const [submittedSuccess, setSubmittedSuccess] = useState(false);
-//   const [formValues, setFormValues] = useState(INITIAL_STATE);
-//   const formRef = useRef();
+      if (submissionResponse.error) {
+        throw new Error(submissionResponse.message)
+      }
 
-//   useEffect(() => {
-//     setSubmittedSuccess(false);
-//     setError(false);
-//     setIsLoading(false);
-//     setFormValues(INITIAL_STATE);
-//   }, []);
+      setFormValues(INITIAL_FORM_VALUES)
+      formRef.current.reset()
+      setIsLoading(false)
+      setSubmittedSuccess(true)
+    } catch (err) {
+      setIsLoading(false)
+      setError(err.message)
+    }
+  }
 
-//   const handleChange = (e) => {
-//     const { name, value } = e.currentTarget;
-//     setFormValues({
-//       ...formValues,
-//       [name]: value,
-//     });
-//     setError(null);
-//   };
+  return (
+    <Section bg={sectionBackgroundColor}>
+      <Container>
+        <StyledForm onSubmit={handleSubmit} ref={formRef}>
+          {!submittedSuccess && (
+            <>
+              <Field
+                type="text"
+                name="name"
+                id="name"
+                value={formValues.name}
+                handleChange={handleChange}
+                label="Name"
+                required
+              />
+              <Field
+                type="email"
+                name="email"
+                id="email"
+                value={formValues.email}
+                handleChange={handleChange}
+                label="Email Address"
+                required
+              />
+              <Field
+                type="phone"
+                name="phone"
+                id="phone"
+                value={formValues.phone}
+                handleChange={handleChange}
+                label="Phone Number"
+              />
+              <Field
+                type="select"
+                name="interest"
+                id="interest"
+                value={formValues.interest}
+                choices={[
+                  'Website Development',
+                  'Website Rescue',
+                  'Web Application',
+                  'Content Management System',
+                  'Search Engine Optimization',
+                  'Pay-Per-Click Advertising',
+                  'Email Marketing',
+                  'Android App',
+                  'Just Saying "Hey!"',
+                  'Release the Kraken!',
+                ]}
+                handleChange={handleChange}
+                label="Area of Interest"
+                required
+              />
+              <Field
+                type="textarea"
+                name="message"
+                id="message"
+                value={formValues.message}
+                handleChange={handleChange}
+                label="Message"
+                required
+              />
+            </>
+          )}
+          {error && (
+            <ErrorMessage>
+              <p>{error}</p>
+            </ErrorMessage>
+          )}
+          {submittedSuccess && (
+            <ThankYou>
+              <SoloHeading color={vars.colorAlmostBlack}>Thank You</SoloHeading>
+              We've received your message and will be in touch shortly!
+            </ThankYou>
+          )}
+          {!submittedSuccess && (
+            <SubmitButton onClick={handleSubmit}>
+              {!isLoading ? (
+                submitButtonText
+              ) : (
+                <Loader
+                  type="Oval"
+                  color={vars.colorWhite}
+                  height={30}
+                  width={30}
+                />
+              )}
+            </SubmitButton>
+          )}
+        </StyledForm>
+      </Container>
+    </Section>
+  )
+}
 
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     setIsLoading(true);
-//     setSubmittedSuccess(false);
-//     try {
-//       const submissionResponse = await fetch("/api/create-submission", {
-//         method: "POST",
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify({ ...formValues }),
-//       }).then((res) => res.json());
+const StyledForm = styled.form`
+  background-color: ${vars.colorWhite};
+  color: ${vars.colorAlmostBlack};
+  padding: 2em;
+  border-radius: ${vars.borderRadiusLarge};
+  margin: 0 auto;
 
-//       console.log(submissionResponse);
-//       setIsLoading(false);
+  .required {
+    color: ${vars.colorRed};
+  }
 
-//       if (submissionResponse.error) {
-//         throw new Error(submissionResponse.message);
-//       }
+  @media (min-width: ${vars.breakpointMedium}) {
+    max-width: 75%;
+  }
+`
 
-//       setFormValues(INITIAL_STATE);
-//       formRef.current.reset();
-//       setIsLoading(false);
-//       setSubmittedSuccess(true);
-//     } catch (err) {
-//       setIsLoading(false);
-//       setError(err.message);
-//     }
-//   };
+const ThankYou = styled.div`
+  padding: 2em;
+`
 
-//   return (
-//     <Section bg={sectionBackgroundColor}>
-//       <Container>
-//         <StyledForm ref={formRef} bg="colorWhite">
-//           {!submittedSuccess &&
-//             formFields &&
-//             formFields.length > 0 &&
-//             formFields.map((field, fieldIndex) => {
-//               switch (field.fieldGroupName) {
-//                 case "page_Layoutsections_Components_ContactForm_FormFields_Input":
-//                   return (
-//                     <Input
-//                       key={`ContactForm_${field}_${fieldIndex}`}
-//                       {...field}
-//                       formValues={formValues}
-//                       handleChange={handleChange}
-//                     />
-//                   );
-//                 case "page_Layoutsections_Components_ContactForm_FormFields_Textarea":
-//                   return (
-//                     <Textarea
-//                       key={`ContactForm_${field}_${fieldIndex}`}
-//                       {...field}
-//                       formValues={formValues}
-//                       handleChange={handleChange}
-//                     />
-//                   );
-//                 case "page_Layoutsections_Components_ContactForm_FormFields_Select":
-//                   return (
-//                     <Select
-//                       key={`ContactForm_${field}_${fieldIndex}`}
-//                       {...field}
-//                       formValues={formValues}
-//                       handleChange={handleChange}
-//                     />
-//                   );
-//                 default:
-//                   return (
-//                     <div key={`Contactform_Default_${fieldIndex}`}>
-//                       A component is not yet defined for that type of form field
-//                     </div>
-//                   );
-//               }
-//             })}
-//           {error && (
-//             <ErrorMessage>
-//               <p>{parse(error)}</p>
-//             </ErrorMessage>
-//           )}
-//           {submittedSuccess && (
-//             <ThankYou>
-//               <SoloHeading color={vars.colorAlmostBlack}>Thank You</SoloHeading>
-//               We've received your message and will be in touch shortly!
-//             </ThankYou>
-//           )}
-//           {!submittedSuccess && (
-//             <SubmitButton onClick={handleSubmit}>
-//               {!isLoading ? (
-//                 submitButtonText
-//               ) : (
-//                 <Loader
-//                   type="Oval"
-//                   color={vars.colorWhite}
-//                   height={30}
-//                   width={30}
-//                 />
-//               )}
-//             </SubmitButton>
-//           )}
-//         </StyledForm>
-//       </Container>
-//     </Section>
-//   );
-// };
+const SubmitButton = styled.button`
+  display: block;
+  margin: 0 auto;
+  border: none;
+  border-radius: ${vars.borderRadiusSmall};
+  background-color: ${vars.colorGreen};
+  color: ${vars.colorWhite};
+  font-weight: ${vars.fontWeightNormal};
+  padding: 1em 4em;
+  cursor: pointer;
+  width: 100%;
+  height: 4rem;
+  font-size: ${vars.fontSizeText};
 
-// export const fragment = graphql`
-//   fragment ContactForm on WpPage_Layoutsections_Components_ContactForm {
-//     fieldGroupName
-//     recipientEmail
-//     submitButtonText
-//     sectionBackgroundColor
-//     formFields {
-//       ... on WpPage_Layoutsections_Components_ContactForm_FormFields_Input {
-//         fieldGroupName
-//         inputLabel
-//         inputName
-//         placeholderText
-//         inputType
-//         required
-//       }
-//       ... on WpPage_Layoutsections_Components_ContactForm_FormFields_Textarea {
-//         fieldGroupName
-//         inputLabel
-//         inputName
-//         placeholderText
-//         required
-//       }
-//       ... on WpPage_Layoutsections_Components_ContactForm_FormFields_Select {
-//         fieldGroupName
-//         inputLabel
-//         inputName
-//         required
-//         options {
-//           optionLabel
-//           optionValue
-//         }
-//       }
-//     }
-//   }
-// `;
+  @media (min-width: ${vars.breakpointLarge}) {
+    max-width: 20rem;
+  }
+`
 
 export default ContactForm
