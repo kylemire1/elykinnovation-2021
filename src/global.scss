@@ -31,11 +31,6 @@ body {
       text-decoration: none;
       transition: opacity 250ms cubic-bezier(0.55, 0, 0.1, 1);
       opacity: 1;
-      &:hover,
-      &:focus {
-        opacity: 0.9;
-        transition: opacity 250ms cubic-bezier(0.55, 0, 0.1, 1);
-      }
     }
 
     ul {
@@ -44,7 +39,7 @@ body {
       }
     }
     .check li {
-      background-image: url('../content/assets/check-bullet.svg') !important;
+      background-image: url('../content/assets/check-green.png') !important;
       background-position: top 0.12em left !important;
 
       @media (min-width: 62em) {
@@ -62,7 +57,7 @@ body {
         background-image: url('../content/assets/bullet-black.png');
       }
       &.check li {
-        background-image: url('../content/assets/check-bullet.svg');
+        background-image: url('../content/assets/check-green.png');
         background-position: top 0.25em left;
       }
     }
