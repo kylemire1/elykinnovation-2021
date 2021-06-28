@@ -1,6 +1,9 @@
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 })
+
+const siteUrl = `http://localhost:9000`
+
 /**
  * 👋 Hey there!
  * This file is the starting point for your new WordPress/Gatsby site! 🚀
@@ -10,7 +13,7 @@ require('dotenv').config({
  */
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://backoffice.elykinnovation.com/`,
+    siteUrl,
   },
   flags: {
     FUNCTIONS: true,
@@ -109,7 +112,73 @@ module.exports = {
     },
     `gatsby-plugin-catch-links`,
     `gatsby-plugin-polished`,
-    `gatsby-plugin-sitemap`,
     `gatsby-plugin-image`,
+    // Sitemap is generated at: "https://[yoursite]/sitemap/sitemap-index.xml"
+    // The custom query and resolvers below add the
+    // <lastmod> value to the sitemap, which is what
+    // Google cares about. This config can be copy/pasted,
+    // it won't change between projects.
+    {
+      resolve: 'gatsby-plugin-sitemap',
+      options: {
+        query: `
+        {
+          allSitePage {
+            nodes {
+              path
+            }
+          }
+          allWpContentNode(filter: {nodeType: {in: ["Post", "Page"]}}) {
+            nodes {
+              ... on WpPost {
+                uri
+                modifiedGmt
+              }
+              ... on WpPage {
+                uri
+                modifiedGmt
+              }
+            }
+          }
+        }
+      `,
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({
+          allSitePage: { nodes: allPages },
+          allWpContentNode: { nodes: allWpNodes },
+        }) => {
+          const wpNodeMap = allWpNodes.reduce((acc, node) => {
+            const { uri } = node
+            acc[uri] = node
+
+            return acc
+          }, {})
+
+          return allPages.map(page => {
+            return { ...page, ...wpNodeMap[page.path] }
+          })
+        },
+        serialize: ({ path, modifiedGmt }) => {
+          return {
+            url: path,
+            lastmod: modifiedGmt,
+          }
+        },
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-gtag`,
+      options: {
+        // You can add multiple tracking ids and a pageview event will be fired for all of them.
+        trackingIds: [
+          'GA-TRACKING_ID', // Google Analytics / GA
+        ],
+        // This object is used for configuration specific to this plugin
+        pluginConfig: {
+          // Puts tracking script in the head instead of the body
+          head: false,
+        },
+      },
+    },
   ],
 }
