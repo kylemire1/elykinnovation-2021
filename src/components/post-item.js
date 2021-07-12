@@ -50,16 +50,15 @@ const PostExcerpt = styled.div`
 `
 
 const PostImage = styled.div`
-max-width: 100%;
-width: 100%;
-    height: 30rem;
-    overflow: hidden;
+  max-width: 100%;
+  width: 100%;
+  height: 30rem;
+  overflow: hidden;
 
-    border: 1px solid #EEEEEE;
-    display: block;
-    margin: 1.5rem 0 0;
-    border-radius: 20px;
-
+  border: 1px solid #eeeeee;
+  display: block;
+  margin: 1.5rem 0 0;
+  border-radius: 20px;
 `
 
 const PostDate = styled.small`
@@ -67,12 +66,15 @@ const PostDate = styled.small`
   margin-bottom: 0.5rem;
 `
 
-const PostItem = ({ uri, title, date, acfPostFields  }) => {
+const PostItem = ({ uri, title, date, acfPostFields }) => {
   const [excerpt, setExcerpt] = useState(null)
 
   const homePageImageData = {
-    fluid: acfPostFields?.launchAnnouncementFields?.fullHomePageScreenshot?.localFile?.childImageSharp?.fluid,
-    altText: acfPostFields?.launchAnnouncementFields?.fullHomePageScreenshot?.altText,
+    fluid:
+      acfPostFields?.launchAnnouncementFields?.fullHomePageScreenshot?.localFile
+        ?.childImageSharp?.fluid,
+    altText:
+      acfPostFields?.launchAnnouncementFields?.fullHomePageScreenshot?.altText,
   }
 
   useEffect(() => {
@@ -102,13 +104,12 @@ const PostItem = ({ uri, title, date, acfPostFields  }) => {
           </PostExcerpt>
           {acfPostFields.launchAnnouncementFields.fullHomePageScreenshot && (
             <PostImage>
-          <Image
-            backgroundColor="transparent"
-            fluid={homePageImageData.fluid}
-            placeholder="dominantColor"
-            alt={homePageImageData.altText}
-          /></PostImage>
-        )}
+              <Image
+                fluid={homePageImageData.fluid}
+                alt={homePageImageData.altText}
+              />
+            </PostImage>
+          )}
         </Link>
       </article>
     </StyledPostItem>
