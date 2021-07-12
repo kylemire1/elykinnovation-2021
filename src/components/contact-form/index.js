@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import { graphql } from 'gatsby'
 import Loader from 'react-loader-spinner'
+import { Helmet } from 'react-helmet'
 
 import { Container, Section, ErrorMessage, SoloHeading } from '../styled/global'
 
@@ -30,6 +31,7 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
   const [submittedSuccess, setSubmittedSuccess] = useState(false)
   const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES)
   const formRef = useRef(null)
+  const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_V3_SITE_KEY
 
   useEffect(() => {
     setSubmittedSuccess(false)
@@ -44,24 +46,38 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
       ...formValues,
       [name]: value,
     })
-    setError(null)
   }
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault()
+    setError(null)
     setIsLoading(true)
     setSubmittedSuccess(false)
+    window.grecaptcha.ready(() => {
+      window.grecaptcha
+        .execute(recaptchaSiteKey, { action: 'submit' })
+        .then(token => {
+          submitData(formValues, token)
+        })
+    })
+  }
+
+  const submitData = async (values, recaptchaToken) => {
+    const payload = {
+      formData: values,
+      recaptchaToken,
+    }
+
     try {
       const submissionResponse = await fetch('/api/create-submission', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ ...formValues }),
+        body: JSON.stringify(payload),
       }).then(res => res.json())
 
       setIsLoading(false)
-
       if (submissionResponse.error) {
         throw new Error(submissionResponse.message)
       }
@@ -72,12 +88,29 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
       setSubmittedSuccess(true)
     } catch (err) {
       setIsLoading(false)
-      setError(err.message)
+      displayError(err.message)
     }
+  }
+
+  const displayError = error => {
+    if (!!error.length) {
+      const errors = error.split(',').join(', ')
+      setError('Please fill out required fields: ' + errors)
+      return
+    }
+
+    setError(error)
   }
 
   return (
     <Section bg={sectionBackgroundColor}>
+      <Helmet>
+        <script
+          key="recaptcha"
+          type="text/javascript"
+          src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
+        />
+      </Helmet>
       <Container>
         <StyledForm onSubmit={handleSubmit} ref={formRef}>
           {!submittedSuccess && (
@@ -152,7 +185,7 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
             </ThankYou>
           )}
           {!submittedSuccess && (
-            <SubmitButton onClick={handleSubmit}>
+            <SubmitButton type="submit" onClick={handleSubmit}>
               {!isLoading ? (
                 submitButtonText
               ) : (

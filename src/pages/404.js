@@ -11,7 +11,7 @@ import { Container, SoloHeading } from '../components/styled/global'
 import vars from '../vars'
 
 const NotFoundWrapper = styled.div`
-  padding: 10rem 0;
+  padding: 5rem 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -32,15 +32,14 @@ const NotFoundContent = styled.div`
 `
 
 const ErrorImage = styled.div`
-max-width: 100%;
-width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border: 1px solid #EEEEEE;
-    display: block;
-    margin: 1.5rem 0 0;
-    border-radius: 20px;
-
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid #eeeeee;
+  display: block;
+  margin: 1.5rem 0 0;
+  border-radius: 20px;
 `
 
 const NotFoundHeading = styled(SoloHeading)`
@@ -65,18 +64,16 @@ const NotFoundPage = ({ data, location }) => {
               <Link to="/contact">contact us</Link> if you need assistance.
             </p>
             <ErrorImage>
-              <StaticImage src="../../content/assets/bad-day.jpg" alt="Broken Computer" 
-            placeholder="blurred"/>
+              <StaticImage
+                src="../../content/assets/bad-day.jpg"
+                alt="Broken Computer"
+                placeholder="blurred"
+              />
             </ErrorImage>
-            
-
-            
           </NotFoundContent>
-          
         </NotFoundWrapper>
       </Container>
     </Layout>
-    
   )
 }
 

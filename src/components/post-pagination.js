@@ -12,6 +12,10 @@ const PaginationButtons = styled.div`
   color: ${vars.colorWhite};
   min-height: 3rem;
 
+  > div {
+    max-width: 45%;
+  }
+
   > * + * {
     margin-top: 1rem;
     width: 100%;
