@@ -6,7 +6,16 @@ import fetch from 'node-fetch'
 // To learn how to set the custom GraphQL up on the WordPress side, watch this video: https://www.youtube.com/watch?v=ZRQ94PMNEcg
 
 export default async function handler(req, res) {
-  const formData = req.body
+  const { formData, recaptchaToken } = req.body
+
+  const recaptchaValidationResult = await recaptchaValidation({
+    recaptchaToken,
+  })
+
+  if (!recaptchaValidationResult.successful) {
+    res.status(400).send(recaptchaValidationResult.message)
+    return
+  }
 
   try {
     // Authenticating with the WordPress site to get a JWT
@@ -83,20 +92,23 @@ export default async function handler(req, res) {
       }),
     })
       .then(res => res.json())
-      .then(result => result.data)
+      .then(result => {
+        console.log(result)
+        return result.data
+      })
 
     if (!submissionResult.createSubmission.success) {
-      throw new Error()
+      throw new Error(JSON.parse(submissionResult.createSubmission.data))
     }
 
     res.status(200).json({
       error: false,
-    }).
-    return
+    }).return
   } catch (error) {
     res.status(200).json({
       error: true,
       message:
+        error.message ||
         'Error submitting your form. Please try again or contact us at 904.998.1935',
     })
     return
@@ -104,3 +116,38 @@ export default async function handler(req, res) {
 }
 
 const generateMutationId = () => Math.random().toString(36).substring(7)
+
+const recaptchaValidation = async ({ recaptchaToken }) => {
+  const result = await (async () => {
+    try {
+      const response = await fetch(
+        'https://www.google.com/recaptcha/api/siteverify',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            secret: process.env.RECAPTCHA_V3_SECRET_KEY,
+            response: recaptchaToken,
+          }),
+        }
+      ).then(res => res.json())
+      return { successful: true, message: response.score }
+    } catch (error) {
+      let message
+
+      if (error.response) {
+        message = `reCAPTCHA server responded with non 2xx code: ${error.response}`
+      } else if (error.request) {
+        message = `No reCAPTCHA response received: ${error.request}`
+      } else {
+        message = `Error setting up reCAPTCHA response: ${error.message}`
+      }
+
+      return { successful: false, message }
+    }
+  })()
+
+  return result
+}

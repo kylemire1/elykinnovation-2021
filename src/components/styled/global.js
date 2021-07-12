@@ -137,6 +137,7 @@ export const ErrorMessage = styled.div`
   color: ${vars.colorWhite};
   border-radius: ${vars.borderRadiusSmall};
   margin: 1em 0;
+  text-transform: capitalize;
 
   p {
     margin-bottom: 0;
