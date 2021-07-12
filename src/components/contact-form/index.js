@@ -46,11 +46,13 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
       ...formValues,
       [name]: value,
     })
-    setError(null)
   }
 
   const handleSubmit = e => {
     e.preventDefault()
+    setError(null)
+    setIsLoading(true)
+    setSubmittedSuccess(false)
     window.grecaptcha.ready(() => {
       window.grecaptcha
         .execute(recaptchaSiteKey, { action: 'submit' })
@@ -65,9 +67,6 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
       formData: values,
       recaptchaToken,
     }
-
-    setIsLoading(true)
-    setSubmittedSuccess(false)
 
     try {
       const submissionResponse = await fetch('/api/create-submission', {
@@ -95,8 +94,8 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
 
   const displayError = error => {
     if (!!error.length) {
-      const errors = error.split(',').join(' ')
-      setError(errors)
+      const errors = error.split(',').join(', ')
+      setError('Please fill out required fields: ' + errors)
       return
     }
 
