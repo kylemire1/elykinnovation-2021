@@ -93,7 +93,6 @@ export default async function handler(req, res) {
     })
       .then(res => res.json())
       .then(result => {
-        console.log(result)
         return result.data
       })
 
