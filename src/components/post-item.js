@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import parse from 'html-react-parser'
 import { Link } from 'gatsby'
 import { rgba } from 'polished'
+import Image from 'gatsby-image'
 
 import vars from '../vars'
 import { stripAnchorTags } from '../utils/stripHtml'
@@ -31,6 +32,7 @@ const StyledPostItem = styled.li`
 
 const PostHeader = styled.header`
   h2 {
+    min-height: 4rem;
     color: ${vars.colorGreen};
     font-size: ${vars.fontSizeHeading1};
   }
@@ -47,13 +49,31 @@ const PostExcerpt = styled.div`
   }
 `
 
+const PostImage = styled.div`
+max-width: 100%;
+width: 100%;
+    height: 30rem;
+    overflow: hidden;
+
+    border: 1px solid #EEEEEE;
+    display: block;
+    margin: 1.5rem 0 0;
+    border-radius: 20px;
+
+`
+
 const PostDate = styled.small`
   display: block;
   margin-bottom: 0.5rem;
 `
 
-const PostItem = ({ uri, title, date, acfPostFields }) => {
+const PostItem = ({ uri, title, date, acfPostFields  }) => {
   const [excerpt, setExcerpt] = useState(null)
+
+  const homePageImageData = {
+    fluid: acfPostFields?.launchAnnouncementFields?.fullHomePageScreenshot?.localFile?.childImageSharp?.fluid,
+    altText: acfPostFields?.launchAnnouncementFields?.fullHomePageScreenshot?.altText,
+  }
 
   useEffect(() => {
     if (!excerpt && acfPostFields) {
@@ -80,6 +100,15 @@ const PostItem = ({ uri, title, date, acfPostFields }) => {
           <PostExcerpt itemProp="description">
             {excerpt && parse(excerpt)}
           </PostExcerpt>
+          {acfPostFields.launchAnnouncementFields.fullHomePageScreenshot && (
+            <PostImage>
+          <Image
+            backgroundColor="transparent"
+            fluid={homePageImageData.fluid}
+            placeholder="dominantColor"
+            alt={homePageImageData.altText}
+          /></PostImage>
+        )}
         </Link>
       </article>
     </StyledPostItem>
