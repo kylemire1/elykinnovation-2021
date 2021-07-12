@@ -90,6 +90,16 @@ export const pageQuery = graphql`
         acfPostFields {
           launchAnnouncementFields {
             excerpt: projectSummary
+            fullHomePageScreenshot {
+              altText
+              localFile {
+                childImageSharp {
+                  fluid(maxWidth: 1000, quality: 100) {
+                    ...GatsbyImageSharpFluid_noBase64
+                  }
+                }
+              }
+            }
           }
         }
         uri
