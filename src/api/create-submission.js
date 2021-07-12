@@ -3,7 +3,7 @@ import fetch from 'node-fetch'
 // This file is a Gatsby Cloud function. When hosting on Gatsby Cloud, it will automatically be deployed as an API route.
 // See the Gatsby docs here to get started: https://www.gatsbyjs.com/docs/how-to/functions/
 
-// To learn how to set the custom GraphQL up on the WordPress side, watch this video: https://www.youtube.com/watch?v=ZRQ94PMNEcg
+// Watch this video to learn how to set the custom GraphQL up on the WordPress side: https://www.youtube.com/watch?v=ZRQ94PMNEcg
 
 export default async function handler(req, res) {
   const { formData, recaptchaToken } = req.body
