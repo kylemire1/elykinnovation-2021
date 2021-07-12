@@ -1,5 +1,5 @@
-const path = require(`path`);
-const chunk = require(`lodash/chunk`);
+const path = require(`path`)
+const chunk = require(`lodash/chunk`)
 
 // This is a simple debugging tool
 // dd() will prettily dump to the terminal and kill the process
@@ -11,22 +11,22 @@ const chunk = require(`lodash/chunk`);
  *
  * See https://www.gatsbyjs.com/docs/node-apis/#createPages for more info.
  */
-exports.createPages = async (gatsbyUtilities) => {
+exports.createPages = async gatsbyUtilities => {
   // Query our posts from the GraphQL server
-  const posts = await getPosts(gatsbyUtilities);
-  const pages = await getPages(gatsbyUtilities);
+  const posts = await getPosts(gatsbyUtilities)
+  const pages = await getPages(gatsbyUtilities)
 
   if (posts.length) {
     // If there are posts, create pages for them
-    await createIndividualBlogPostPages({ posts, gatsbyUtilities });
+    await createIndividualBlogPostPages({ posts, gatsbyUtilities })
     // and a paginated archive
-    await createBlogPostArchive({ posts, gatsbyUtilities });
+    await createBlogPostArchive({ posts, gatsbyUtilities })
   }
 
   if (pages.length) {
-    await createWordpressPages({ pages, gatsbyUtilities });
+    await createWordpressPages({ pages, gatsbyUtilities })
   }
-};
+}
 
 /**
  * This function creates all the individual blog pages in this site
@@ -34,10 +34,6 @@ exports.createPages = async (gatsbyUtilities) => {
 const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) => {
   return Promise.all(
     posts.map(({ previous, post, next }) => {
-      if (post.acfPostFields.postType !== "launch-announcement") {
-        return;
-      }
-
       return (
         // createPage is an action passed to createPages
         // See https://www.gatsbyjs.com/docs/actions#createPage for more info
@@ -74,10 +70,10 @@ const createIndividualBlogPostPages = async ({ posts, gatsbyUtilities }) => {
                 : null,
           },
         })
-      );
+      )
     })
-  );
-};
+  )
+}
 
 /**
  * This function creates pages in Gatsby from the pages defined in the Wordpress admin area
@@ -105,20 +101,20 @@ const createWordpressPages = async ({ pages, gatsbyUtilities }) => {
         }
       }
     }
-  `);
+  `)
 
-  const postsPageUri = graphqlResult.data.wpPage.uri;
-  const primaryMenuPageIds = graphqlResult.data.primaryMenu.nodes.map((node) =>
-    node.menuItems.nodes.map((node) => node.connectedNode.node.databaseId)
-  )[0];
+  const postsPageUri = graphqlResult.data.wpPage.uri
+  const primaryMenuPageIds = graphqlResult.data.primaryMenu.nodes.map(node =>
+    node.menuItems.nodes.map(node => node.connectedNode.node.databaseId)
+  )[0]
 
   return Promise.all(
     pages.map(({ page }) => {
       const isPrimaryPage =
-        primaryMenuPageIds.includes(page.databaseId) || page.uri === "/";
+        primaryMenuPageIds.includes(page.databaseId) || page.uri === '/'
 
       if (page.uri === postsPageUri) {
-        return null;
+        return null
       }
 
       return gatsbyUtilities.actions.createPage({
@@ -137,10 +133,10 @@ const createWordpressPages = async ({ pages, gatsbyUtilities }) => {
           id: page.id,
           isPrimaryPage,
         },
-      });
+      })
     })
-  );
-};
+  )
+}
 
 /**
  * This function creates all the individual blog pages in this site
@@ -157,27 +153,27 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
         uri
       }
     }
-  `);
+  `)
 
-  const { postsPerPage } = graphqlResult.data.wp.readingSettings;
-  const postsPageUri = graphqlResult.data.wpPage.uri;
+  const { postsPerPage } = graphqlResult.data.wp.readingSettings
+  const postsPageUri = graphqlResult.data.wpPage.uri
 
-  const postsChunkedIntoArchivePages = chunk(posts, postsPerPage);
-  const totalPages = postsChunkedIntoArchivePages.length;
+  const postsChunkedIntoArchivePages = chunk(posts, postsPerPage)
+  const totalPages = postsChunkedIntoArchivePages.length
 
   return Promise.all(
     postsChunkedIntoArchivePages.map(async (_posts, index) => {
-      const pageNumber = index + 1;
+      const pageNumber = index + 1
 
-      const getPagePath = (page) => {
+      const getPagePath = page => {
         if (page === 1 && page <= totalPages) {
-          return `${postsPageUri}`;
+          return `${postsPageUri}`
         } else if (page > 1 && page <= totalPages) {
-          return `${postsPageUri}page/${page}`;
+          return `${postsPageUri}page/${page}`
         }
 
-        return null;
-      };
+        return null
+      }
 
       // createPage is an action passed to createPages
       // See https://www.gatsbyjs.com/docs/actions#createPage for more info
@@ -202,9 +198,9 @@ async function createBlogPostArchive({ posts, gatsbyUtilities }) {
           nextPagePath: getPagePath(pageNumber + 1),
           previousPagePath: getPagePath(pageNumber - 1),
         },
-      });
+      })
     })
-  );
+  )
 }
 
 /**
@@ -219,7 +215,10 @@ async function getPosts({ graphql, reporter }) {
   const graphqlResult = await graphql(`
     query WpPosts {
       # Query all WordPress blog posts sorted by date
-      allWpPost(sort: { fields: [date], order: DESC }) {
+      allWpPost(
+        sort: { fields: [date], order: DESC }
+        filter: { acfPostFields: { postType: { eq: "launch-announcement" } } }
+      ) {
         edges {
           previous {
             id
@@ -247,17 +246,17 @@ async function getPosts({ graphql, reporter }) {
         }
       }
     }
-  `);
+  `)
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
       graphqlResult.errors
-    );
-    return;
+    )
+    return
   }
 
-  return graphqlResult.data.allWpPost.edges;
+  return graphqlResult.data.allWpPost.edges
 }
 
 /**
@@ -281,15 +280,15 @@ async function getPages({ graphql, reporter }) {
         }
       }
     }
-  `);
+  `)
 
   if (graphqlResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
       graphqlResult.errors
-    );
-    return;
+    )
+    return
   }
 
-  return graphqlResult.data.allWpPage.edges;
+  return graphqlResult.data.allWpPage.edges
 }
