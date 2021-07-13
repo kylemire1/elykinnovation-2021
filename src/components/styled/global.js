@@ -90,7 +90,32 @@ export const SoloHeading = styled.h2`
     font-size: ${vars.fontSizeHeading4};
   }
 `
+export const Hr = styled.hr`
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+`
 
+export const ErrorMessage = styled.div`
+  padding: 1em;
+  background-color: ${vars.colorRed};
+  color: ${vars.colorWhite};
+  border-radius: ${vars.borderRadiusSmall};
+  margin: 1em 0;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: currentColor;
+    text-decoration: underline !important;
+  }
+`
+
+export const SuccessMessage = styled(ErrorMessage)`
+  background-color: ${vars.colorTransparent};
+  border: solid ${vars.pixel} ${vars.colorGreenSmall};
+`
 export const FormControl = styled.div`
   display: block;
   height: 100%;
@@ -106,6 +131,7 @@ export const FormControl = styled.div`
   label {
     font-weight: ${vars.fontWeightBold};
     margin-bottom: 0.5rem;
+    text-transform: capitalize;
   }
 
   input {
@@ -125,31 +151,11 @@ export const FormControl = styled.div`
     height: 10rem;
     padding: 0.5em;
   }
-`
-export const Hr = styled.hr`
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-`
 
-export const ErrorMessage = styled.div`
-  padding: 1em;
-  background-color: ${vars.colorRed};
-  color: ${vars.colorWhite};
-  border-radius: ${vars.borderRadiusSmall};
-  margin: 1em 0;
-  text-transform: capitalize;
-
-  p {
-    margin-bottom: 0;
+  small {
+    color: ${vars.colorDarkRed};
+    font-size: ${vars.fontSizeText};
+    display: block;
+    margin-top: 0.25rem;
   }
-
-  a {
-    color: currentColor;
-    text-decoration: underline !important;
-  }
-`
-
-export const SuccessMessage = styled(ErrorMessage)`
-  background-color: ${vars.colorTransparent};
-  border: solid ${vars.pixel} ${vars.colorGreenSmall};
 `
