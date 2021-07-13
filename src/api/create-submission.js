@@ -104,7 +104,7 @@ export default async function handler(req, res) {
       throw new Error(JSON.parse(submissionResult.createSubmission.data))
     }
 
-    res.status(200).send({
+    res.status(200).json({
       error: false,
       message: 'success',
     })

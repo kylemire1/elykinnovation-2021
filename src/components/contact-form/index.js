@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 import { Form, Formik } from 'formik'
 import styled from 'styled-components'
 import Loader from 'react-loader-spinner'
+import { graphql } from 'gatsby'
 
 import { Section, Container, ErrorMessage, SoloHeading } from '../styled/global'
 import TextInputField, { TextAreaField } from './input-field'
@@ -11,6 +12,14 @@ import SelectField from './select-field'
 import vars from '../../vars'
 import { validate } from './validate'
 import useAsyncSubmit from './useAsyncSubmit'
+
+export const fragment = graphql`
+  fragment ContactForm on WpPage_Layoutsections_Components_ContactForm {
+    fieldGroupName
+    submitButtonText
+    sectionBackgroundColor
+  }
+`
 
 const ContactForm = ({ sectionBackgroundColor, submitButtonText }) => {
   const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_V3_SITE_KEY
