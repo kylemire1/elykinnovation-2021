@@ -1,13 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react'
-import styled from 'styled-components'
-import { graphql } from 'gatsby'
-import Loader from 'react-loader-spinner'
+import React from 'react'
 import { Helmet } from 'react-helmet'
+import { Form, Formik } from 'formik'
+import styled from 'styled-components'
+import Loader from 'react-loader-spinner'
+import { graphql } from 'gatsby'
 
-import { Container, Section, ErrorMessage, SoloHeading } from '../styled/global'
+import { Section, Container, ErrorMessage, SoloHeading } from '../styled/global'
+import TextInputField, { TextAreaField } from './input-field'
+import SelectField from './select-field'
 
 import vars from '../../vars'
-import Field from './field'
+import { validate } from './validate'
+import useAsyncSubmit from './useAsyncSubmit'
 
 export const fragment = graphql`
   fragment ContactForm on WpPage_Layoutsections_Components_ContactForm {
@@ -17,90 +21,10 @@ export const fragment = graphql`
   }
 `
 
-const INITIAL_FORM_VALUES = {
-  name: '',
-  email: '',
-  phone: '',
-  interest: '',
-  message: '',
-}
-
-const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const [submittedSuccess, setSubmittedSuccess] = useState(false)
-  const [formValues, setFormValues] = useState(INITIAL_FORM_VALUES)
-  const formRef = useRef(null)
+const ContactForm = ({ sectionBackgroundColor, submitButtonText }) => {
   const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_V3_SITE_KEY
-
-  useEffect(() => {
-    setSubmittedSuccess(false)
-    setError(false)
-    setIsLoading(false)
-    setFormValues(INITIAL_FORM_VALUES)
-  }, [])
-
-  const handleChange = e => {
-    const { name, value } = e.currentTarget
-    setFormValues({
-      ...formValues,
-      [name]: value,
-    })
-  }
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    setError(null)
-    setIsLoading(true)
-    setSubmittedSuccess(false)
-    window.grecaptcha.ready(() => {
-      window.grecaptcha
-        .execute(recaptchaSiteKey, { action: 'submit' })
-        .then(token => {
-          submitData(formValues, token)
-        })
-    })
-  }
-
-  const submitData = async (values, recaptchaToken) => {
-    const payload = {
-      formData: values,
-      recaptchaToken,
-    }
-
-    try {
-      const submissionResponse = await fetch('/api/create-submission', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      }).then(res => res.json())
-
-      setIsLoading(false)
-      if (submissionResponse.error) {
-        throw new Error(submissionResponse.message)
-      }
-
-      setFormValues(INITIAL_FORM_VALUES)
-      formRef.current.reset()
-      setIsLoading(false)
-      setSubmittedSuccess(true)
-    } catch (err) {
-      setIsLoading(false)
-      displayError(err.message)
-    }
-  }
-
-  const displayError = error => {
-    if (!!error.length) {
-      const errors = error.split(',').join(', ')
-      setError('Please fill out required fields: ' + errors)
-      return
-    }
-
-    setError(error)
-  }
+  const { handleSubmit, serverState, showForm } =
+    useAsyncSubmit(recaptchaSiteKey)
 
   return (
     <Section bg={sectionBackgroundColor}>
@@ -112,99 +36,114 @@ const ContactForm = ({ submitButtonText, sectionBackgroundColor }) => {
         />
       </Helmet>
       <Container>
-        <StyledForm onSubmit={handleSubmit} ref={formRef}>
-          {!submittedSuccess && (
-            <>
-              <Field
-                type="text"
-                name="name"
-                id="name"
-                value={formValues.name}
-                handleChange={handleChange}
-                label="Name"
-                required
-              />
-              <Field
-                type="email"
-                name="email"
-                id="email"
-                value={formValues.email}
-                handleChange={handleChange}
-                label="Email Address"
-                required
-              />
-              <Field
-                type="phone"
-                name="phone"
-                id="phone"
-                value={formValues.phone}
-                handleChange={handleChange}
-                label="Phone Number"
-              />
-              <Field
-                type="select"
-                name="interest"
-                id="interest"
-                value={formValues.interest}
-                choices={[
-                  'Website Development',
-                  'Website Rescue',
-                  'Web Application',
-                  'Content Management System',
-                  'Search Engine Optimization',
-                  'Pay-Per-Click Advertising',
-                  'Email Marketing',
-                  'Android App',
-                  'Just Saying "Hey!"',
-                  'Release the Kraken!',
-                ]}
-                handleChange={handleChange}
-                label="Area of Interest"
-                required
-              />
-              <Field
-                type="textarea"
-                name="message"
-                id="message"
-                value={formValues.message}
-                handleChange={handleChange}
-                label="Message"
-                required
-              />
-            </>
-          )}
-          {error && (
-            <ErrorMessage>
-              <p>{error}</p>
-            </ErrorMessage>
-          )}
-          {submittedSuccess && (
-            <ThankYou>
-              <SoloHeading color={vars.colorAlmostBlack}>Thank You</SoloHeading>
-              We've received your message and will be in touch shortly!
-            </ThankYou>
-          )}
-          {!submittedSuccess && (
-            <SubmitButton type="submit" onClick={handleSubmit}>
-              {!isLoading ? (
-                submitButtonText
-              ) : (
-                <Loader
-                  type="Oval"
-                  color={vars.colorWhite}
-                  height={30}
-                  width={30}
+        <Formik
+          initialValues={{
+            name: '',
+            email: '',
+            phone: '',
+            interest: '',
+            message: '',
+          }}
+          onSubmit={handleSubmit}
+          validate={validate}
+        >
+          {({ isSubmitting }) =>
+            showForm ? (
+              <StyledForm id="contact-form" name="contact">
+                <TextInputField
+                  isRequired
+                  id="name-contact"
+                  name="name"
+                  label="name"
+                  title="Name"
+                  type="text"
                 />
-              )}
-            </SubmitButton>
-          )}
-        </StyledForm>
+                <TextInputField
+                  isRequired
+                  id="email-contact"
+                  name="email"
+                  label="email"
+                  title="Email"
+                  type="email"
+                />
+                <TextInputField
+                  id="phone-contact"
+                  name="phone"
+                  label="phone number"
+                  title="Phone Number"
+                  type="phone"
+                />
+                <SelectField
+                  isRequired
+                  type="select"
+                  name="interest"
+                  id="interest-contact"
+                  choices={[
+                    'Website Development',
+                    'Website Rescue',
+                    'Web Application',
+                    'Content Management System',
+                    'Search Engine Optimization',
+                    'Pay-Per-Click Advertising',
+                    'Email Marketing',
+                    'Android App',
+                    'Just Saying "Hey!"',
+                    'Release the Kraken!',
+                  ]}
+                  label="Area of Interest"
+                />
+                <TextAreaField
+                  isRequired
+                  id="message-contact"
+                  name="message"
+                  label="message"
+                  title="Message"
+                  type="text"
+                  rows="8"
+                />
+                <div>
+                  {!serverState.ok && (
+                    <ErrorMessage>
+                      Error submitting your form. Please try again or contact us
+                      at <a href="tel:+19049981935">904.998.1935</a>
+                    </ErrorMessage>
+                  )}
+                  <SubmitButton
+                    type="submit"
+                    aria-disabled={isSubmitting}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <Loader
+                        type="Oval"
+                        color={vars.colorWhite}
+                        height={30}
+                        width={30}
+                      />
+                    ) : (
+                      submitButtonText
+                    )}
+                  </SubmitButton>
+                </div>
+              </StyledForm>
+            ) : (
+              <StyledForm as="div">
+                <ThankYou>
+                  <SoloHeading color={vars.colorAlmostBlack}>
+                    Thank You
+                  </SoloHeading>
+                  <p>{serverState.message}</p>
+                </ThankYou>
+              </StyledForm>
+            )
+          }
+        </Formik>
       </Container>
     </Section>
   )
 }
 
-const StyledForm = styled.form`
+const StyledForm = styled(Form)`
   background-color: ${vars.colorWhite};
   color: ${vars.colorAlmostBlack};
   padding: 2em;
@@ -218,10 +157,6 @@ const StyledForm = styled.form`
   @media (min-width: ${vars.breakpointMedium}) {
     max-width: 75%;
   }
-`
-
-const ThankYou = styled.div`
-  padding: 2em;
 `
 
 const SubmitButton = styled.button`
@@ -241,6 +176,10 @@ const SubmitButton = styled.button`
   @media (min-width: ${vars.breakpointLarge}) {
     max-width: 20rem;
   }
+`
+
+const ThankYou = styled.div`
+  padding: 1em 2em 0;
 `
 
 export default ContactForm
