@@ -36,7 +36,6 @@
     "gatsby-source-wordpress": "^5.4.1",
     "gatsby-transformer-sharp": "^3.4.0",
     "html-react-parser": "^1.2.6",
-    "lodash.isobject": "^3.0.2",
     "node-fetch": "^2.6.1",
     "patch-package": "^6.4.7",
     "polished": "^1.9.3",
