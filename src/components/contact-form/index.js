@@ -21,6 +21,14 @@ export const fragment = graphql`
   }
 `
 
+const INITIAL_FORM_VALUES = {
+  name: '',
+  email: '',
+  phone: '',
+  interest: '',
+  message: '',
+}
+
 const ContactForm = ({ sectionBackgroundColor, submitButtonText }) => {
   const recaptchaSiteKey = process.env.GATSBY_RECAPTCHA_V3_SITE_KEY
   const { handleSubmit, serverState, showForm } =
@@ -37,13 +45,7 @@ const ContactForm = ({ sectionBackgroundColor, submitButtonText }) => {
       </Helmet>
       <Container>
         <Formik
-          initialValues={{
-            name: '',
-            email: '',
-            phone: '',
-            interest: '',
-            message: '',
-          }}
+          initialValues={INITIAL_FORM_VALUES}
           onSubmit={handleSubmit}
           validate={validate}
         >
