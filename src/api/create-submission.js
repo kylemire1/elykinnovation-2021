@@ -21,6 +21,8 @@ export default async function handler(req, res) {
     return
   }
 
+  console.log(recaptchaValidationResult)
+
   try {
     // Authenticating with the WordPress site to get a JWT
     const loginData = await fetch(process.env.WPGRAPHQL_URL, {
@@ -126,18 +128,14 @@ const recaptchaValidation = async ({ recaptchaToken }) => {
   const result = await (async () => {
     try {
       const response = await fetch(
-        'https://www.google.com/recaptcha/api/siteverify',
+        `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_V3_SECRET_KEY}&response=${recaptchaToken}`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            secret: process.env.RECAPTCHA_V3_SECRET_KEY,
-            response: recaptchaToken,
-          }),
         }
       ).then(res => res.json())
+      if (!response.success || response.score < 0.5) {
+        return { successful: false, message: 'Recaptcha verification failed.' }
+      }
       return { successful: true, message: response.score }
     } catch (error) {
       let message
