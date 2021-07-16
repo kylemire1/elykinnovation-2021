@@ -45,7 +45,10 @@ const ButtonWrapper = styled.div`
 
   .btn {
     box-shadow: 0 1.25rem 2.5rem #021717;
-    font-size: xx-large;
+
+    @media (min-width: ${vars.breakpointLarge}) {
+      font-size: xx-large;
+    }
   }
 `
 
