@@ -81,6 +81,7 @@ const ContactForm = ({ sectionBackgroundColor, submitButtonText }) => {
                   name="interest"
                   id="interest-contact"
                   choices={[
+                    'ADA Compliance',
                     'Website Development',
                     'Website Rescue',
                     'Web Application',
@@ -88,7 +89,7 @@ const ContactForm = ({ sectionBackgroundColor, submitButtonText }) => {
                     'Search Engine Optimization',
                     'Pay-Per-Click Advertising',
                     'Email Marketing',
-                    'Android App',
+                    'Mobile App',
                     'Just Saying "Hey!"',
                     'Release the Kraken!',
                   ]}

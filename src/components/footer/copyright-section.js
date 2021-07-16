@@ -125,7 +125,7 @@ const CopyrightSection = () => {
           <Copyright>
             <p>
               Copyright &copy; {new Date().getFullYear()} Elyk Innovation, Inc.
-              &ndash; Jacksonville, Florida
+              A Veteran Owned Business &ndash; Jacksonville, Florida
             </p>
           </Copyright>
           <Links>

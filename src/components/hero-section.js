@@ -10,6 +10,7 @@ import vars from '../vars'
 const StyledHero = styled.section`
   position: relative;
   min-height: 100vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,6 +38,10 @@ const StyledHero = styled.section`
   @media (min-width: ${vars.breakpointLarge}) {
     background-attachment: fixed;
   }
+
+  @media (max-height: ${vars.breakpointSmall}) {
+    min-height: 45em;
+  }
 `
 
 const ButtonWrapper = styled.div`
@@ -45,6 +50,13 @@ const ButtonWrapper = styled.div`
 
   .btn {
     box-shadow: 0 1.25rem 2.5rem #021717;
+    @media (min-width: ${vars.breakpointLarge}) {
+      font-size: x-large;
+      padding: 1em;
+    }
+    @media (min-width: ${vars.breakpointExtraLarge}) {
+      font-size: xx-large;
+    }
   }
 `
 
