@@ -116,7 +116,7 @@ export default async function handler(req, res) {
       error: true,
       message:
         error.message ||
-        'Error submitting your form. Please try again or contact us at 904.998.1935',
+        'Something went wrong when submitting form data to WordPress.',
     })
     return
   }
